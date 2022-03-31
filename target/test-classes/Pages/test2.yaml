@@ -1,0 +1,21 @@
+elements:
+  - &reset-password-button
+    id: gmail-button
+    description: google search
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//*[@class='gb_d'])[1]
+  - &reset-security-button
+    id: field-search
+    description: Button reset security
+    locators:
+      - device: WEB
+        type: NAME
+        value: q
+  - id: button-search
+    description: Button reset security
+    locators:
+      - device: WEB
+        type: NAME
+        value: btnK

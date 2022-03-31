@@ -1,0 +1,13 @@
+elements:
+  - id: page-title
+    description: Page title
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@class='page-title']
+  - id: mobile-button
+    description: Mobile button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //a[text()='Mobile']

@@ -1,0 +1,31 @@
+elements:
+  - id: user-field
+    description: User field
+    locators:
+      - device: WEB
+        type: NAME
+        value: username
+  - id: pass-field
+    description: Pass field
+    locators:
+      - device: WEB
+        type: NAME
+        value: password
+  - id: location-option-inpatient
+    description: Location
+    locators:
+      - device: WEB
+        type: ID
+        value: Inpatient Ward
+  - id: login-button
+    description: Login button
+    locators:
+      - device: WEB
+        type: ID
+        value: loginButton
+  - id: error-message
+    description: Error message
+    locators:
+      - device: WEB
+        type: ID
+        value: error-message
