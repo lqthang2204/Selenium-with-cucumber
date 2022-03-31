@@ -80,6 +80,12 @@ public class ExecuteYaml {
                             if (objActionElements.has("inputType")) {
                                 actionElements.setInputType(objActionElements.get("inputType").toString());
                             }
+                            if(objActionElements.has("condition")){
+                                actionElements.setCondition(objActionElements.get("condition").toString());
+                            }
+                            if(objActionElements.has("timeout")){
+                                actionElements.setTimeout(Long.parseLong(objActionElements.get("timeout").toString()));
+                            }
                             listActionElements.add(actionElements);
                             action.setList(listActionElements);
                         }

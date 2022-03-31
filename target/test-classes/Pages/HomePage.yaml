@@ -1,13 +1,39 @@
 elements:
-  - id: page-title
+  - &page-title
+    id: page-title
     description: Page title
     locators:
       - device: WEB
         type: XPATH
         value: //*[@class='page-title']
-  - id: mobile-button
+  - &mobile-button
+    id: mobile-button
     description: Mobile button
     locators:
       - device: WEB
         type: XPATH
-        value: //a[text()='Mobile']
+        value: //a[text()='Mobilessss']
+  - &tv-button
+    id: tv-button
+    description: Mobile button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //a[text()='TV']
+  - &product-iphone
+    id: product-iphone
+    description: Iphone
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//*[@class='product-image'])[1]
+actions:
+  - id: buy-one-mobile
+    description: action buy one mobile
+    actionElements:
+      - element: *mobile-button
+        inputType: click
+      - element: *tv-button
+        condition: NOT_DISPLAYED
+        timeout: 10000
+        inputType: click

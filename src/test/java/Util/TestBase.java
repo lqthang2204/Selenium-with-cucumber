@@ -1,8 +1,6 @@
 package Util;
 
-import bean.Elements;
-import bean.Locators;
-import bean.Page;
+import bean.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -18,8 +16,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class TestBase {
     WebDriver driver;
@@ -60,7 +58,7 @@ public class TestBase {
             }
             driver.manage().timeouts().pageLoadTimeout(Duration.ofMillis(Configuration.PAGE_LOAD_TIME));
             driver.get(URl);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             Assert.assertTrue(false);
         }
@@ -68,7 +66,7 @@ public class TestBase {
     }
 
     public void mouseAction(Page page, String action, WebDriver driver, String element) {
-        Locators locators = getValueElement(page, driver, element);
+        Locators locators = getValueElement(page, element);
         WebDriverWait wait = getWait(driver);
         By by = getBy(driver, locators.getType(), locators.getValue());
         try {
@@ -83,7 +81,7 @@ public class TestBase {
                     break;
 
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             Assert.assertTrue(false);
         }
@@ -91,8 +89,8 @@ public class TestBase {
     }
 
     public void showUI(Page page, WebDriver driver, String element, String status) {
-        try{
-            Locators locators = getValueElement(page, driver, element);
+        try {
+            Locators locators = getValueElement(page, element);
             WebDriverWait wait = getWait(driver);
             By by = getBy(driver, locators.getType(), locators.getValue());
             switch (status) {
@@ -117,7 +115,7 @@ public class TestBase {
                     });
                     break;
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             Assert.assertTrue(false);
         }
@@ -125,7 +123,7 @@ public class TestBase {
     }
 
     public void verifyText(Page page, WebDriver driver, String element, String content, boolean status, Map<String, String> map) {
-        Locators locators = getValueElement(page, driver, element);
+        Locators locators = getValueElement(page, element);
         By by = getBy(driver, locators.getType(), locators.getValue());
         try {
             if (map.containsKey(content)) {
@@ -140,7 +138,7 @@ public class TestBase {
                 });
             } else {
                 String finalResult = content;
-                 new WebDriverWait(driver, Duration.ofMillis(Configuration.TIME_OUT)).until(new ExpectedCondition<Boolean>() {
+                new WebDriverWait(driver, Duration.ofMillis(Configuration.TIME_OUT)).until(new ExpectedCondition<Boolean>() {
                     public Boolean apply(WebDriver driver) {
                         return driver.findElement(by).getText().equals(finalResult);
                     }
@@ -161,12 +159,12 @@ public class TestBase {
             if (map.containsKey(content)) {
                 text = map.get(content);
             }
-            Locators locators = getValueElement(page, driver, element);
+            Locators locators = getValueElement(page, element);
             WebDriverWait wait = getWait(driver);
             By by = getBy(driver, locators.getType(), locators.getValue());
             wait.until(ExpectedConditions.elementToBeClickable(by));
             driver.findElement(by).sendKeys(text);
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             Assert.assertTrue(false);
         }
@@ -178,43 +176,116 @@ public class TestBase {
             map = new HashMap<>();
         }
         try {
-            Locators locators = getValueElement(page, driver, element);
+            Locators locators = getValueElement(page, element);
             WebDriverWait wait = getWait(driver);
             By by = getBy(driver, locators.getType(), locators.getValue());
             wait.until(ExpectedConditions.presenceOfElementLocated(by));
             String element_text = driver.findElement(by).getText();
             map.put("KEY." + text, element_text);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             Assert.assertTrue(false);
         }
 
     }
-    public void scrollAction(WebDriver driver,String element,Page page){
-        try{
-            Locators locators = getValueElement(page, driver, element);
+
+    public void scrollAction(WebDriver driver, String element, Page page) {
+        try {
+            Locators locators = getValueElement(page, element);
             WebDriverWait wait = getWait(driver);
             By by = getBy(driver, locators.getType(), locators.getValue());
             wait.until(ExpectedConditions.visibilityOfElementLocated(by));
-            ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(by));
-        }catch (Exception e){
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(by));
+        } catch (Exception e) {
             e.printStackTrace();
             Assert.assertTrue(false);
         }
     }
+
+    public void executeAction(WebDriver driver, Page page, String action) {
+        Actions actions = getActions(page, action);
+        WebDriverWait wait ;
+        boolean flag= false;
+        List<ActionElements> list = actions.getList();
+
+            for (int i = 0; i < list.size(); i++) {
+                try {
+                Locators locators = getValueElement(page,list.get(i).getElement());
+                By by = getBy(driver, locators.getType(), locators.getValue());
+                if(list.get(i).getCondition()!=null){
+                    wait = getWaitAction(driver,list.get(i).getTimeout());
+                    switch (list.get(i).getCondition()){
+                        case "DISPLAYED":
+                            flag = true;
+                            wait.until(ExpectedConditions.presenceOfElementLocated(by));
+                            runType(driver,by, list.get(i).getInputType());
+                            break;
+                        case "NOT_DISPLAYED":
+                            flag = true;
+                           Assert.assertTrue(wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOfElementLocated(by))));
+                            runType(driver,by, list.get(i).getInputType());
+                            break;
+                    }
+
+                }else{
+                    wait = getWait(driver);
+                    wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+                    runType(driver,by, list.get(i).getInputType());
+                }
+
+            }
+                catch (Exception e){
+                    e.printStackTrace();
+                    Assert.assertTrue(flag);
+                }
+        }
+
+//        By by = getBy(driver, locators.getType(), locators.getValue());
+
+    }
+    public void runType(WebDriver driver, By by, String status){
+        switch (status){
+            case "text":
+                driver.findElement(by).sendKeys();
+                break;
+            case "click":
+                driver.findElement(by).click();
+                break;
+            default:
+                throw new RuntimeException();
+
+
+        }
+    }
+
 
     public WebDriverWait getWait(WebDriver driver) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(Configuration.TIME_OUT));
         return wait;
     }
+    public WebDriverWait getWaitAction(WebDriver driver,long duration) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(duration));
+        return wait;
+    }
 
-    public Locators getValueElement(Page page, WebDriver driver, String id) {
+    public Locators getValueElement(Page page, String id) {
         for (int i = 0; i < page.getElements().size(); i++) {
             if (page.getElements().get(i).getId().equals(id)) {
                 return page.getElements().get(i).getLocator();
             }
         }
         System.out.println("Not Found element in file yaml");
+        return null;
+    }
+
+    public Actions getActions(Page page, String action_id) {
+
+        for (int i = 0; i < page.getActions().size(); i++) {
+            if(page.getActions().get(i).getAction_id().equals(action_id)) {
+                return page.getActions().get(i);
+            }
+        }
+        System.out.println("Not Found Action in file yaml");
         return null;
     }
 

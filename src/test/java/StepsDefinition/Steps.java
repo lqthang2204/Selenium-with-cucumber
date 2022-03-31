@@ -81,9 +81,14 @@ public class Steps {
     public void iscrollToElement(String element) {
         testBase.scrollAction(this.driver, element, this.page);
     }
+    @Given("I perform to action {word}")
+    public void i_perform_to_action(String action) {
+        testBase.executeAction(this.driver,this.page,action);
+
+    }
     @After
     public void tearDown(){
-//        this.driver.close();
+        this.driver.close();
     }
 
 }
