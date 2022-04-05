@@ -1,6 +1,7 @@
 package Util;
 
 import bean.*;
+import io.cucumber.datatable.DataTable;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -202,14 +203,20 @@ public class TestBase {
         }
     }
 
-    public void executeAction(WebDriver driver, Page page, String action) {
+    public void executeAction(WebDriver driver, Page page, String action, DataTable dataTable) {
         Actions actions = getActions(page, action);
         WebDriverWait wait ;
         boolean flag= false;
         List<ActionElements> list = actions.getList();
-
+            String value="";
             for (int i = 0; i < list.size(); i++) {
                 try {
+                 if(dataTable!=null){
+                     Map<String,String> mapOverride = dataTable.asMap(String.class,String.class);
+                     if(mapOverride.containsKey(list.get(i).getElement())){
+                         value = mapOverride.get(list.get(i).getElement());
+                     }
+                 }
                 Locators locators = getValueElement(page,list.get(i).getElement());
                 By by = getBy(driver, locators.getType(), locators.getValue());
                 if(list.get(i).getCondition()!=null){
@@ -218,19 +225,19 @@ public class TestBase {
                         case "DISPLAYED":
                             flag = true;
                             wait.until(ExpectedConditions.presenceOfElementLocated(by));
-                            runType(driver,by, list.get(i).getInputType());
+                            runType(driver,by, list.get(i).getInputType(),value);
                             break;
                         case "NOT_DISPLAYED":
                             flag = true;
                            Assert.assertTrue(wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOfElementLocated(by))));
-                            runType(driver,by, list.get(i).getInputType());
+                            runType(driver,by, list.get(i).getInputType(),value);
                             break;
                     }
 
                 }else{
                     wait = getWait(driver);
                     wait.until(ExpectedConditions.visibilityOfElementLocated(by));
-                    runType(driver,by, list.get(i).getInputType());
+                    runType(driver,by, list.get(i).getInputType(),value);
                 }
 
             }
@@ -243,10 +250,10 @@ public class TestBase {
 //        By by = getBy(driver, locators.getType(), locators.getValue());
 
     }
-    public void runType(WebDriver driver, By by, String status){
+    public void runType(WebDriver driver, By by, String status,String value){
         switch (status){
             case "text":
-                driver.findElement(by).sendKeys();
+                driver.findElement(by).sendKeys(value);
                 break;
             case "click":
                 driver.findElement(by).click();
@@ -279,14 +286,14 @@ public class TestBase {
     }
 
     public Actions getActions(Page page, String action_id) {
-
-        for (int i = 0; i < page.getActions().size(); i++) {
-            if(page.getActions().get(i).getAction_id().equals(action_id)) {
-                return page.getActions().get(i);
-            }
+        Actions actions= null;
+        try {
+            Map<String, Actions> map= page.getMapActions();
+             actions =  map.get(action_id);
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        System.out.println("Not Found Action in file yaml");
-        return null;
+         return  actions;
     }
 
     public By getBy(WebDriver driver, String type, String value) {

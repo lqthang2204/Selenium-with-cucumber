@@ -61,7 +61,7 @@ public class ExecuteYaml {
                     elementsList.add(elements);
                 }
                 if (object.has("actions")) {
-                    List<Actions> listAction = new LinkedList<>();
+                    Map<String,Actions> mapAction = new LinkedHashMap<>();
                     List<ActionElements> listActionElements = new LinkedList<>();
                     JSONArray arrActions = new JSONArray(object.get("actions").toString());
                     for (int i = 0; i < arrActions.length(); i++) {
@@ -89,9 +89,9 @@ public class ExecuteYaml {
                             listActionElements.add(actionElements);
                             action.setList(listActionElements);
                         }
-                        listAction.add(action);
+                        mapAction.put(objAction.get("id").toString(),action);
                     }
-                    page.setActions(listAction);
+                    page.setMapActions(mapAction);
                 }
                 page.setElements(elementsList);
                 mapPage.put(pageYaml,page);

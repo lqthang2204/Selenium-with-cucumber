@@ -12,7 +12,7 @@ elements:
     locators:
       - device: WEB
         type: XPATH
-        value: //a[text()='Mobilessss']
+        value: //a[text()='Mobile']
   - &tv-button
     id: tv-button
     description: Mobile button
@@ -27,12 +27,21 @@ elements:
       - device: WEB
         type: XPATH
         value: (//*[@class='product-image'])[1]
+  - &search-input
+    id: search-input
+    description: Iphone
+    locators:
+      - device: WEB
+        type: ID
+        value: search
 actions:
   - id: buy-one-mobile
     description: action buy one mobile
     actionElements:
       - element: *mobile-button
         inputType: click
+      - element: *search-input
+        inputType: text
       - element: *tv-button
         condition: NOT_DISPLAYED
         timeout: 10000

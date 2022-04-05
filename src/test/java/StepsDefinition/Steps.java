@@ -3,6 +3,7 @@ package StepsDefinition;
 import Util.ExecuteYaml;
 import Util.TestBase;
 import bean.Page;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
@@ -78,13 +79,22 @@ public class Steps {
         testBase.mouseAction(this.page,action,this.driver,element);
     }
     @Given("I scroll to element {word}")
-    public void iscrollToElement(String element) {
+    public void isScrollToElement(String element) {
         testBase.scrollAction(this.driver, element, this.page);
     }
     @Given("I perform to action {word}")
     public void i_perform_to_action(String action) {
-        testBase.executeAction(this.driver,this.page,action);
+        testBase.executeAction(this.driver,this.page,action,null);
 
+    }
+    @Given("I perform to action {word} with override values")
+    public void actionOverride(String action,DataTable dataTable) {
+        testBase.executeAction(this.driver,this.page,action, dataTable);
+//        System.out.println("dataTable.asList().size()= "+ dataTable.asMap(String.class,String.class));
+//        Map<String,String> map = dataTable.asMap(String.class,String.class);
+//        System.out.println("dataTable.asList().size()= "+ map.keySet());
+//        System.out.println("map.getKey"+ map);
+//        System.out.println("thang=== " +dataTable.row());
     }
     @After
     public void tearDown(){
