@@ -86,6 +86,10 @@ public class Steps {
     public void saveText(String element, String text) {
         testBase.saveTextElement(this.page, this.driver, element, text, this.mapSaveText);
     }
+    @Given("I click keyboard {word} button on element {word}")
+    public void i_click_keyboard_button_on_element(String Key, String element) {
+        testBase.keyBoard(this.page,this.driver,element,Key);
+    }
 
     @Given("I {word} text from element {word}")
     public void clearText(String action, String element) {

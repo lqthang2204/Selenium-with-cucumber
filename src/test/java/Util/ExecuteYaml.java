@@ -3,8 +3,6 @@ package Util;
 import bean.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -52,21 +50,24 @@ public class ExecuteYaml {
                     JSONArray arrLocator = new JSONArray(obj.get("locators").toString());
                     for (int j = 0; j < arrLocator.length(); j++) {
                         JSONObject objLocator = new JSONObject(arrLocator.get(j).toString());
-                        locators = new Locators();
-                        locators.setDevice(objLocator.get("device").toString());
-                        locators.setType(objLocator.get("type").toString());
-                        locators.setValue(objLocator.get("value").toString());
-                        elements.setLocator(locators);
+                        if(objLocator.get("device").toString().equals(Configuration.WEB_BROWSER) || objLocator.get("device").toString().equals("WEB") ){
+                            locators = new Locators();
+                            locators.setDevice(objLocator.get("device").toString());
+                            locators.setType(objLocator.get("type").toString());
+                            locators.setValue(objLocator.get("value").toString());
+                            elements.setLocator(locators);
+                        }
+
                     }
                     elementsList.add(elements);
                 }
                 if (object.has("actions")) {
-                    Map<String,Actions> mapAction = new LinkedHashMap<>();
+                    Map<String, ActionsTest> mapAction = new LinkedHashMap<>();
                     List<ActionElements> listActionElements = new LinkedList<>();
                     JSONArray arrActions = new JSONArray(object.get("actions").toString());
                     for (int i = 0; i < arrActions.length(); i++) {
                         JSONObject objAction = new JSONObject(arrActions.get(i).toString());
-                        Actions action = new Actions();
+                        ActionsTest action = new ActionsTest();
                         action.setAction_id(objAction.get("id").toString());
                         action.setDescription(objAction.get("description").toString());
                         JSONArray arrActionElements = new JSONArray(objAction.get("actionElements").toString());

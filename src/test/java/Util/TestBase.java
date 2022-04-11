@@ -5,12 +5,11 @@ import bean.*;
 import io.cucumber.datatable.DataTable;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -32,25 +31,26 @@ public class TestBase {
 
     public WebDriver getDriver() {
         switch (Configuration.WEB_BROWSER) {
-            case "chrome":
+            case "CHROME":
                 WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver();
                 break;
-            case "firefox":
+            case "FIREFOX":
                 WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver();
                 break;
-            case "opera":
+            case "OPERA":
                 WebDriverManager.operadriver().setup();
                 driver = new OperaDriver();
                 break;
-            case "edge":
+            case "EDGE":
                 WebDriverManager.edgedriver().setup();
                 driver = new EdgeDriver();
                 break;
             default:
-                WebDriverManager.chromedriver().setup();
-                driver = new ChromeDriver();
+                System.out.println("Browser "+ Configuration.PAGE_LOAD_TIME + " is not suuport");
+                Assert.assertTrue(false);
+                break;
         }
         return driver;
     }
@@ -174,6 +174,36 @@ public class TestBase {
         }
 
     }
+    public void keyBoard(Page page, WebDriver driver,String element, String action){
+        Actions actions = new Actions(driver);
+        WebDriverWait wait = getWait(driver);
+        Locators locators = getValueElement(page, element);
+        By by = getBy(driver, locators.getType(), locators.getValue());
+        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+        WebElement ele = null;
+        switch (action){
+            case "ENTER":
+                actions.sendKeys(Keys.ENTER).perform();
+                break;
+            case "HOVER":
+                 ele = driver.findElement(by);
+                actions.moveToElement(ele).perform();
+                break;
+            case "HOVER-AND-CLICK":
+                 ele = driver.findElement(by);
+                actions.moveToElement(ele).perform();
+                actions.click();
+                actions.perform();
+                break;
+            default:
+                System.out.println("Not suuport case  "+action );
+                Assert.assertTrue(false);
+        }
+
+
+
+
+    }
 
     public void saveTextElement(Page page, WebDriver driver, String element, String text, Map<String, String> map) {
         if (map == null) {
@@ -207,7 +237,7 @@ public class TestBase {
     }
 
     public void executeAction(WebDriver driver, Page page, String action, DataTable dataTable,Map<String, String> map) {
-        Actions actions = getActions(page, action);
+        ActionsTest actions = getActions(page, action);
         WebDriverWait wait ;
         boolean flag= false;
         List<ActionElements> list = actions.getList();
@@ -323,10 +353,10 @@ public class TestBase {
         return null;
     }
 
-    public Actions getActions(Page page, String action_id) {
-        Actions actions= null;
+    public ActionsTest getActions(Page page, String action_id) {
+        ActionsTest actions= null;
         try {
-            Map<String, Actions> map= page.getMapActions();
+            Map<String, ActionsTest> map= page.getMapActions();
              actions =  map.get(action_id);
         }catch (Exception e){
             e.printStackTrace();

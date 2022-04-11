@@ -1,0 +1,66 @@
+:toc: macro
+:toclevels: 4
+toc::[]
+// Automatic Table of contents for github pages only possible with .adoc format
+// AsciiDoc format is better format than markdown
+// https://asciidoctor.org/docs/asciidoc-vs-markdown/=comparison-by-example
+
+== About this project
+* The project holds all automation tests for multi project
+
+
+== Why do I need this project?
+This project is for multi browser (chrome, firefox, edge, safari)
+
+* This project will provide tests specific to performing various browser UI actions and verifications.
+* The project will provide use of the same steps for Web.
+
+== When and why would I need to modify this project?
+Any QA or Developer can contribute to this project for valid acceptable scenarios as below:
+
+. Add a new test or feature file of clubbing various tests.
+. There is an error with an existing test and needs to be updated.
+. There is missing documentation.
+. Any other case that should be brought up to QA leads.
+
+== How do I setup IntelliJ?
+Review the https://www.jetbrains.com/idea/download/#section=windows, which addresses
+questions such as:
+
+. How do I import the code into IntelliJ?
+. How do I check out and change GIT branches?
+. What are environment variables and how to configure them for running tests?
+
+== How do I get the code, afresh?
+. You can download code at https://github.com/lqthang2204/FrameworkAuto
+. Clone this project to a working folder on your local machine.
+Follow https://github.com/lqthang2204/FrameworkAuto for cloning a repository.
+
+== Test execution
+
+=== How do I run a automation test?
+. VM options : -Dtimeout=120000 -DpageLoadTimeout=120000 -DstartMaximized=true
+. Environment Variables: WEB_BROWSER=FIREFOX
+
+
+
+=== How do I search for a feature file or a test?
+For searching a specific feature, you can navigate along the path,
+----
+src => test => resources => features => FeatureName.feature
+----
+
+In the below image,
+
+. Click on *src*
+. Click on *test*
+. Click on *resources*
+. Click on *features*
+.. Select the desired feature you are looking for. A single feature file holds *_multiple tests for all platforms_* (Web) as per the requirement.
+Here Login.feature file is selected in point 4.
+
+.Understanding feature file, tests, and it's tags
+
+You can also use `Ctrl+Shift+f` on Windows and `Cmd+Shift+f` on Mac to search for a feature name, test name or a certain test tag.
+
+

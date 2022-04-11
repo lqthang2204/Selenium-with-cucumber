@@ -3,11 +3,13 @@ elements:
     description: Welcome
     locators:
       - device: WEB
+        browse: CHROME
         type: XPATH
         value: //*[contains(text(),'Logged in as')]
   - id: log-out
     description: Log out
     locators:
       - device: WEB
+        browse: CHROME
         type: XPATH
         value: //*[contains(text(),'Logout')]

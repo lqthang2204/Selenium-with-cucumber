@@ -2,7 +2,7 @@ package bean;
 
 import java.util.List;
 
-public class Actions {
+public class ActionsTest {
     public String action_id;
     public String description;
     public List<ActionElements> list;

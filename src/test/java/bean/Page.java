@@ -5,13 +5,13 @@ import java.util.Map;
 
 public class Page {
     public List<Elements> elements;
-    public Map<String,Actions> mapActions;
+    public Map<String, ActionsTest> mapActions;
 
-    public Map<String, Actions> getMapActions() {
+    public Map<String, ActionsTest> getMapActions() {
         return mapActions;
     }
 
-    public void setMapActions(Map<String, Actions> mapActions) {
+    public void setMapActions(Map<String, ActionsTest> mapActions) {
         this.mapActions = mapActions;
     }
 
