@@ -1,5 +1,6 @@
 package Util;
 
+import StepsDefinition.Steps;
 import bean.*;
 import io.cucumber.datatable.DataTable;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -19,12 +20,14 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class TestBase {
     WebDriver driver;
 
     public TestBase() {
         Configuration.ReadConfig();
+
     }
 
     public WebDriver getDriver() {
@@ -203,7 +206,7 @@ public class TestBase {
         }
     }
 
-    public void executeAction(WebDriver driver, Page page, String action, DataTable dataTable) {
+    public void executeAction(WebDriver driver, Page page, String action, DataTable dataTable,Map<String, String> map) {
         Actions actions = getActions(page, action);
         WebDriverWait wait ;
         boolean flag= false;
@@ -217,6 +220,9 @@ public class TestBase {
                          value = mapOverride.get(list.get(i).getElement());
                      }
                  }
+                 if(map.containsKey(value)){
+                     value = map.get(value);
+                 }
                 Locators locators = getValueElement(page,list.get(i).getElement());
                 By by = getBy(driver, locators.getType(), locators.getValue());
                 if(list.get(i).getCondition()!=null){
@@ -225,12 +231,17 @@ public class TestBase {
                         case "DISPLAYED":
                             flag = true;
                             wait.until(ExpectedConditions.presenceOfElementLocated(by));
-                            runType(driver,by, list.get(i).getInputType(),value);
+                            if(list.get(i).getInputType()!=null){
+                                runType(driver,by, list.get(i).getInputType(),value);
+                            }
+
                             break;
                         case "NOT_DISPLAYED":
                             flag = true;
-                           Assert.assertTrue(wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOfElementLocated(by))));
-                            runType(driver,by, list.get(i).getInputType(),value);
+                           wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOfElementLocated(by)));
+                            if(list.get(i).getInputType()!=null){
+                                runType(driver,by, list.get(i).getInputType(),value);
+                            }
                             break;
                     }
 
@@ -244,6 +255,7 @@ public class TestBase {
                 catch (Exception e){
                     e.printStackTrace();
                     Assert.assertTrue(flag);
+                    System.out.println("Error at action have element "+ list.get(i).getElement() +" and input "+ list.get(i).getInputType());
                 }
         }
 
@@ -264,6 +276,31 @@ public class TestBase {
 
         }
     }
+    public void CloseBrowser(WebDriver driver,String title){
+        boolean flag = false;
+        try {
+            Set<String> windows =  driver.getWindowHandles();
+            String mainWindow =  driver.getWindowHandle();
+            for (String handle: windows)
+            {
+                driver.switchTo().window(handle);
+                String pageTitle = driver.getTitle();
+                if(pageTitle.equalsIgnoreCase(title))
+                {
+                    driver.close();
+                    flag = true;
+                    System.out.println("Closed the  '"+pageTitle+"' Tab now ...");
+                }
+            }
+            driver.switchTo().window(mainWindow);
+            Assert.assertTrue(flag);
+        }catch (Exception e){
+            e.printStackTrace();
+            Assert.assertTrue(flag);
+        }
+
+
+    }
 
 
     public WebDriverWait getWait(WebDriver driver) {
@@ -276,12 +313,13 @@ public class TestBase {
     }
 
     public Locators getValueElement(Page page, String id) {
-        for (int i = 0; i < page.getElements().size(); i++) {
-            if (page.getElements().get(i).getId().equals(id)) {
-                return page.getElements().get(i).getLocator();
+            for (int i = 0; i < page.getElements().size(); i++) {
+                if (page.getElements().get(i).getId().equals(id)) {
+                    return page.getElements().get(i).getLocator();
+                }
             }
-        }
-        System.out.println("Not Found element in file yaml");
+
+        System.out.println("Not Found element "+ id+  " in file "+ Steps.titlePage+".yaml");
         return null;
     }
 

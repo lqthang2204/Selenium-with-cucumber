@@ -34,6 +34,12 @@ elements:
       - device: WEB
         type: ID
         value: search
+  - id: link-text
+    description: Link text
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//*[@class='block-title'])[1]
 actions:
   - id: buy-one-mobile
     description: action buy one mobile
@@ -44,5 +50,5 @@ actions:
         inputType: text
       - element: *tv-button
         condition: NOT_DISPLAYED
-        timeout: 10000
+        timeout: 1000
         inputType: click
