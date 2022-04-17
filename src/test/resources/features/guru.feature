@@ -1,11 +1,11 @@
 Feature: Login function
   Scenario: Negative to web URL
-    Given I Navigate with URl is "https://www.google.com.vn/"
+    Given I navigate to "https://www.google.com.vn/"
 #    Given I Navigate with URl is "https://zingnews.vn/"
     And I change the page spec to test
     And I type "lqthang" into element field-search
     And I click element button-search
-    And I Navigate with URl is "http://live.techpanda.org/index.php/"
+    And I navigate to "http://live.techpanda.org/index.php/"
     And I change the page spec to HomePage
     And I wait for element page-title to be DISPLAYED
     And I perform to action buy-one-mobile

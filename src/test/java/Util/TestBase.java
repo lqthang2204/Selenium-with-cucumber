@@ -56,18 +56,28 @@ public class TestBase {
         return driver;
     }
 
-    public void OpenBrowser(WebDriver driver, String URl) {
+    public WebDriver OpenBrowser(WebDriver driver, String URl) {
         try {
-            if (Configuration.DEFAULT_MAXIMUM) {
-                driver.manage().window().maximize();
+            if (driver == null) {
+                driver = getDriver();
+                driver.manage().timeouts().pageLoadTimeout(Duration.ofMillis(Configuration.PAGE_LOAD_TIME));
+                if (Configuration.DEFAULT_MAXIMUM) {
+                    driver.manage().window().maximize();
+                }
             }
-            driver.manage().timeouts().pageLoadTimeout(Duration.ofMillis(Configuration.PAGE_LOAD_TIME));
-            driver.get(URl);
+            if(URl.equals("refresh-page")){
+               driver.navigate().refresh();
+            }
+            if(!URl.equals("refresh-page")){
+                driver.get(URl.replace("\"",""));
+            }
+
+
         } catch (Exception e) {
             e.printStackTrace();
             Assert.assertTrue(false);
         }
-
+        return  driver;
     }
 
     public void mouseAction(Page page, String action, WebDriver driver, String element) {
@@ -92,6 +102,7 @@ public class TestBase {
         }
 
     }
+
 
     public void showUI(Page page, WebDriver driver, String element, String status) {
         try {

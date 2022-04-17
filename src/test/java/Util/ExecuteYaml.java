@@ -24,20 +24,22 @@ public class ExecuteYaml {
         return "can not read file yaml";
     }
     public static void main(String[] args) {
-        ExecuteYaml exe = new ExecuteYaml();
-        Map<String, Page> map = new HashMap<>();
-        exe.updateYaml("test", map);
+//        ExecuteYaml exe = new ExecuteYaml();
+//        Map<String, Page> map = new HashMap<>();
+//        exe.updateYaml("test", map);
     }
 
-    public Page updateYaml(String pageYaml, Map<String, Page> mapPage) {
+    public Page updateYaml(String pageYaml, Map<String, Page> mapPage, Map<String, String> mapFileyaml) {
         Page page = null;
         try {
             Locators locators;
             if (mapPage.get(pageYaml) != null) {
                 page = mapPage.get(pageYaml);
             } else {
-                String file_name = System.getProperty("user.dir")+"/src/test/resources/Pages/"+pageYaml+".yaml";
-                String json = ConvertFileYaml(new File(file_name));
+                String file_path = mapFileyaml.get(pageYaml+".yaml");
+//                String json = ConvertFileYaml(new File(file_path));
+//                String file_name = System.getProperty("user.dir")+"/src/test/resources/Pages/"+pageYaml+".yaml";
+                String json = ConvertFileYaml(new File(file_path));
                 page = new Page();
                 List<Elements> elementsList = new LinkedList<>();
                 JSONObject object = new JSONObject(json);
@@ -102,5 +104,17 @@ public class ExecuteYaml {
             Assert.assertTrue(false);
         }
         return page;
+    }
+    public Map<String, String> findFile(File dir, Map<String, String> list) {
+        File[] listFiles = dir.listFiles();
+        for (File file : listFiles) {
+            if (file.isFile()) {
+                list.put(file.getName(), file.getAbsolutePath());
+
+            } else if (file.isDirectory()) {
+                findFile(new File(file.getAbsolutePath()), list);
+            }
+        }
+        return list;
     }
 }

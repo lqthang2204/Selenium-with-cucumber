@@ -13,18 +13,20 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 public class Steps {
-    public WebDriver driver;
+    public  WebDriver driver;
     TestBase testBase;
     ExecuteYaml execute;
     Map<String, Page> map;
     Page page;
     Map<String, String> mapSaveText;
     public static String titlePage;
+    public static Map<String, String> mapFileYaml;
 
     public Map<String, Page> getMap() {
         return map;
@@ -40,21 +42,22 @@ public class Steps {
         map = new HashMap<>();
         page = new Page();
         mapSaveText = new HashMap<>();
+        mapFileYaml = new HashMap<>();
+        execute.findFile(new File(System.getProperty("user.dir") + "/src/test/resources/Pages"), this.mapFileYaml);
     }
 
-    @Given("I Navigate with URl is {string}")
+
+    @Given("I navigate to {word}")
     public void openBrowser(String url) {
-        if(driver == null){
-            driver = testBase.getDriver();
-        }
-        testBase.OpenBrowser(this.driver, url);
+            this.driver = testBase.OpenBrowser(this.driver, url);
     }
 
     @Given("I change the page spec to {word}")
     public void updateYaml(String yaml) {
-        page = execute.updateYaml(yaml, map);
+        page = execute.updateYaml(yaml, map, this.mapFileYaml);
         this.titlePage = yaml;
     }
+
 
     @Given("I {word} element {word}")
     public void mouseAction(String action, String element) {
@@ -86,9 +89,10 @@ public class Steps {
     public void saveText(String element, String text) {
         testBase.saveTextElement(this.page, this.driver, element, text, this.mapSaveText);
     }
+
     @Given("I click keyboard {word} button on element {word}")
     public void i_click_keyboard_button_on_element(String Key, String element) {
-        testBase.keyBoard(this.page,this.driver,element,Key);
+        testBase.keyBoard(this.page, this.driver, element, Key);
     }
 
     @Given("I {word} text from element {word}")
@@ -103,14 +107,15 @@ public class Steps {
 
     @Given("I perform to action {word}")
     public void i_perform_to_action(String action) {
-        testBase.executeAction(this.driver, this.page, action, null,this.mapSaveText);
+        testBase.executeAction(this.driver, this.page, action, null, this.mapSaveText);
 
     }
 
     @Given("I perform to action {word} with override values")
     public void actionOverride(String action, DataTable dataTable) {
-        testBase.executeAction(this.driver, this.page, action, dataTable,this.mapSaveText);
+        testBase.executeAction(this.driver, this.page, action, dataTable, this.mapSaveText);
     }
+
     @Given("I close browser with title is {string}")
     public void iCLoseBrowser(String title) {
         testBase.CloseBrowser(this.driver, title);
@@ -120,6 +125,7 @@ public class Steps {
     @After
     public void tearDown() {
         this.driver.close();
+
     }
 
 }

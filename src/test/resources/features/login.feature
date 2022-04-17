@@ -1,11 +1,12 @@
 Feature: Login function
+  @mc-login
   Scenario: Negative to web URL
-    Given I Navigate with URl is "https://www.google.com.vn/"
-#    Given I Navigate with URl is "https://zingnews.vn/"
+    Given I navigate to "https://zingnews.vn/"
+    And I navigate to "https://www.google.com.vn/"
     And I change the page spec to test
     And I type "lqthang" into element field-search
     And I click element button-search
-    And I Navigate with URl is "https://demo.openmrs.org/openmrs/login.htm"
+    And I navigate to "https://demo.openmrs.org/openmrs/login.htm"
     And I change the page spec to LoginPage
     And I wait for element user-field to be DISPLAYED
     And I wait for element pass-field to be DISPLAYED
@@ -16,6 +17,7 @@ Feature: Login function
     And I click element login-button
     And I wait for element error-message to be DISPLAYED
     And I verify the text for element error-message is "Invalid username/password. Please try again."
+    And I navigate to refresh-page
     And I type "Admin" into element user-field
     And I type "Admin123" into element pass-field
     And I save the text for element location-option-inpatient with key "location"

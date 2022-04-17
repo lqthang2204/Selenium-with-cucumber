@@ -27,7 +27,7 @@ Feature: Search function
 
   @mc-2
   Scenario: test Search function
-    Given I Navigate with URl is "http://live.techpanda.org/index.php/"
+    Given I navigate to "http://live.techpanda.org/index.php/"
 #    And I Navigate with URl is "https://www.google.com/"
 #    And I close browser with title is "test"
     And I change the page spec to HomePage
@@ -40,7 +40,9 @@ Feature: Search function
     And I perform to action buy-one-mobile with override values
       | search-input | KEY.product |
     And I click keyboard HOVER button on element dropdown-search
-    Then I click element dropdown-search
+    Then I click element dropdown-search  
+    And I navigate to refresh-page
+#    And I navigate to "refresh-page"
 #    And I click element dropdown-search
 #    And I click keyboard HOVER-AND-CLICK button on element dropdown-search
 #    And I click keyboard RIGHT-CLICK button on element search-input
