@@ -29,6 +29,7 @@ public class TestBase {
 
     }
 
+
     public WebDriver getDriver() {
         switch (Configuration.WEB_BROWSER) {
             case "CHROME":
@@ -184,6 +185,14 @@ public class TestBase {
         switch (action){
             case "ENTER":
                 actions.sendKeys(Keys.ENTER).perform();
+                break;
+            case "DOUBLE-CLICK":
+                ele = driver.findElement(by);
+                actions.doubleClick(ele).perform();
+                break;
+            case "RIGHT-CLICK":
+                ele = driver.findElement(by);
+                actions.contextClick(ele).perform();
                 break;
             case "HOVER":
                  ele = driver.findElement(by);

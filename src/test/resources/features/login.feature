@@ -18,16 +18,16 @@ Feature: Login function
     And I verify the text for element error-message is "Invalid username/password. Please try again."
     And I type "Admin" into element user-field
     And I type "Admin123" into element pass-field
-    And I save the text for element location-option-inpatient is "location"
+    And I save the text for element location-option-inpatient with key "location"
     And I click element location-option-inpatient
     And I click element login-button
     And I change the page spec to IndexPage
     And I wait for element welcome-user to be DISPLAYED
     And I verify the text for element welcome-user is "KEY.location"
-    And I save the text for element welcome-user is "user"
+    And I save the text for element welcome-user with key "user"
     And I wait for element log-out to be DISPLAYED
     And I click element log-out
     And I change the page spec to LoginPage
     And I wait for element user-field to be DISPLAYED
-    d
+
 

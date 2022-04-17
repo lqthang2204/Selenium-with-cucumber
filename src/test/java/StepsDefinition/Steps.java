@@ -82,7 +82,7 @@ public class Steps {
         testBase.verifyText(this.page, this.driver, element, text, false, this.mapSaveText);
     }
 
-    @Given("I save the text for element {word} is {string}")
+    @Given("I save the text for element {word} with key {string}")
     public void saveText(String element, String text) {
         testBase.saveTextElement(this.page, this.driver, element, text, this.mapSaveText);
     }
@@ -119,7 +119,7 @@ public class Steps {
 
     @After
     public void tearDown() {
-//        this.driver.close();
+        this.driver.close();
     }
 
 }
