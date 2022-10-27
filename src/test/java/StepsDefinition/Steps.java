@@ -6,20 +6,19 @@ import bean.Page;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
-import org.junit.AfterClass;
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class Steps {
-    public  WebDriver driver;
+    public static  WebDriver driver;
     TestBase testBase;
     ExecuteYaml execute;
     Map<String, Page> map;
@@ -36,7 +35,7 @@ public class Steps {
     }
 
     @Before
-    public void setUp() {
+    public void setUp(Scenario scenario) {
         testBase = new TestBase();
         execute = new ExecuteYaml();
         map = new HashMap<>();
@@ -44,12 +43,23 @@ public class Steps {
         mapSaveText = new HashMap<>();
         mapFileYaml = new HashMap<>();
         execute.findFile(new File(System.getProperty("user.dir") + "/src/test/resources/Pages"), this.mapFileYaml);
+
+    }
+    @Before
+    public void setUp2(Scenario scenario){
+        System.out.println("Scenarion == "+ scenario);
+        System.out.println(""+ scenario.getSourceTagNames());
+        Collection<String> tags = scenario.getSourceTagNames();
+        for(int i=0;i<tags.size();i++){
+            System.out.println(tags.toArray()[i]);
+        }
+
     }
 
 
     @Given("I navigate to {word}")
     public void openBrowser(String url) {
-            this.driver = testBase.OpenBrowser(this.driver, url);
+            this.driver = TestBase.OpenBrowser(testBase, this.driver, url);
     }
 
     @Given("I change the page spec to {word}")
@@ -59,9 +69,9 @@ public class Steps {
     }
 
 
-    @Given("I {word} element {word}")
+    @Given("I {word} element {}")
     public void mouseAction(String action, String element) {
-        testBase.mouseAction(this.page, action, this.driver, element);
+        testBase.mouseAction(this.page, action, this.driver, element,this.mapSaveText);
     }
 
     @When("I type {string} into element {word}")
@@ -70,9 +80,9 @@ public class Steps {
 
     }
 
-    @And("I wait for element {word} to be {word}")
+    @And("I wait for element {} to be {}")
     public void waitTo(String element, String status) {
-        testBase.showUI(this.page, this.driver, element, status);
+        testBase.showUI(this.page, this.driver, element, status, this.mapSaveText);
     }
 
     @And("I verify the text for element {word} is {string}")
@@ -97,7 +107,7 @@ public class Steps {
 
     @Given("I {word} text from element {word}")
     public void clearText(String action, String element) {
-        testBase.mouseAction(this.page, action, this.driver, element);
+        testBase.mouseAction(this.page, action, this.driver, element,  this.mapSaveText);
     }
 
     @Given("I scroll to element {word}")

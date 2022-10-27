@@ -25,6 +25,12 @@ elements:
       - device: WEB
         type: NAME
         value: btnK
+  - id: ui-text-equal
+    description: Button login
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()="{text}"]
   - id: video-button
     description: Video button
     locators:

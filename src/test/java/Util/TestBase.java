@@ -2,6 +2,8 @@ package Util;
 
 import StepsDefinition.Steps;
 import bean.*;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import io.cucumber.datatable.DataTable;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
@@ -21,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static com.codeborne.selenide.Selenide.$;
+
 public class TestBase {
     WebDriver driver;
 
@@ -33,8 +37,9 @@ public class TestBase {
     public WebDriver getDriver() {
         switch (Configuration.WEB_BROWSER) {
             case "CHROME":
+//                WebDriverManager.chromedriver().clearDriverCache();
                 WebDriverManager.chromedriver().setup();
-                driver = new ChromeDriver();
+                driver = new  ChromeDriver();
                 break;
             case "FIREFOX":
                 WebDriverManager.firefoxdriver().setup();
@@ -56,10 +61,11 @@ public class TestBase {
         return driver;
     }
 
-    public WebDriver OpenBrowser(WebDriver driver, String URl) {
+    public static WebDriver OpenBrowser(TestBase testBase, WebDriver driver, String URl) {
         try {
             if (driver == null) {
-                driver = getDriver();
+                driver = testBase.getDriver();
+                System.out.println("Duration.ofMillis(Configuration.PAGE_LOAD_TIME)=="+ Duration.ofMillis(Configuration.PAGE_LOAD_TIME));
                 driver.manage().timeouts().pageLoadTimeout(Duration.ofMillis(Configuration.PAGE_LOAD_TIME));
                 if (Configuration.DEFAULT_MAXIMUM) {
                     driver.manage().window().maximize();
@@ -80,10 +86,11 @@ public class TestBase {
         return  driver;
     }
 
-    public void mouseAction(Page page, String action, WebDriver driver, String element) {
+    public void mouseAction(Page page, String action, WebDriver driver, String element, Map<String, String> map) {
         Locators locators = getValueElement(page, element);
+        String valueElement = getValueElementToWithText(locators, element,map);
         WebDriverWait wait = getWait(driver);
-        By by = getBy(driver, locators.getType(), locators.getValue());
+        By by = getBy(driver, locators.getType(), valueElement);
         try {
             switch (action) {
                 case "click":
@@ -104,11 +111,12 @@ public class TestBase {
     }
 
 
-    public void showUI(Page page, WebDriver driver, String element, String status) {
+    public void showUI(Page page, WebDriver driver, String element, String status, Map<String, String> map) {
         try {
             Locators locators = getValueElement(page, element);
+            String valueElement = getValueElementToWithText(locators, element, map);
             WebDriverWait wait = getWait(driver);
-            By by = getBy(driver, locators.getType(), locators.getValue());
+            By by = getBy(driver, locators.getType(),valueElement);
             switch (status) {
                 case "DISPLAYED":
                     wait.until(ExpectedConditions.visibilityOfElementLocated(by));
@@ -234,7 +242,7 @@ public class TestBase {
             WebDriverWait wait = getWait(driver);
             By by = getBy(driver, locators.getType(), locators.getValue());
             wait.until(ExpectedConditions.presenceOfElementLocated(by));
-            String element_text = driver.findElement(by).getText();
+            String element_text = driver.findElement(by).getAttribute("value");;
             map.put("KEY." + text, element_text);
         } catch (Exception e) {
             e.printStackTrace();
@@ -363,8 +371,9 @@ public class TestBase {
     }
 
     public Locators getValueElement(Page page, String id) {
-            for (int i = 0; i < page.getElements().size(); i++) {
-                if (page.getElements().get(i).getId().equals(id)) {
+        String element = getElement(id);
+        for (int i = 0; i < page.getElements().size(); i++) {
+                if (page.getElements().get(i).getId().equals(element)) {
                     return page.getElements().get(i).getLocator();
                 }
             }
@@ -403,5 +412,30 @@ public class TestBase {
                 System.out.println("Not Found type");
         }
         return by;
+    }
+    public String getValueElementToWithText(Locators locator, String element, Map<String, String> map){
+        String elementText=null;
+        String value=locator.getValue();
+        if(element.contains("with text")){
+            String split[] =  element.split("with text");
+            elementText = split[1].trim().replace("\"","");
+        }
+        if(value.contains("{text}")){
+            if(map.containsKey(elementText)){
+                elementText = map.get(elementText);
+            }
+            return value.replace("{text}", elementText);
+        }
+       return value;
+
+    }
+    public String getElement(String element){
+        if(element.contains("with text")){
+            String split[] =  element.split("with text");
+            element = split[0].trim();
+            return element;
+        }else{
+            return  element;
+        }
     }
 }

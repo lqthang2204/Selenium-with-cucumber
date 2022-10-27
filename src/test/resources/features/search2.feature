@@ -2,8 +2,8 @@
 Feature: Search function
   @mc-1
   Scenario: test Search function
-#    Given I Navigate with URl is "http://live.techpanda.org/index.php/"
-    And I Navigate with URl is "https://www.google.com/"
+    Given I navigate to "http://live.techpanda.org/index.php/"
+#    And I navigate to "https://www.google.com/"
 #    And I close browser with title is "test"
     And I change the page spec to HomePage
     And I wait for element mobile-button to be DISPLAYED

@@ -95,6 +95,12 @@
             <artifactId>guava</artifactId>
             <version>31.0.1-jre</version>
         </dependency>
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>6.6.6</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 
