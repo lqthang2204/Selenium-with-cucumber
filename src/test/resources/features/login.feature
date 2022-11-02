@@ -35,15 +35,16 @@ Feature: Login function
   @mc-test2
   Scenario: Negative to web URL
 #    Given I navigate to "https://zingnews.vn/"
-    And I navigate to "https://www.google.com.vn/"
-    And I change the page spec to test
-    And I type "Đăng nhập" into element field-search
-    And I save the text for element field-search with key "name"
-    And I clear text from element field-search
-#    And I click element ui-text-equal with text "Đăng nhập"
-    And I wait for element ui-text-equal with text "KEY.name" to be DISPLAYED
-    And I click element ui-text-equal with text "KEY.name"
-    And I wait for element ui-text-equal with text "Tiếp theo" to be DISPLAYED
+#    And I navigate to "https://www.google.com.vn/"
+#    And I change the page spec to test
+#    And I type "Đăng nhập" into element field-search
+#    And I save the text for element field-search with key "name"
+#    And I clear text from element field-search
+##    And I click element ui-text-equal with text "Đăng nhập"
+#    And I wait for element ui-text-equal with text "KEY.name" to be DISPLAYED
+#    And I click element ui-text-equal with text "KEY.name"
+#    And I wait for element ui-text-equal with text "Tiếp theo" to be DISPLAYED
+    And I run test.json with data.json data file
 
 
 

@@ -2,8 +2,9 @@ package Util;
 
 import StepsDefinition.Steps;
 import bean.*;
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.cucumber.datatable.DataTable;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
@@ -17,16 +18,17 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.nio.file.Paths;
 import java.time.Duration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static com.codeborne.selenide.Selenide.$;
 
 public class TestBase {
     WebDriver driver;
+    private JsonNode arrayJsonNode;
+
 
     public TestBase() {
         Configuration.ReadConfig();
@@ -37,7 +39,7 @@ public class TestBase {
     public WebDriver getDriver() {
         switch (Configuration.WEB_BROWSER) {
             case "CHROME":
-//                WebDriverManager.chromedriver().clearDriverCache();
+                WebDriverManager.chromedriver().clearDriverCache();
                 WebDriverManager.chromedriver().setup();
                 driver = new  ChromeDriver();
                 break;
@@ -192,6 +194,52 @@ public class TestBase {
             e.printStackTrace();
             Assert.assertTrue(false);
         }
+
+    }
+    public void runCollection(String collectionJson, String dataFile, Map<String, String> datatable)  {
+         collectionJson = Configuration.PATH_POSTMAN+"/collection/"+collectionJson;
+         dataFile = Configuration.PATH_POSTMAN+"/data-files/"+dataFile;
+         try {
+            this.arrayJsonNode = ( new ObjectMapper()).readTree(new File(dataFile));
+             JsonNode jsonNode = UpdateNodeJson( datatable);
+             System.out.println("json node== "+ jsonNode);
+                ObjectMapper mapper = new ObjectMapper();
+                dataFile = Configuration.PATH_POSTMAN+"/data-files/"+System.currentTimeMillis()+".json";
+                mapper.writeValue(Paths.get(dataFile).toFile(), jsonNode);
+         }catch (Exception e){
+             e.printStackTrace();
+             Assert.assertTrue(false);
+         }
+
+    }
+    public JsonNode UpdateNodeJson(Map<String, String> dataTable){
+//        if(dataTable!=null){
+
+            Iterator<JsonNode> var1 = this.arrayJsonNode.iterator();
+            if(var1.hasNext()){
+                 JsonNode jsonNode = var1.next();
+                Iterator<Map.Entry<String, JsonNode>> fields = jsonNode.fields();
+                while(fields.hasNext()){
+                    Map.Entry<String, JsonNode> jsonNodeMap = fields.next();
+                    String key = jsonNodeMap.getKey();
+                    String value = jsonNodeMap.getValue().asText();
+                    List<String> list = new ArrayList<>(Arrays.asList("user."));
+                    Iterator<String> var = list.iterator();
+                    if(var.hasNext()){
+                        String field_key = var.next();
+                        if(value.contains(field_key)){
+                            ((ObjectNode) jsonNode).put(key, getReplaceValue(value));
+                        }
+                        if(Objects.nonNull(dataTable) && dataTable.containsKey(key)){
+                            ((ObjectNode)jsonNode).put(key, (String)dataTable.get(key));
+                        }
+                    }
+                }
+
+            }
+
+            return this.arrayJsonNode;
+//        }
 
     }
     public void keyBoard(Page page, WebDriver driver,String element, String action){
@@ -438,4 +486,14 @@ public class TestBase {
             return  element;
         }
     }
+    public String getReplaceValue(String value){
+        String replaceValue = null;
+        if(value.toLowerCase().contains("user.")){
+            replaceValue = "test";
+        }
+        return replaceValue;
+
+    }
+
+
 }

@@ -65,6 +65,7 @@ public class Steps {
     @Given("I change the page spec to {word}")
     public void updateYaml(String yaml) {
         page = execute.updateYaml(yaml, map, this.mapFileYaml);
+
         this.titlePage = yaml;
     }
 
@@ -77,6 +78,11 @@ public class Steps {
     @When("I type {string} into element {word}")
     public void actionType(String content, String element) {
         testBase.ActionType(this.page, this.driver, element, content, this.mapSaveText);
+
+    }
+    @And("I run {word} with {word} data file")
+    public void i_run_postman_collection_with_data_json(String collectionFile, String dataFile) {
+        testBase.runCollection(collectionFile, dataFile, (Map)null);
 
     }
 
@@ -134,8 +140,9 @@ public class Steps {
 
     @After
     public void tearDown() {
-        this.driver.close();
-
+        if(driver!=null){
+            this.driver.close();
+        }
     }
 
 }

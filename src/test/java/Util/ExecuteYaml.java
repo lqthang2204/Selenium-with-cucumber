@@ -3,14 +3,16 @@ package Util;
 import bean.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import org.json.JSONArray;
-import org.json.JSONObject;
+
 import org.junit.Assert;
 
 import java.io.File;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import java.util.*;
 
 public class ExecuteYaml {
+
     public String ConvertFileYaml(File f) {
         try {
             ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
@@ -22,11 +24,6 @@ public class ExecuteYaml {
             e.printStackTrace();
         }
         return "can not read file yaml";
-    }
-    public static void main(String[] args) {
-//        ExecuteYaml exe = new ExecuteYaml();
-//        Map<String, Page> map = new HashMap<>();
-//        exe.updateYaml("test", map);
     }
 
     public Page updateYaml(String pageYaml, Map<String, Page> mapPage, Map<String, String> mapFileyaml) {
@@ -117,4 +114,21 @@ public class ExecuteYaml {
         }
         return list;
     }
+//    public void getPath(String configPath){
+//        String os = System.getProperty("os.name");
+//        if (os.indexOf("Windows") != -1) {
+//            configPath = configPath.replace("\", "");
+//            if (configPath.indexOf("file:\\\\") != -1) {
+//                configPath = configPath.replace("file:\\\\", "");
+//            }
+//        } else if (configPath.indexOf("file:") != -1) {
+//            configPath = configPath.replace("file:", "");
+//        }
+//    }
+
+//    public static void main(String[] args) {
+//        ExecuteYaml exe = new ExecuteYaml();
+//        exe.getPath(System.getProperty("user.dir") + "/src/test/resources/Pages");
+//    }
+
 }
