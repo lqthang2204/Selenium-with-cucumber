@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.Scenario;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.*;
@@ -18,17 +19,21 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.*;
+import java.util.stream.Stream;
 
 import static com.codeborne.selenide.Selenide.$;
 
 public class TestBase {
     WebDriver driver;
     private JsonNode arrayJsonNode;
-
+    FakerData fake;
 
     public TestBase() {
         Configuration.ReadConfig();
@@ -179,16 +184,21 @@ public class TestBase {
 
     }
 
-    public void ActionType(Page page, WebDriver driver, String element, String content, Map<String, String> map) {
+    public void ActionType(Page page, WebDriver driver, String element, String content, Map<String, String> map, UserDTO userDTO) {
         try {
             String text = content;
             if (map.containsKey(content)) {
                 text = map.get(content);
             }
+            if(content.contains("USER.")){
+                String suffix = content.substring(5);
+                text = getProfileUser(suffix, userDTO);
+            }
             Locators locators = getValueElement(page, element);
             WebDriverWait wait = getWait(driver);
             By by = getBy(driver, locators.getType(), locators.getValue());
             wait.until(ExpectedConditions.elementToBeClickable(by));
+            driver.findElement(by).clear();
             driver.findElement(by).sendKeys(text);
         } catch (Exception e) {
             e.printStackTrace();
@@ -196,7 +206,7 @@ public class TestBase {
         }
 
     }
-    public void runCollection(String collectionJson, String dataFile, Map<String, String> datatable)  {
+    public void runCollection(String collectionJson, String dataFile, Map<String, String> datatable, Scenario scenario)  {
          collectionJson = Configuration.PATH_POSTMAN+"/collection/"+collectionJson;
          dataFile = Configuration.PATH_POSTMAN+"/data-files/"+dataFile;
          try {
@@ -204,8 +214,18 @@ public class TestBase {
              JsonNode jsonNode = UpdateNodeJson( datatable);
              System.out.println("json node== "+ jsonNode);
                 ObjectMapper mapper = new ObjectMapper();
-                dataFile = Configuration.PATH_POSTMAN+"/data-files/"+System.currentTimeMillis()+".json";
+                dataFile = Configuration.PATH_POSTMAN+"/data-files/"+ scenario.getName()+"_" +System.currentTimeMillis()+".json";
                 mapper.writeValue(Paths.get(dataFile).toFile(), jsonNode);
+                String[] arrComman = new String[]{"newman","run",null,null,null};
+             arrComman[2] = collectionJson;
+             arrComman[3] = "-d";
+             arrComman[4] = dataFile;
+                List<String> commandLineAggrument = new ArrayList<>(Arrays.asList(arrComman));
+                if(System.getProperty("os.name").toLowerCase().contains("win")){
+                    commandLineAggrument.add(0,"cmd");
+                    commandLineAggrument.add(1,"/c");
+                }
+             ExecuteWithOutToFile(dataFile, commandLineAggrument.toArray(new String[0]));
          }catch (Exception e){
              e.printStackTrace();
              Assert.assertTrue(false);
@@ -290,7 +310,7 @@ public class TestBase {
             WebDriverWait wait = getWait(driver);
             By by = getBy(driver, locators.getType(), locators.getValue());
             wait.until(ExpectedConditions.presenceOfElementLocated(by));
-            String element_text = driver.findElement(by).getAttribute("value");;
+            String element_text = driver.findElement(by).getText();
             map.put("KEY." + text, element_text);
         } catch (Exception e) {
             e.printStackTrace();
@@ -311,8 +331,29 @@ public class TestBase {
             Assert.assertTrue(false);
         }
     }
+    public void ExecuteWithOutToFile(String path, String... args) throws IOException, InterruptedException {
+        int exitCode = 0;
+        Process process = Runtime.getRuntime().exec(args);
+        BufferedReader stdInput = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
-    public void executeAction(WebDriver driver, Page page, String action, DataTable dataTable,Map<String, String> map) {
+        StringBuilder outputBuilder;
+        String line;
+        for(outputBuilder = new StringBuilder(); process.isAlive(); exitCode = process.waitFor()) {
+            while((line = stdInput.readLine()) != null) {
+                outputBuilder.append(line).append("\n");
+            }
+        }
+        if (exitCode != 0) {
+            System.out.println(outputBuilder.toString());
+        } else {
+            System.out.println(outputBuilder.toString());
+            stdInput.close();
+
+        }
+        deleteFile(path);
+    }
+
+    public void executeAction(WebDriver driver, Page page, String action, DataTable dataTable,Map<String, String> map, UserDTO userDTO) {
         ActionsTest actions = getActions(page, action);
         WebDriverWait wait ;
         boolean flag= false;
@@ -328,7 +369,10 @@ public class TestBase {
                  }
                  if(map.containsKey(value)){
                      value = map.get(value);
-                 }
+                 } if(value.contains("USER.")){
+                        String suffix = value.substring(5);
+                        value = getProfileUser(suffix, userDTO);
+                    }
                 Locators locators = getValueElement(page,list.get(i).getElement());
                 By by = getBy(driver, locators.getType(), locators.getValue());
                 if(list.get(i).getCondition()!=null){
@@ -494,6 +538,111 @@ public class TestBase {
         return replaceValue;
 
     }
+    public UserDTO CreateUser(){
+        fake = new FakerData();
+         return fake.CreateUser();
 
+    }
+    public void deleteFile(String path){
+        File f = new File(path);
+        f.delete();
+    }
+//    public String getText(Map<String, String> map, List<UserDTO> listUserDTO, String content){
+//        Stream<String> var1 = Arrays.stream(Configuration.PREFIX);
+//        if(var1.anyMatch(content.toLowerCase()::startsWith)){
+//            String[] arrCharacter = content.split(" ");
+//            for(int i=0;i<Configuration.PREFIX.length;i++){
+//                for(int k=0;k<arrCharacter.length;k++){
+//                    if(arrCharacter[k].toLowerCase().contains(Configuration.PREFIX[i])){
+//
+//                    }
+//                }
+//            }
+//        }else{
+//            return content;
+//        }
+//        String text =null;
+//        if (map.containsKey(content)) {
+//            text = map.get(content);
+//            return text;
+//        }
+//        if(content.contains("USER.")){
+//
+//        }
+//        return "";
+//    }
+//    public String getValue(String key, List<UserDTO> listUserDTO, Map<String, String> mapSaveText){
+//        String value =null;
+//        String count;
+//        UserDTO userDTO;
+//        switch (key){
+//            case "user.":
+//                String suffix = key.substring(5);
+//                String suffix2= key.substring(6);
+//                boolean isDigit = checkIsDigit(suffix2);
+//                if(isDigit){
+//                     userDTO = listUserDTO.get(Integer.parseInt(suffix2));
+//                }else{
+//                    userDTO = listUserDTO.get(listUserDTO.size()-1);
+//                }
+//                value = getProfileUser(suffix, userDTO);
+//            case "key.":
+////               getValueKey("ds");
+//        }
+//        return value;
+//
+//    }
+    public String getProfileUser(String suffix, UserDTO userDTO){
+        String value ="";
+        switch (suffix){
+            case "firstName":
+                value= userDTO.getFirstname();
+                break;
+            case "lastName":
+                value= userDTO.getLastname();
+                break;
+            case "dob":
+                value= userDTO.getDob();
+                break;
+            case "email":
+                value= userDTO.getEmail();
+                break;
+            case "phoneNumber":
+                value= userDTO.getPhoneNumber();
+                break;
+            case "address":
+                value= userDTO.getAddress();
+                break;
+            default:
+                System.out.println("Not Found User");
+        }
+        return value;
+    }
+//    public String getValueKey(String key, Map<String, String> map){
+//        String value =null;
+//        if(map.containsKey(key)){
+//            value =  map.get(key);
+//        }else{
+//            System.out.println("Not Found key in cached");
+//            Assert.assertTrue(false);
+//        }
+//        return value;
+//    }
+//    public boolean checkIsDigit(String value){
+//        try {
+//            Integer.parseInt(value);
+//            return true;
+//        }catch (Exception e){
+//            return false;
+//        }
+//    }
+//
+//    public static void main(String[] args) {
+//        String s = "le quang thang";
+//        String[] s1 = s.split(" ");
+//        for(int i=0;i<s1.length;i++){
+//            System.out.println("test === "+ s1[i]);
+//        }
+//    }
 
 }

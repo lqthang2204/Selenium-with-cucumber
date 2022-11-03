@@ -12,8 +12,10 @@ Feature: Search function
 #    And I save the text for element link-text is "link"
     And I wait for element product-one to be DISPLAYED
     And I save the text for element product-one with key "product"
+    And I become a random user
     And I perform to action buy-one-mobile with override values
-      | search-input | KEY.product |
+#      | search-input | KEY.product |
+      | search-input | USER.email |
 #    And I click keyboard HOVER button on element dropdown-search
 #    And I click element dropdown-search
 #    And I click keyboard HOVER-AND-CLICK button on element dropdown-search

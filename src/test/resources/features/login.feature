@@ -4,6 +4,8 @@ Feature: Login function
 #    Given I navigate to "https://zingnews.vn/"
     And I navigate to "https://www.google.com.vn/"
     And I change the page spec to test
+    And I become a random user
+    And I type "USER.email" into element field-search
     And I type "lqthang" into element field-search
     And I click element button-search
     And I navigate to "https://demo.openmrs.org/openmrs/login.htm"
@@ -31,6 +33,9 @@ Feature: Login function
     And I click element log-out
     And I change the page spec to LoginPage
     And I wait for element user-field to be DISPLAYED
+#    And I run test.json with data.json data file
+    And I run test.json with data.json data file with override values
+      | search-input | USER.email |
 
   @mc-test2
   Scenario: Negative to web URL
@@ -44,7 +49,10 @@ Feature: Login function
 #    And I wait for element ui-text-equal with text "KEY.name" to be DISPLAYED
 #    And I click element ui-text-equal with text "KEY.name"
 #    And I wait for element ui-text-equal with text "Tiếp theo" to be DISPLAYED
-    And I run test.json with data.json data file
+#    And I run test.json with data.json data file
+    And I become a random user
+    And I run test.json with data.json data file with override values
+      | test | USER.email |
 
 
 

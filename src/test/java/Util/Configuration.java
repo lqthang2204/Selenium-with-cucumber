@@ -11,6 +11,7 @@ public class Configuration {
     public static int PAGE_LOAD_TIME= 0;
     public static boolean DEFAULT_MAXIMUM =true;
     public static String PATH_POSTMAN;
+    public static String[] PREFIX= new String[]{"unique.", "user.","key."};
 
 //    private static final SelenideConfig defaults = new SelenideConfig();
 

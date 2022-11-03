@@ -3,6 +3,7 @@ package StepsDefinition;
 import Util.ExecuteYaml;
 import Util.TestBase;
 import bean.Page;
+import bean.UserDTO;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -13,9 +14,7 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 
 import java.io.File;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Steps {
     public static  WebDriver driver;
@@ -26,7 +25,9 @@ public class Steps {
     Map<String, String> mapSaveText;
     public static String titlePage;
     public static Map<String, String> mapFileYaml;
-
+    Scenario scenario;
+    List<UserDTO> listUserDTO;
+    UserDTO userDTO;
     public Map<String, Page> getMap() {
         return map;
     }
@@ -40,9 +41,13 @@ public class Steps {
         execute = new ExecuteYaml();
         map = new HashMap<>();
         page = new Page();
+        userDTO = new UserDTO();
         mapSaveText = new HashMap<>();
         mapFileYaml = new HashMap<>();
         execute.findFile(new File(System.getProperty("user.dir") + "/src/test/resources/Pages"), this.mapFileYaml);
+        this.scenario = scenario;
+        listUserDTO = new LinkedList<>();
+
 
     }
     @Before
@@ -53,6 +58,7 @@ public class Steps {
         for(int i=0;i<tags.size();i++){
             System.out.println(tags.toArray()[i]);
         }
+
 
     }
 
@@ -77,20 +83,27 @@ public class Steps {
 
     @When("I type {string} into element {word}")
     public void actionType(String content, String element) {
-        testBase.ActionType(this.page, this.driver, element, content, this.mapSaveText);
+        testBase.ActionType(this.page, this.driver, element, content, this.mapSaveText, this.userDTO);
 
     }
     @And("I run {word} with {word} data file")
     public void i_run_postman_collection_with_data_json(String collectionFile, String dataFile) {
-        testBase.runCollection(collectionFile, dataFile, (Map)null);
+        testBase.runCollection(collectionFile, dataFile, (Map)null, this.scenario);
 
+    }
+    @And("I run {word} with {word} data file with override values")
+    public void i_run_with_data_file_with_override_values(String collectionFile, String dataFile, DataTable dataTable) {
+        testBase.runCollection(collectionFile, dataFile, dataTable, this.scenario, userDTO);
     }
 
     @And("I wait for element {} to be {}")
     public void waitTo(String element, String status) {
         testBase.showUI(this.page, this.driver, element, status, this.mapSaveText);
     }
-
+    @Given("I become a random user")
+    public void i_become_a_random_user() {
+         this.userDTO = testBase.CreateUser();
+    }
     @And("I verify the text for element {word} is {string}")
     public void verifyText(String element, String text) {
         testBase.verifyText(this.page, this.driver, element, text, true, this.mapSaveText);
@@ -123,13 +136,13 @@ public class Steps {
 
     @Given("I perform to action {word}")
     public void i_perform_to_action(String action) {
-        testBase.executeAction(this.driver, this.page, action, null, this.mapSaveText);
+        testBase.executeAction(this.driver, this.page, action, null, this.mapSaveText, this.userDTO);
 
     }
 
     @Given("I perform to action {word} with override values")
     public void actionOverride(String action, DataTable dataTable) {
-        testBase.executeAction(this.driver, this.page, action, dataTable, this.mapSaveText);
+        testBase.executeAction(this.driver, this.page, action, dataTable, this.mapSaveText, this.userDTO);
     }
 
     @Given("I close browser with title is {string}")
