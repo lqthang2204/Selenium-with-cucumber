@@ -33,9 +33,11 @@ Feature: Login function
     And I click element log-out
     And I change the page spec to LoginPage
     And I wait for element user-field to be DISPLAYED
+#    And I run test.json with data.json data file with override values
+#      | test2 | KEY.name |
 #    And I run test.json with data.json data file
-    And I run test.json with data.json data file with override values
-      | search-input | USER.email |
+#    And I run test.json with data.json data file with override values
+#      | search-input | USER.email |
 
   @mc-test2
   Scenario: Negative to web URL
@@ -45,14 +47,31 @@ Feature: Login function
 #    And I type "Đăng nhập" into element field-search
 #    And I save the text for element field-search with key "name"
 #    And I clear text from element field-search
-##    And I click element ui-text-equal with text "Đăng nhập"
+#    And I click element ui-text-equal with text "Đăng nhập"
 #    And I wait for element ui-text-equal with text "KEY.name" to be DISPLAYED
 #    And I click element ui-text-equal with text "KEY.name"
 #    And I wait for element ui-text-equal with text "Tiếp theo" to be DISPLAYED
+#      And I become a random user
 #    And I run test.json with data.json data file
-    And I become a random user
-    And I run test.json with data.json data file with override values
-      | test | USER.email |
+#    And I run test.json with data.json data file with override values
+#      | test2 | KEY.name |
+    And I run postman collection with link "https://www.getpostman.com/collections/be1065f3f80e40af800f"
+
+  @mc-loginPMT
+  Scenario: Logib PMT and changeRole
+    Given I navigate to "https://pmt-pmi-qa.qak8s.vibrenthealth.com/"
+    And I change the page spec to AdminLoginPage
+    And I type "mcadmin@vibrenthealth.com" into element username-input
+    And I type "Password123$" into element password-input
+    And I click element submit-button
+    And I change the page spec to HomePagePMT
+    And I perform to action change-to-system-admin-role
+    And I wait for element user-admin-icon to be DISPLAYED
+#    And I click element user-admin-icon
+#    And I change the page spec to UserAdminPage
+#    And I wait for element spinner to be NOT_DISPLAYED
+#    And I click element add-user
+#    And I
 
 
 

@@ -1,0 +1,22 @@
+elements:
+  - &username-input
+    id: username-input
+    description: Username Input
+    locators:
+      - device: WEB
+        type: ID
+        value: username
+  - &password-input
+    id: password-input
+    description: Password input
+    locators:
+      - device: WEB
+        type: ID
+        value: password
+  - &submit-button
+    id: submit-button
+    description: Submit button
+    locators:
+      - device: WEB
+        type: ID
+        value: kc-login

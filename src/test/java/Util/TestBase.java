@@ -198,7 +198,7 @@ public class TestBase {
             WebDriverWait wait = getWait(driver);
             By by = getBy(driver, locators.getType(), locators.getValue());
             wait.until(ExpectedConditions.elementToBeClickable(by));
-            driver.findElement(by).clear();
+//            driver.findElement(by).clear();
             driver.findElement(by).sendKeys(text);
         } catch (Exception e) {
             e.printStackTrace();
@@ -206,12 +206,12 @@ public class TestBase {
         }
 
     }
-    public void runCollection(String collectionJson, String dataFile, Map<String, String> datatable, Scenario scenario)  {
+    public void runCollection(String collectionJson, String dataFile, Map<String, String> datatable, Scenario scenario, UserDTO userDTO, Map<String, String> mapSavetext)  {
          collectionJson = Configuration.PATH_POSTMAN+"/collection/"+collectionJson;
          dataFile = Configuration.PATH_POSTMAN+"/data-files/"+dataFile;
          try {
             this.arrayJsonNode = ( new ObjectMapper()).readTree(new File(dataFile));
-             JsonNode jsonNode = UpdateNodeJson( datatable);
+             JsonNode jsonNode = UpdateNodeJson( datatable, userDTO, mapSavetext);
              System.out.println("json node== "+ jsonNode);
                 ObjectMapper mapper = new ObjectMapper();
                 dataFile = Configuration.PATH_POSTMAN+"/data-files/"+ scenario.getName()+"_" +System.currentTimeMillis()+".json";
@@ -232,7 +232,8 @@ public class TestBase {
          }
 
     }
-    public JsonNode UpdateNodeJson(Map<String, String> dataTable){
+
+    public JsonNode UpdateNodeJson(Map<String, String> dataTable, UserDTO userDTO, Map<String, String> mapSaveText){
 //        if(dataTable!=null){
 
             Iterator<JsonNode> var1 = this.arrayJsonNode.iterator();
@@ -243,17 +244,20 @@ public class TestBase {
                     Map.Entry<String, JsonNode> jsonNodeMap = fields.next();
                     String key = jsonNodeMap.getKey();
                     String value = jsonNodeMap.getValue().asText();
-                    List<String> list = new ArrayList<>(Arrays.asList("user."));
+                    List<String> list = new ArrayList<>(Arrays.asList("user.", "unique.","key."));
                     Iterator<String> var = list.iterator();
-                    if(var.hasNext()){
-                        String field_key = var.next();
+                    for(int i=0;i<list.size();i++){
+                        String field_key = list.get(i);
                         if(value.contains(field_key)){
-                            ((ObjectNode) jsonNode).put(key, getReplaceValue(value));
+                            ((ObjectNode) jsonNode).put(key, getReplaceValue(value, userDTO, mapSaveText));
                         }
                         if(Objects.nonNull(dataTable) && dataTable.containsKey(key)){
-                            ((ObjectNode)jsonNode).put(key, (String)dataTable.get(key));
+                            String data = dataTable.get(key).toString();
+                            data = getReplaceValue(data, userDTO, mapSaveText);
+                            ((ObjectNode)jsonNode).put(key, data);
                         }
                     }
+
                 }
 
             }
@@ -310,7 +314,7 @@ public class TestBase {
             WebDriverWait wait = getWait(driver);
             By by = getBy(driver, locators.getType(), locators.getValue());
             wait.until(ExpectedConditions.presenceOfElementLocated(by));
-            String element_text = driver.findElement(by).getText();
+            String element_text = "input".equals(driver.findElement(by).getTagName())? driver.findElement(by).getAttribute("value"):driver.findElement(by).getText();
             map.put("KEY." + text, element_text);
         } catch (Exception e) {
             e.printStackTrace();
@@ -360,6 +364,7 @@ public class TestBase {
         List<ActionElements> list = actions.getList();
             String value="";
             for (int i = 0; i < list.size(); i++) {
+
                 try {
                  if(dataTable!=null){
                      Map<String,String> mapOverride = dataTable.asMap(String.class,String.class);
@@ -530,22 +535,43 @@ public class TestBase {
             return  element;
         }
     }
-    public String getReplaceValue(String value){
+    public String getReplaceValue(String value, UserDTO userDTO, Map<String, String> mapSaveText){
         String replaceValue = null;
         if(value.toLowerCase().contains("user.")){
-            replaceValue = "test";
+            String suffix = value.substring(5);
+            replaceValue = getProfileUser(suffix, userDTO);
+        }
+        else if(value.toLowerCase().contains("unique.")){
+            String suffix = value.substring(7);
+            if(suffix.contains("number.")){
+                String number = suffix.substring(7);
+                replaceValue= getRandomNumber(Integer.parseInt(number));
+            }else{
+                replaceValue =  getRandomCharacter(value);
+            }
+
+        }
+        else if(mapSaveText.containsKey(value)){
+            replaceValue =mapSaveText.get(value);
+        }
+        else{
+            replaceValue = value;
         }
         return replaceValue;
 
     }
+
     public UserDTO CreateUser(){
         fake = new FakerData();
          return fake.CreateUser();
 
     }
     public void deleteFile(String path){
-        File f = new File(path);
-        f.delete();
+        if(path!=""){
+            File f = new File(path);
+            f.delete();
+        }
+
     }
 //    public String getText(Map<String, String> map, List<UserDTO> listUserDTO, String content){
 //        Stream<String> var1 = Arrays.stream(Configuration.PREFIX);
@@ -637,12 +663,46 @@ public class TestBase {
 //        }
 //    }
 //
-//    public static void main(String[] args) {
-//        String s = "le quang thang";
-//        String[] s1 = s.split(" ");
-//        for(int i=0;i<s1.length;i++){
-//            System.out.println("test === "+ s1[i]);
-//        }
-//    }
+    public  String getRandomCharacter(String content){
+        final String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        final int N = alphabet.length();
+        Random r = new Random();
+        String value = "";
+        for (int i = 0; i < 10; i++) {
+            value = value+alphabet.charAt(r.nextInt(N));
+        }
+        return value+content;
+    }
+    public  String getRandomNumber(int length){
+        final String number = "0123456789";
+        final int N = number.length();
+        Random r = new Random();
+        String value = "";
+        for (int i = 0; i < length; i++) {
+            value = value+number.charAt(r.nextInt(N));
+        }
+        return value;
+    }
+    public static void main(String[] args) {
+        final String number = "0123456789";
+        final int N = number.length();
+        Random r = new Random();
+        String value = "";
+        for (int i = 0; i < 10; i++) {
+            value = value+number.charAt(r.nextInt(N));
+        }
+        System.out.println("value =="+ value);
+
+    }
+    public void ExecutePostmanCollectionWithLink(String link) throws IOException, InterruptedException {
+        String[] arrCommand = new String[]{"newman","run",null};
+        arrCommand[2] = link;
+        List<String> commandLineAggrument = new ArrayList<>(Arrays.asList(arrCommand));
+        if(System.getProperty("os.name").toLowerCase().contains("win")){
+            commandLineAggrument.add(0,"cmd");
+            commandLineAggrument.add(1,"/c");
+        }
+        ExecuteWithOutToFile("", commandLineAggrument.toArray(new String[0]));
+    }
 
 }

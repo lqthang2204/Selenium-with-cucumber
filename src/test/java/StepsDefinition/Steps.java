@@ -13,7 +13,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 
+import javax.xml.crypto.Data;
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 public class Steps {
@@ -88,12 +90,12 @@ public class Steps {
     }
     @And("I run {word} with {word} data file")
     public void i_run_postman_collection_with_data_json(String collectionFile, String dataFile) {
-        testBase.runCollection(collectionFile, dataFile, (Map)null, this.scenario);
+        testBase.runCollection(collectionFile, dataFile, (Map)null, this.scenario, this.userDTO, this.mapSaveText);
 
     }
     @And("I run {word} with {word} data file with override values")
     public void i_run_with_data_file_with_override_values(String collectionFile, String dataFile, DataTable dataTable) {
-        testBase.runCollection(collectionFile, dataFile, dataTable, this.scenario, userDTO);
+        testBase.runCollection(collectionFile, dataFile,  dataTable.asMap(String.class, String.class), this.scenario, userDTO, this.mapSaveText);
     }
 
     @And("I wait for element {} to be {}")
@@ -149,6 +151,10 @@ public class Steps {
     public void iCLoseBrowser(String title) {
         testBase.CloseBrowser(this.driver, title);
 
+    }
+    @Given("I run postman collection with link {word}")
+    public void i_run_postman_collection_with_link(String link) throws IOException, InterruptedException {
+        testBase.ExecutePostmanCollectionWithLink(link);
     }
 
     @After

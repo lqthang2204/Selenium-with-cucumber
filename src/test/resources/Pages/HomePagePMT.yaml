@@ -1,0 +1,260 @@
+elements:
+  - id: expand-menu
+    description: Expand/Hamburger Menu
+    locators:
+      - device: WEB
+        type: ID
+        value: navbar-toggle
+  - &user-dropdown
+    id: user-dropdown
+    description: Welcome message when accessing into system successfully
+    locators:
+      - device: WEB
+        type: CSS
+        value: span[class*='welcome-message']
+  - &log-out
+    id: log-out
+    description: Log out
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //a[text()='Log out']
+  - &select-role-dropdown
+    id: select-role-dropdown
+    description: Select role dropdown
+    locators:
+      - device: WEB
+        type: ID
+        value: manager-account
+  - &program-manager-role
+    id: program-manager-role
+    description: Program manager role below select role dropdown
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //a[text()='Program Manager']
+  - &site-manager-role
+    id: site-manager-role
+    description: Site manager role below select role dropdown
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //a[text()='Site Manager']
+  - &program-coordinator-role
+    id: program-coodinator-role
+    description: Program coordinator role below select role dropdown
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //a[text()='Program Coordinator']
+  - &research-assistant-role
+    id: research-assistant-role
+    description: Research assistant role below select role dropdown
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //a[text()='Research Assistant']
+  - &cati-interviewer-role
+    id: cati-interviewer-role
+    description: CATI interviewer role below select role dropdown
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //a[text()='CATI Interviewer']
+  - &system-admin-role
+    id: system-admin-role
+    description: System administrator role below select role dropdown
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //a[text()='System Administrator']
+  - &support-admin-role
+    id: support-admin-role
+    description: Support admin role below select role dropdown
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //a[text()='Support Admin']
+  - id: user-role-option
+    description: Select user role
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //a[text()="{text}"]
+  - id: user-admin-icon
+    description: User admin icon
+    locators:
+      - device: WEB
+        type: ID
+        value: icon-User
+  - id: program-maintenance-icon
+    description: Program maintenance icon on left menu
+    locators:
+      - device: WEB
+        type: ID
+        value: icon-Program
+  - id: communications-icon
+    description: Communications icon left menu
+    locators:
+      - device: WEB
+        type: ID
+        value: icon-Communications
+  - id: site-management-icon
+    description: Site management icon
+    locators:
+      - device: WEB
+        type: ID
+        value: icon-Site
+  - id: insights-icon
+    description: Insights icon
+    locators:
+      - device: WEB
+        type: ID
+        value: icon-Insights
+  - &prospect-management-icon
+    id: prospect-management-icon
+    description: Prospect management icon
+    locators:
+      - device: WEB
+        type: ID
+        value: icon-Prospect
+  - &search-icon
+    id: search-icon
+    description: Search icon
+    locators:
+      - device: WEB
+        type: ID
+        value: icon-Search
+  - &scheduling-icon
+    id: scheduling-icon
+    description: Scheduling icon
+    locators:
+      - device: WEB
+        type: ID
+        value: icon-Scheduling
+  - &dashboard-icon
+    id: dashboard-icon
+    description: Dashboard icon
+    locators:
+      - device: WEB
+        type: ID
+        value: icon-Dashboard
+  - id: capacity-icon
+    description: Capacity Management icon
+    locators:
+      - device: WEB
+        type: ID
+        value: icon-Capacity
+  - id: notification-icon
+    description: Notification icon
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*="button-overlay-trigger"]
+  - id: new-notification
+    description: New notification icon
+    locators:
+      - device: WEB
+        type: CSS
+        value: span[class*="notification-badge"]
+  - id: message-text
+    description: Text message of new notification
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*="message-text"]
+  - id: message-table
+    description: Table of new notification
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*="UNREAD recent"]
+  - id: permission-message
+    description: Table of new notification
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(text(),'You do not have permission to access this resource.')]
+    values:
+      - lang: EN
+        value: You do not have permission to access this resource. Your access rights might have been changed.
+  - id: change-password
+    description: Change password
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Change Password']
+  - id: admin-user-dropdown-menu
+    description: Select type of change password or log out
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='dropdown-toggle']
+actions:
+  - id: change-to-program-manager-role
+    description: Change to program manager role
+    actionElements:
+      - element: *select-role-dropdown
+        inputType: click
+      - element: *program-manager-role
+        inputType: click
+  - id: change-to-support-admin-role
+    description: Change to support admin role
+    actionElements:
+      - element: *select-role-dropdown
+        inputType: click
+      - element: *support-admin-role
+        inputType: click
+  - id: change-to-system-admin-role
+    description: Change to system admin role
+    actionElements:
+      - element: *select-role-dropdown
+        inputType: click
+      - element: *system-admin-role
+        inputType: click
+  - id: change-to-cati-interviewer-role
+    description: Change to system admin role
+    actionElements:
+      - element: *select-role-dropdown
+        inputType: click
+      - element: *cati-interviewer-role
+        inputType: click
+  - id: change-to-site-manager-role
+    description: Change to site manager role
+    actionElements:
+      - element: *select-role-dropdown
+        inputType: click
+      - element: *site-manager-role
+        inputType: click
+  - id: change-to-program-coordinator-role
+    description: Change to program coordinator role
+    actionElements:
+      - element: *select-role-dropdown
+        inputType: click
+      - element: *program-coordinator-role
+        inputType: click
+  - id: change-to-research-assistant-role
+    description: Change to research assistant role
+    actionElements:
+      - element: *select-role-dropdown
+        inputType: click
+      - element: *research-assistant-role
+        inputType: click
+  - id: log-out
+    description: Log out
+    actionElements:
+      - element: *user-dropdown
+        condition: DISPLAYED
+        timeout: 10000
+        inputType: click
+      - element: *log-out
+        condition: DISPLAYED
+        timeout: 10000
+        inputType: click
+  - id: wait-for-10-seconds
+    description: Wait for a 10 second timeout
+    actionElements:
+      - element: *search-icon
+        condition: NOT_DISPLAYED
+        timeout: 10000
+        inputType: click
