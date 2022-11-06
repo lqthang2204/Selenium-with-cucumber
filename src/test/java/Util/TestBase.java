@@ -34,6 +34,8 @@ public class TestBase {
     WebDriver driver;
     private JsonNode arrayJsonNode;
     FakerData fake;
+    public WebDriverWait wait;
+    public Actions actions;
 
     public TestBase() {
         Configuration.ReadConfig();
@@ -65,6 +67,7 @@ public class TestBase {
                 Assert.assertTrue(false);
                 break;
         }
+        wait = getWait(driver);
         return driver;
     }
 
@@ -96,12 +99,19 @@ public class TestBase {
     public void mouseAction(Page page, String action, WebDriver driver, String element, Map<String, String> map) {
         Locators locators = getValueElement(page, element);
         String valueElement = getValueElementToWithText(locators, element,map);
-        WebDriverWait wait = getWait(driver);
+//        WebDriverWait wait = getWait(driver);
         By by = getBy(driver, locators.getType(), valueElement);
         try {
             switch (action) {
                 case "click":
                     wait.until(ExpectedConditions.elementToBeClickable(by));
+                    String disabled = driver.findElement(by).getAttribute("disabled");
+                    if(disabled!=null){
+                        wait.until(ExpectedConditions.not(ExpectedConditions.attributeToBeNotEmpty(driver.findElement(by), "disabled")));
+                    }
+
+//                    wait.until(ExpectedConditions.invisibilityOfElementLocated(driver.findElement(by).getAttribute("disabled")));
+//                    scrollToElement(this.driver, by);
                     driver.findElement(by).click();
                     break;
                 case "clear":
@@ -122,7 +132,7 @@ public class TestBase {
         try {
             Locators locators = getValueElement(page, element);
             String valueElement = getValueElementToWithText(locators, element, map);
-            WebDriverWait wait = getWait(driver);
+//            WebDriverWait wait = getWait(driver);
             By by = getBy(driver, locators.getType(),valueElement);
             switch (status) {
                 case "DISPLAYED":
@@ -156,6 +166,8 @@ public class TestBase {
     public void verifyText(Page page, WebDriver driver, String element, String content, boolean status, Map<String, String> map) {
         Locators locators = getValueElement(page, element);
         By by = getBy(driver, locators.getType(), locators.getValue());
+        scrollAction(this.driver, element, page);
+
         try {
             if (map.containsKey(content)) {
                 content = map.get(content);
@@ -195,7 +207,7 @@ public class TestBase {
                 text = getProfileUser(suffix, userDTO);
             }
             Locators locators = getValueElement(page, element);
-            WebDriverWait wait = getWait(driver);
+//            WebDriverWait wait = getWait(driver);
             By by = getBy(driver, locators.getType(), locators.getValue());
             wait.until(ExpectedConditions.elementToBeClickable(by));
 //            driver.findElement(by).clear();
@@ -268,7 +280,7 @@ public class TestBase {
     }
     public void keyBoard(Page page, WebDriver driver,String element, String action){
         Actions actions = new Actions(driver);
-        WebDriverWait wait = getWait(driver);
+//        WebDriverWait wait = getWait(driver);
         Locators locators = getValueElement(page, element);
         By by = getBy(driver, locators.getType(), locators.getValue());
         wait.until(ExpectedConditions.visibilityOfElementLocated(by));
@@ -311,7 +323,7 @@ public class TestBase {
         }
         try {
             Locators locators = getValueElement(page, element);
-            WebDriverWait wait = getWait(driver);
+//            WebDriverWait wait = getWait(driver);
             By by = getBy(driver, locators.getType(), locators.getValue());
             wait.until(ExpectedConditions.presenceOfElementLocated(by));
             String element_text = "input".equals(driver.findElement(by).getTagName())? driver.findElement(by).getAttribute("value"):driver.findElement(by).getText();
@@ -326,10 +338,22 @@ public class TestBase {
     public void scrollAction(WebDriver driver, String element, Page page) {
         try {
             Locators locators = getValueElement(page, element);
-            WebDriverWait wait = getWait(driver);
+//            WebDriverWait wait = getWait(driver);
             By by = getBy(driver, locators.getType(), locators.getValue());
             wait.until(ExpectedConditions.visibilityOfElementLocated(by));
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(by));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.assertTrue(false);
+        }
+    }
+    public void scrollToElement(WebDriver driver, By by) {
+        try {
+             actions = new Actions(driver);
+            actions.moveToElement(driver.findElement(by));
+            actions.perform();
+//            wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+//            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(by));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.assertTrue(false);
@@ -359,7 +383,7 @@ public class TestBase {
 
     public void executeAction(WebDriver driver, Page page, String action, DataTable dataTable,Map<String, String> map, UserDTO userDTO) {
         ActionsTest actions = getActions(page, action);
-        WebDriverWait wait ;
+        WebDriverWait waitAction ;
         boolean flag= false;
         List<ActionElements> list = actions.getList();
             String value="";
@@ -380,20 +404,32 @@ public class TestBase {
                     }
                 Locators locators = getValueElement(page,list.get(i).getElement());
                 By by = getBy(driver, locators.getType(), locators.getValue());
+//                    scrollToElement(this.driver, by);
                 if(list.get(i).getCondition()!=null){
-                    wait = getWaitAction(driver,list.get(i).getTimeout());
+                    waitAction = getWaitAction(driver,list.get(i).getTimeout());
+                    if(waitAction!=null){
+                        flag = true;
+                    }else{
+                        waitAction = this.wait;
+                    }
                     switch (list.get(i).getCondition()){
                         case "DISPLAYED":
-                            flag = true;
-                            wait.until(ExpectedConditions.presenceOfElementLocated(by));
+                            flag = waitAction.until(new ExpectedCondition<Boolean>() {
+                                public Boolean apply(WebDriver driver) {
+                                    return driver.findElement(by).isDisplayed();
+                                }
+                            });
                             if(list.get(i).getInputType()!=null){
                                 runType(driver,by, list.get(i).getInputType(),value);
                             }
 
                             break;
                         case "NOT_DISPLAYED":
-                            flag = true;
-                           wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOfElementLocated(by)));
+                            flag = waitAction.until(new ExpectedCondition<Boolean>() {
+                                public Boolean apply(WebDriver driver) {
+                                    return !driver.findElement(by).isDisplayed();
+                                }
+                            });
                             if(list.get(i).getInputType()!=null){
                                 runType(driver,by, list.get(i).getInputType(),value);
                             }
@@ -420,9 +456,11 @@ public class TestBase {
     public void runType(WebDriver driver, By by, String status,String value){
         switch (status){
             case "text":
+                scrollToElement(this.driver, by);
                 driver.findElement(by).sendKeys(value);
                 break;
             case "click":
+                scrollToElement(this.driver, by);
                 driver.findElement(by).click();
                 break;
             default:
@@ -495,6 +533,9 @@ public class TestBase {
         switch (type) {
             case "XPATH":
                 by = By.xpath(value);
+                break;
+            case "CSS":
+                by = By.cssSelector(value);
                 break;
             case "ID":
                 by = By.id(value);

@@ -1,0 +1,144 @@
+elements:
+  - &loading-indicator
+    id: loading-indicator
+    description: Loading indicator within search input field
+    locators:
+      - device: WEB
+        type: CSS
+        value: div.loading-indicator.is-loading
+  - &search-input
+    id: search-input
+    description: Search input
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[placeholder='Search by name or email address']
+  - id: add-user
+    description: Add user button
+    locators:
+      - device: WEB
+        type: CSS
+        value: a[class*='add-user-button']
+  - id: email-in-table
+    description: Column contains user email in table
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //td[3]//div
+  - id: first-name-in-table
+    description: Column contains user first name in table
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//td[1]//div)[1]
+  - id: last-name-in-table
+    description: Column contains user last name in table
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //td[2]//div
+  - id: status-in-table
+    description: Column contains user status in table
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //td[6]//div
+  - id: empty-user-table
+    description: Empty user table when filter a not existing user
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //td[text()='There is no data to display']
+  - id: user-table
+    description: Loaded user table
+    locators:
+      - device: WEB
+        type: CSS
+        value: .table.table-hover.datatable-custom-body
+  - &first-name
+    id: first-name
+    description: First name in the result table
+    locators:
+      - device: WEB
+        type: CSS
+        value: a[href*="/userAdmin/editUser"]
+  - id: cati-full-name
+    description: Full name displayed on the editing user page
+    locators:
+      - device: WEB
+        type: CSS
+        value: div.name-field
+  - id: total-record
+    description: Total record
+    locators:
+      - device: WEB
+        type: CSS
+        value: div.showTotalRecords
+  - id: first-name-header-filter
+    description: Fisrt name filter in the result table
+    locators:
+      - device: WEB
+        type: CSS
+        value: .first-col.sort-column
+  - id: total-one-record-value
+    description: Show total one records at bottom of page
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(@class,'pagination')]//*[contains(.,'Showing 1-1')]
+  - id: filter-button-user-admin
+    description: Filter button user admin
+    locators:
+      - device: WEB
+        type: ID
+        value: dropdown-filter-options
+  - id: view-archived-user
+    description: View archived user
+    locators:
+      - device: WEB
+        type: CSS
+        value: div.slidercontainer
+  - id: apply-filters-button
+    description: Apply filters button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button.submit-btn
+  - id: option-filter-account-status
+    description: Option filter account status
+    locators:
+      - device: WEB
+        type: XPATH
+        value:  //div[text()="Select an account status"]/following-sibling::input[@disabled]
+  - id: spinner
+    description: Spinner icon while loading
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='spinner-container']
+  - id: success-alert
+    description: Success alert in pmt application
+    locators:
+      - device: WEB
+        type: CSS
+        value: .alert.animated.fade.success.in
+actions:
+  - id: click-first-name-if-displayed
+    description: Click first name in user table if there is data
+    actionElements:
+      - element: *first-name
+        condition: DISPLAYED
+        timeout: 2000
+        inputType: click
+  - id: search-user
+    description: Fill in user email to search field and click
+    actionElements:
+      - element: *search-input
+        inputType: click
+      - element: *search-input
+        infoType: email
+        inputType: text
+      - element: *loading-indicator
+        condition: NOT_DISPLAYED
+      - element: *first-name
+        inputType: click

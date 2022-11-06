@@ -20,3 +20,26 @@ elements:
       - device: WEB
         type: ID
         value: kc-login
+actions:
+  - id: fill-admin-sign-in-form
+    description: Fill out sign in page with admin values
+    actionElements:
+      - element: *username-input
+        infoType: pmtAdminEmail
+        inputType: text
+      - element: *password-input
+        infoType: pmtAdminPassword
+        inputType: text
+      - element: *submit-button
+        inputType: click
+  - id: fill-admin-sign-in-form-admin-portal
+    description: Fill out sign in page with admin values
+    actionElements:
+      - element: *username-input
+        infoType: adminEmail
+        inputType: text
+      - element: *password-input
+        infoType: adminPassword
+        inputType: text
+      - element: *submit-button
+        inputType: click

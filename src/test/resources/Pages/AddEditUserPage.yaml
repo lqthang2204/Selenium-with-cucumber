@@ -1,0 +1,501 @@
+elements:
+  - &first-name-input
+    id: first-name-input
+    description: First name input
+    locators:
+      - device: WEB
+        type: NAME
+        value: firstName
+  - &last-name-input
+    id: last-name-input
+    description: Last name input
+    locators:
+      - device: WEB
+        type: NAME
+        value: lastName
+  - &email-input
+    id: email-input
+    description: Email input
+    locators:
+      - device: WEB
+        type: NAME
+        value: email
+  - id: email-address-value
+    description: Email address value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(text(),'Email Address')]/following::div
+  - id: remove-role-icon
+    description: Remove role icon
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='react-select__multi-value'] svg
+  - &role-dropdown
+    id: role-dropdown
+    description: Role dropdown
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='userRoles'] div[class*='dropdown']
+  - id: role-dropdown-option
+    description: Role dropdown option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()="{text}"]
+  - &role-program-manager
+    id: role-program-manager
+    description: Role program manager
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Program Manager']
+  - id: role-support-admin
+    description: Role support admin
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Support Admin']
+  - id: role-support-staff
+    description: Role support staff
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Support Staff']
+  - id: role-cati
+    description: Role CATI
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='CATI Interviewer']
+  - &role-system-admin
+    id: role-system-admin
+    description: Role system admin
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='System Administrator']
+  - id: all-of-us
+    description: All of us node
+    locators:
+      - device: WEB
+        type: CSS
+        value: input#PMI
+  - id: vrp-automation-awardee
+    description: Vrp automation awardee node
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//input[@name='nodeIds'])[2]
+  - &vrp
+    id: vrp
+    description: Vrp node
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[contains(text(),'Health Starts Here')]/preceding-sibling::input
+  - id: vrp-automation-last-node-checked
+    description: Automation last node checkbox is checked in vrp
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//input[@name='nodeIds'])[last()][@checked]
+  - id: automation-org
+    description: VRP automation org node
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[id='PMI|AUTOMATION_AWARDEE|AUTOMATION_ORG']
+  - id: automation-org-2
+    description: Automation org node 2
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[id*='AUTOMATION_ORG_2']
+  - id: vrp-automation-org
+    description: Automation org node
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[id='4|AUTOMATION_AWARDEE|AUTOMATION_ORG']
+  - id: vrp-automation-org-2
+    description: VRP Automation org node 2
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[id='4|AUTOMATION_AWARDEE_2|AUTOMATION_ORG_2']
+  - &automation-awardee
+    id: automation-awardee
+    description: Automation awardee node
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //input[@id="PMI|AUTOMATION_AWARDEE"]
+  - id: automation-awardee-2
+    description: Automation awardee 2 node
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //input[@id="PMI|AUTOMATION_AWARDEE_2"]
+  - id: vrp-automation-awardee
+    description: VRP automation awardee node
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[@class='node']//input)[2]
+  - id: automation-site-1
+    description: Automation site 1 node
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[id*='AUTOMATION_SITE_1']
+  - id: automation-site-2
+    description: Automation site 2 node
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[id*='AUTOMATION_SITE_2']
+  - id: automation-site-3
+    description: Automation site 3 node
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[id*="AUTOMATION_SITE_3"]
+  - id: automation-site-4
+    description: Automation site 4 node
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[id*="AUTOMATION_SITE_4"]
+  - id: automation-site-6
+    description: Automation site 6 node
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[id*='AUTOMATION_SITE_6']
+  - id: automation-site-7
+    description: Automation site 7 node
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[id*='AUTOMATION_SITE_7']
+  - id: automation-site-8
+    description: Automation site 8 node
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[id*='AUTOMATION_SITE_8']
+  - id: automation-site-9
+    description: Automation site 9 node
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[id*='AUTOMATION_SITE_9']
+  - id: automation-site-1-label
+    description: Automation site 1 label
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //label[@class='container checkbox-inline']/span[contains(text(),"Automation Site 1")]
+  - id: automation-site-2-label
+    description: Automation site 2 label
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //label[@class='container checkbox-inline']/span[contains(text(),"Automation Site 2")]
+  - &save-button
+    id: save-button
+    description: Save button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button.submit-btn.btn-default
+  - id: cancel-button
+    description: Cancel button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //input[contains(@class,'cancel-btn')][@value='Cancel']
+  - id: role-site-manager
+    description: Role site manager
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Site Manager']
+  - id: role-program-coordinator
+    description: Role PC
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Program Coordinator']
+  - id: role-CEM
+    description: Role CEM
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Communications & Engagement Manager']
+  - id: role-administrator
+    description: Role administrator
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Administrator']
+  - id: role-RA
+    description: Role RA
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Research Assistant']
+  - id: vibrent-account-checkbox
+    description: Vibrent account checkbox
+    locators:
+      - device: WEB
+        type: NAME
+        value: isInternalAccount
+  - id: edit-user-button
+    description: Edit user button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button.submit-btn.btn.btn-default
+  - id: edit-account-dropdown
+    description: Edit account dropdown
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //button[contains(text(),'Edit Account')]
+  - id: edit-account-dropdown-option
+    description: Edit account dropdown
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(text(), "{text}")]
+  - &archive-user-button
+    id: archive-user-button
+    description: Delete user button on editing page
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //button[text()='Archive user']
+  - &back-to-user-management
+    id: back-to-user-management
+    description: Header back to user management
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class="heading-back"]
+  - id: user-action-message
+    description: User action message
+    locators:
+      - device: WEB
+        type: CSS
+        value: span[class='text-content']
+  - id: option-button-in-edit-user
+    description: Restore user button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //button[text()="{text}"]
+  - id: error-message
+    description: Error message
+    locators:
+      - device: WEB
+        type: CSS
+        value: div.message.animated.fade.error.in
+  - id: access-custom-forms-permission-checkbox
+    description: Permission to access custom forms checkbox
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@name='canAccessCustomForms']/following-sibling::span
+  - id: automation-org-checked
+    description: Automation org checkbox is checked
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //input[@id='PMI|AUTOMATION_AWARDEE|AUTOMATION_ORG'][@checked]
+  - id: first-name-required-error
+    description: Error when inputting empty first name
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //input[@name='firstName']/following::span[@class='help-block']
+    values:
+      - lang: EN
+        value: This field is required.
+  - id: last-name-required-error
+    description: Error when inputting empty last name
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //input[@name='lastName']/following::span[@class='help-block']
+    values:
+      - lang: EN
+        value: This field is required.
+  - id: role-required-error
+    description: Error when un-selecting at least one role
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //label[text()='Roles']/following-sibling::span[text()='Please select
+          at least one user role.']
+    values:
+      - lang: EN
+        value: Please select at least one user role.
+  - id: group-required-error
+    description: Error when un-selecting at least one group
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[contains(text(),'Groups')]/following-sibling::span[text()='Please
+          select at least one group for site pairing.']
+    values:
+      - lang: EN
+        value: Please select at least one group for site pairing.
+  - id: reset-password-button
+    description: Reset password button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()="Reset Password"]
+  - &awardee-title
+    id: awardee-title
+    description: Awardee title
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[@class='title-hierarchy'][text()='Awardee']
+  - &awardee-view-all-button
+    id: awardee-view-all-button
+    description: Awardee view all button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Awardee']//button[text()='View All']
+  - &organizational-structure-edit-button
+    id: organizational-structure-edit-button
+    description: Organizational structure edit button
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='pencil-button']
+  - &organizational-structure-save-button
+    id: organizational-structure-save-button
+    description: Organizational structure save button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='btn-save']
+  - id: label-checkbox
+    description: Label of checkbox with dynamic text
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[text()="{text}"]
+actions:
+  - id: create-program-manager-user
+    description: Fill out user create form
+    actionElements:
+      - element: *first-name-input
+        infoType: firstName
+        inputType: text
+      - element: *last-name-input
+        infoType: lastName
+        inputType: text
+      - element: *email-input
+        infoType: email
+        inputType: text
+      #      - element: *organizational-structure-edit-button
+      #        condition: DISPLAYED
+      #        inputType: click
+      #      - element: *awardee-title
+      #        condition: DISPLAYED
+      #        inputType: click
+      #      - element: *awardee-view-all-button
+      #        condition: DISPLAYED
+      #        inputType: click
+      - element: *automation-awardee
+        condition: DISPLAYED
+        inputType: click
+      #      - element: *organizational-structure-save-button
+      #        condition: DISPLAYED
+      #        inputType: click
+      - element: *role-dropdown
+        inputType: click
+      - element: *role-program-manager
+        inputType: click
+      - element: *role-dropdown
+        inputType: click
+      - element: *save-button
+        inputType: click
+  - id: create-program-manager-user-vrp-node
+    description: Fill out user create form
+    actionElements:
+      - element: *first-name-input
+        infoType: firstName
+        inputType: text
+      - element: *last-name-input
+        infoType: lastName
+        inputType: text
+      - element: *email-input
+        infoType: email
+        inputType: text
+      - element: *role-dropdown
+        inputType: click
+      - element: *role-program-manager
+        inputType: click
+      - element: *vrp
+        inputType: click
+      - element: *save-button
+        condition: DISPLAYED
+        inputType: click
+  - id: archive-user-if-exist
+    description: Archive user
+    actionElements:
+      - element: *archive-user-button
+        condition: DISPLAYED
+        timeout: 2000
+        inputType: click
+      - element: *back-to-user-management
+        condition: DISPLAYED
+        timeout: 2000
+        inputType: click
+  - id: create-system-admin-user
+    description: Fill out user create form
+    actionElements:
+      - element: *first-name-input
+        infoType: firstName
+        inputType: text
+      - element: *last-name-input
+        infoType: lastName
+        inputType: text
+      - element: *email-input
+        infoType: email
+        inputType: text
+      #      - element: *organizational-structure-edit-button
+      #        condition: DISPLAYED
+      #        inputType: click
+      #      - element: *awardee-title
+      #        condition: DISPLAYED
+      #        inputType: click
+      #      - element: *awardee-view-all-button
+      #        condition: DISPLAYED
+      #        inputType: click
+      - element: *automation-awardee
+        condition: DISPLAYED
+        inputType: click
+      #      - element: *organizational-structure-save-button
+      #        condition: DISPLAYED
+      #        inputType: click
+      - element: *role-dropdown
+        inputType: click
+      - element: *role-system-admin
+        condition: DISPLAYED
+        inputType: click
+      - element: *role-dropdown
+        inputType: click
+      - element: *save-button
+        condition: ENABLED
+        inputType: click

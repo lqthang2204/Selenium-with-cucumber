@@ -1,0 +1,238 @@
+elements:
+  - &email-address-input
+    id: email-address-input
+    description: Email address input
+    locators:
+      - device: WEB
+        type: NAME
+        value: emailAddress
+  - &phone-number-input
+    id: phone-number-input
+    description: Phone number input
+    locators:
+      - device: WEB
+        type: NAME
+        value: phoneNumber
+  - &first-name-input
+    id: first-name-input
+    description: Firstname input
+    locators:
+      - device: WEB
+        type: NAME
+        value: firstName
+  - &last-name-input
+    id: last-name-input
+    description: Lastname input
+    locators:
+      - device: WEB
+        type: NAME
+        value: lastName
+  - &dob-input
+    id: dob-input
+    description: DOB input
+    locators:
+      - device: WEB
+        type: NAME
+        value: dob
+  - &search-button
+    id: search-button
+    description: Search button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='button-primary']
+  - &participant-name
+    id: participant-name
+    description: Participant name in searching result table
+    locators:
+      - device: WEB
+        type: CSS
+        value: strong[role="presentation"]
+  - &participant-external-id
+    id: participant-external-id
+    description: Participant external id in searching result table
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class="external-id"]
+  - &participant-internal-id
+    id: participant-internal-id
+    description: Participant internal id in searching result table
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class="internal-id"]
+  - &participant-dob-not-found
+    id: participant-dob-not-found
+    description: Text DOB record not found displayed in searching result table
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[.= "DOB record not found"]
+  - &prospect-name
+    id: prospect-name
+    description: Prospect name in searching result table
+    locators:
+      - device: WEB
+        type: CSS
+        value: strong[role="presentation"]
+  - id: participant-dob
+    description: Participant dob in searching result table
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class='participant-dob']
+  - &create-appointment-button
+    id: create-appointment-button
+    description: Button create appointment on table searching result
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='create-btn']
+  - &appointment-manage-button
+    id: appointment-manage-button
+    description: Appointment manage button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[id*='dropdownAppointmentList']
+  - &the-first-menu-item
+    id: the-first-menu-item
+    description: The first menu item
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='item-appointment-list'] a[role*='menuitem']
+  - &participant-email
+    id: participant-email
+    description: Email of participant displayed on searching result table
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class="participant-email"]
+  - &participant-phone-not-found
+    id: participant-phone-not-found
+    description: Text phone record not found displayed on searching result table
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[.="Phone record not found"]
+  - &participant-id-input
+    id: participant-id-input
+    description: External/Internal ID input
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[name="internalExternalId"]
+  - &search-result-value
+    id: search-result-value
+    description: Search result value
+    locators:
+      - device: WEB
+        type: CSS
+        value: h3[class*='result-title result-title__modify']
+  - &expanded-search-toggle-off
+    id: expanded-search-toggle-off
+    description: Expanded Search Toggle with status OFF
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //input[@name='toggle']/following-sibling::div/div[contains(text(),"OFF")]
+  - &expanded-search-toggle-on
+    id: expanded-search-toggle-on
+    description: Expanded Search Toggle with status ON
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //input[@name='toggle']/following-sibling::div/div[contains(text(),"ON")]
+  - &clear-button
+    id: clear-button
+    description: Clear button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button.btn-secondary.btn-clear
+  - &expand-search-text-desc
+    id: expand-search-text-desc
+    description: Expand Search text description
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@class='txt-description-expanded-search']
+  - &expand-search-sub-desc
+    id: expand-search-sub-desc
+    description: Expand Search sub description
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@class='txt-description-expanded-search']/following-sibling::span
+  - id: external-id-value
+    description: External ID value in result table
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class='external-id']
+  - id: internal-id-value
+    description: Internal ID value in result table
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class='internal-id']
+  - id: phone-number-search-page
+    description: Phone number in search page
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(@class,'cell-container')]//a
+  - id: loading-indicator
+    description: Loading indicator within search input field
+    locators:
+      - device: WEB
+        type: CSS
+        value: div.loading-indicator.is-loading
+actions:
+  - id: wait-for-5-seconds
+    description: Wait for 5 seconds
+    actionElements:
+      - element: *participant-id-input
+        condition: NOT_DISPLAYED
+        timeout: 5000
+        inputType: click
+  - id: go-to-participant-profile-page
+    description: Go to participant profile page
+    actionElements:
+      - element: *clear-button
+        inputType: click
+      - element: *email-address-input
+        infoType: email
+        inputType: text
+      - element: *search-button
+        condition: ENABLED
+        inputType: click
+      - element: *participant-name
+        inputType: click
+  - id: search-email
+    description: Search prospect or participant by email
+    actionElements:
+      - element: *email-address-input
+        infoType: email
+        inputType: text
+      - element: *search-button
+        inputType: click
+      - element: *participant-name
+        inputType: click
+  - id: check-participant-exist
+    description: Check participant exist
+    actionElements:
+      - element: *email-address-input
+        infoType: email
+        inputType: text
+      - element: *search-button
+        condition: ENABLED
+        inputType: click
+      - element: *participant-name
+        condition: DISPLAYED
+        timeout: 10000
+      - element: *search-button
+        condition: ENABLED
+        inputType: click

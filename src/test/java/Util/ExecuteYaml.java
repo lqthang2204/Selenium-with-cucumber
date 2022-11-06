@@ -62,9 +62,10 @@ public class ExecuteYaml {
                 }
                 if (object.has("actions")) {
                     Map<String, ActionsTest> mapAction = new LinkedHashMap<>();
-                    List<ActionElements> listActionElements = new LinkedList<>();
+//                    List<ActionElements> listActionElements = new LinkedList<>();
                     JSONArray arrActions = new JSONArray(object.get("actions").toString());
                     for (int i = 0; i < arrActions.length(); i++) {
+                        List<ActionElements> listActionElements = new LinkedList<>();
                         JSONObject objAction = new JSONObject(arrActions.get(i).toString());
                         ActionsTest action = new ActionsTest();
                         action.setAction_id(objAction.get("id").toString());
