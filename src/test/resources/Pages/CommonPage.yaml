@@ -1,0 +1,50 @@
+elements:
+  - &spinner
+    id: spinner
+    description: Spinner icon while loading
+    locators:
+    - device: WEB
+      type: CSS
+      value: div[class*='spinner-container']
+  - id: oss-title
+    description: OSS node title
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[contains(@class,'title-hierarchy') and contains(text(),"{text}")]
+  - id: oss-edit-button
+    description: OSS edit button
+    locators:
+      - device: WEB
+        type: CSS
+        value: .pencil-button
+  - id: oss-view-all-button
+    description: OSS view all button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[contains(text(),"{text}")]//button[text()='View All']
+  - id: oss-radio-option
+    description: OSS radio option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[text()="{text}"]
+  - id: oss-save-button
+    description: OSS save button
+    locators:
+      - device: WEB
+        type: CSS
+        value: .actions-btn button.btn-save
+  - id: oss-cancel-button
+    description: OSS cancel button
+    locators:
+      - device: WEB
+        type: CSS
+        value: .actions-btn button.btn-cancel
+  - id: organizational-structure-form-group
+    description: Organizational structure form group
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //label[contains(text(),'Organizational Structure')]

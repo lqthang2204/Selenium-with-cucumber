@@ -1,0 +1,74 @@
+elements:
+  - id: search-input
+    description: Search input
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[placeholder='Search Name']
+  - &create-segmentation-button
+    id: create-segmentation-button
+    description: Create a new segmentation button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[aria-label="Create new segmentation"]
+  - id: segmentation-name-in-table
+    description: Segmentation name in table
+    locators:
+      - device: WEB
+        type: CSS
+        value: a[class='segname']
+  - id: clone-button
+    description: Clone button
+    locators:
+      - device: WEB
+        type: CSS
+        value: a[aria-label='Clone']
+  - id: confirm-clone-button
+    description: Confirm clone button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[aria-label='Confirm clone']
+  - id: archive-button
+    description: Archive button
+    locators:
+      - device: WEB
+        type: CSS
+        value: a[aria-label='Archive']
+  - id: confirm-archive-button
+    description: Confirm archive button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[aria-label='Confirm archive']
+  - id: empty-table-text
+    description: Empty table text
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[@class='emptytabletext'][text()='Create a New Segmentation']
+  - id: filter-button
+    description: Filter button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //button[text()=' Filter']
+  - id: view-archived-toggle
+    description: View archived toggle
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='OFF']
+  - id: loading-indicator
+    description: Loading indicator in the search field
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class='loading-indicator is-loading']
+  - id: total-one-record-value
+    description: Show total one records at bottom of page
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(@class,'pagination')]//*[contains(.,'Showing 1-1')]

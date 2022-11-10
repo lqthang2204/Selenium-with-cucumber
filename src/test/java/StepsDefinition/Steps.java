@@ -122,7 +122,7 @@ public class Steps {
         testBase.verifyText(this.page,element, text, false, this.mapSaveText, userDTO);
     }
 
-    @Given("I save the text for element {word} with key {string}")
+    @Given("I save text for element {word} with key {string}")
     public void saveText(String element, String text) {
         testBase.saveTextElement(this.page,element, text, this.mapSaveText);
     }

@@ -1,0 +1,498 @@
+elements:
+  - &create-engagement-button
+    id: create-engagement-button
+    description: Create engagement list button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='btn-create']
+  - id: loading-indicator
+    description: Loading indicator within search input field
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class='loading-indicator is-loading']
+  - id: engagement-name-input
+    description: Engagement name input
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[label="Engagement Name"]
+  - id: next-button
+    description: Button next
+    locators:
+      - device: WEB
+        type: CSS
+        value: .btn.btn-primary.btn-next.btn.btn-default
+  - id: cancel-button
+    description: Cancel button on engagement list creation page
+    locators:
+      - device: WEB
+        type: CSS
+        value: button.btn-cancel
+  - id: save-as-draft
+    description: Button save as draft
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='btn-save']
+  - id: select-assignee
+    description: Select assignee
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Select Assignee']
+  - &field-assignee
+    id: field-assignee
+    description: Field assignee in organization structure
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //button[contains(@class,'view-all-btn')]/parent::div[contains(text(),'Assignee')]
+  - &view-all-assignee
+    id: view-all-assignee
+    description: View all assignee
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[contains(text(),'Assignee')]//button[contains(@class,'view-all-btn')]
+  - &select-all
+    id: select-all
+    description: Select all assignee
+    locators:
+      - device: WEB
+        type: CSS
+        value: label[class*='select-all']
+  - id: mcadmin-checkbox
+    description: Mcadmin checkbox
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //input[@type='checkbox']/following::span[text()='mcadmin mcadmin']
+  - &save-org-button
+    id: save-org-button
+    description: Save organizational structure
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class='structure-summary'] button[class*='btn-save']
+  - id: engagement-goal-drop-down
+    description: Engagement goal drop down
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //label[text()='Engagement Goal (Optional)']/following-sibling::div
+  - &organizational-structure-edit-button
+    id: organizational-structure-edit-button
+    description: Organizational structure edit button
+    locators:
+      - device: WEB
+        type: CSS
+        value: span[class='pencil-button']
+  - id: step-title
+    description: Title on current step
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='step-title']
+    values:
+      - lang: EN
+        value: 2. Select Audience Segmentation
+  - id: first-segmentation
+    description: First segmentation option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //label[input[@name="radio0"]]
+  - id: listname-segmentation
+    description: Listname segmentation option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(text(),'TA-ListNameSegment')]/preceding::label[contains(@class,'radio-btn')][1]
+  - id: segmentation-radio-option
+    description: Segmentation radio option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(text(),"{text}")]/preceding::label[contains(@class,'radio-btn')][1]
+  - id: create-list
+    description: Create list button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='btn-create']
+  - id: name-required-error
+    description: Show required error when engagement name is empty
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //input[@label="Engagement Name"]//following::div[.='This field is required.']
+  - id: first-engagement-goal
+    description: First engagement goal in the dropdown
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[id*='option-0']
+  - id: search-engagement
+    description: Search engagement list by name
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[placeholder='Search Name']
+  - id: engagement-on-list
+    description: Engagement displayed on list after searching
+    locators:
+      - device: WEB
+        type: CSS
+        value: a[class="table-link"]
+  - id: engagement-status-on-list
+    description: Engagement status displayed on list after searching
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//a[@class="table-link"]/following::td[@tabindex="6"])[1]
+  - id: refreshing-count-span
+    description: Span 'List is currently refreshing'
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[text()='List is currently refreshing.']
+  - id: engagement-title
+    description: Engagement title displayed on view engagement page
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*="engagement-title"]
+  - id: setting-button
+    description: Setting button on view engagement page
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='btn-setting']
+  - id: save-button
+    description: Save button on edit engagement page
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='btn-save']
+  - id: back-to-case-management
+    description: Button back to case management
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='btn-back']
+  - id: archive-button
+    description: Button archive engagement list
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[@class='engagement-action'])[1]
+  - id: archive-confirmation-button
+    description: Button confirmation when archiving engagement list
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //button[text()='Archive']
+  - id: result-table-has-no-data
+    description: No data displayed on the result table
+    locators:
+      - device: WEB
+        type: CSS
+        value: td[class*='table-no-data']
+  - id: filter-button
+    description: Button filter on Case Management page
+    locators:
+      - device: WEB
+        type: ID
+        value: dropdown-filter-options
+  - id: view-archived-toggle
+    description: Toggle view archived
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='switch']
+  - id: review-step-title
+    description: Title review step
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='3. Review']
+  - id: automation-awardee-level-title
+    description: Level title automation awardee
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Automation Awardee']
+  - id: automation-awardee-2-level-title
+    description: Level title automation awardee
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Automation Awardee 2']
+  - id: engagement-goal-info
+    description: Verify engagement goal displayed at step review
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //label[text()='Engagement Goal (Optional)']/following-sibling::div
+  - id: error_must_be_a_minimum_of_1_assignee
+    description: Error 'There must be a minimum of 1 assignee.' when removing all assignees
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[.='There must be a minimum of 1 assignee.']
+  - id: vrp-organization-title
+    description: Organization title in vrp
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[@class='title-hierarchy'][text()='Clinic Location']
+  - id: vrp-organization-view-all-button
+    description: organization view all button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Clinic Location']//button[text()='View All']
+  - id: automation-site-1-checkbox
+    description: Automation site 1 checkbox
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Automation Site 1']
+  - id: refresh-count
+    description: Count participants in view list
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class="refresh-count"]
+  - id: refresh-count-value
+    description: Refresh count value
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class='refresh-count']
+  - id: search-input
+    description: Search input
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[class*='search-input']
+  - id: search-button
+    description: Search button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='search-btn']
+  - id: engagement-name
+    description: Engagement name
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class="split-two-lines"]
+  - id: engagement-type
+    description: Engagement type description
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='hint-text']
+  - id: out-come-name
+    description: Out come name
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[text()='Appointment scheduled to complete activities with support']
+  - id: participants-view-list
+    description: List participants
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class="participant-list-datatable"]
+  - id: add-button
+    description: Add button
+    locators:
+      - device: WEB
+        type: CSS
+        value: div.action-section span.btn-link
+  - id: tooltip
+    description: Tooltip
+    locators:
+      - device: WEB
+        type: CSS
+        value: div.tooltip-inner
+  - id: assign-to-dropdown
+    description: Assign to dropdown
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='select-assign-to']
+  - id: assign-to-me-option
+    description: Assign to me option
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='assignee-to-me-label']
+  - id: engagement-outcome-column
+    description: Engagement outcome column
+    locators:
+      - device: WEB
+        type: CSS
+        value: th[data-field='engagement_outcome']
+  - id: firstname-lastname-user
+    description: Firstname lastname automation user
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[text()='firstname lastname']
+  - id: site-title
+    description: Site title
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[@class='title-hierarchy'][text()='Site']
+  - id: site-view-all-button
+    description: Site view all button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Site']//button[text()='View All']
+  - id: automation-site-1-title
+    description: Automation site 1 title
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[text()='Automation Site 1']
+  - id: automation-site-3-title
+    description: Automation site 3 title
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[text()='Automation Site 3']
+  - id: participant-full-name
+    description: Participant full name
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//*[contains(@class,'participant-name')]//div)[1]
+  - id: select-first-option
+    description: Select first option in organizational structure
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//label[@class='container checkbox-inline'])[1]
+  - id: optional-description-input
+    description: Optional description input field
+    locators:
+      - device: WEB
+        type: CSS
+        value: textarea.form-control.description
+  - id: goal-title-container
+    description: Goal title for the engagement list
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class="goal-title-containner"]
+  - id: engagement-goal-dropdown-option
+    description: Goal title for the engagement list
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(text(), "{text}")]
+  - id: total-one-record-value
+    description: Show total one records at bottom of page
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(@class,'pagination')]//*[contains(.,'Showing 1-1')]
+  - id: archived-button-disabled
+    description: Archived button disabled
+    locators:
+      - device: WEB
+        type: CSS
+        value: .btn-link.is-disabled
+  - id: assign-to-dropdown-disabled
+    description: Assign to dropdown disabled
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(@class,'select-assign-to')]//div[contains(@class,'disabled')]
+  - id: add-button-disabled
+    description: Add button disabled
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class='action-section'] span[class*='btn-link is-disabled']
+  - id: filter-modal-of-list-case-management
+    description: Filter modal of list case management
+    locators:
+      - device: WEB
+        type: CSS
+        value: div.filter-modal
+  - id: participant-phone-value
+    description: Participant phone value on case management page
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[role="presentation"] a[href]
+  - &spinner
+    id: spinner
+    description: Spinner icon while loading
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='spinner-container']
+  - id: success-alert
+    description: Success alert in pmt application
+    locators:
+      - device: WEB
+        type: CSS
+        value: .alert.animated.fade.success.in
+actions:
+  - id: create-engagement-list
+    description: Click button create list on creating engagement page
+    actionElements:
+      - element: create-list
+        condition: NOT_ENABLED
+        timeout: 3000
+        inputType: click
+      - element: create-list
+        inputType: click
+  - id: fill-engagement-form
+    description: Create engagement list
+    actionElements:
+      - element: engagement-name-input
+        infoType: email
+        inputType: text
+      - element: engagement-goal-drop-down
+        inputType: click
+      - element: first-engagement-goal
+        inputType: click
+      - element: organizational-structure-edit-button
+        inputType: click
+      - element: site-title
+        inputType: click
+      - element: site-view-all-button
+        inputType: click
+      - element: automation-site-1-checkbox
+        inputType: click
+      - element: select-assignee
+        inputType: click
+      - element: view-all-assignee
+        inputType: click
+      - element: select-all
+        inputType: click
+      - element: save-org-button
+        inputType: click
+  - id: select-all-assignees
+    description: Select all assignees available in current hierarchy
+    actionElements:
+      - element: organizational-structure-edit-button
+        inputType: click
+      - element: field-assignee
+        inputType: click
+      - element: view-all-assignee
+        inputType: click
+      - element: select-all
+        inputType: click
+      - element: save-org-button
+        inputType: click

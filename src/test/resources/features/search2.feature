@@ -9,9 +9,9 @@ Feature: Search function
     And I wait for element mobile-button to be DISPLAYED
     And I click element mobile-button
 #    And I wait for element link-text to be DISPLAYED
-#    And I save the text for element link-text is "link"
+#    And I save text for element link-text is "link"
     And I wait for element product-one to be DISPLAYED
-    And I save the text for element product-one with key "product"
+    And I save text for element product-one with key "product"
     And I become a random user
     And I perform buy-one-mobile action with override values
 #      | search-input | KEY.product |
@@ -36,9 +36,9 @@ Feature: Search function
     And I wait for element mobile-button to be DISPLAYED
     And I click element mobile-button
 #    And I wait for element link-text to be DISPLAYED
-#    And I save the text for element link-text is "link"
+#    And I save text for element link-text is "link"
     And I wait for element product-one to be DISPLAYED
-    And I save the text for element product-one with key "product"
+    And I save text for element product-one with key "product"
     And I perform buy-one-mobile action with override values
       | search-input | KEY.product |
     And I click keyboard HOVER button on element dropdown-search

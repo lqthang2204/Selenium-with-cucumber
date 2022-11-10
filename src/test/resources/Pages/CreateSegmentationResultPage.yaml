@@ -1,0 +1,91 @@
+elements:
+  - id: back-to-list-button
+    description: Back to list button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[text()='Back To List']
+  - id: segmentation-name
+    description: Segmentation name
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //label[text()='Name']/following-sibling::div
+  - id: segmentation-description
+    description: Segmentation description
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //label[text()='Description']/following-sibling::div
+  - id: communication-channel
+    description: Communication Channel
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //label[text()='Communication Channel']/following-sibling::div
+  - id: segmentation-filter-details
+    description: Segmentation filter details
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class="segment-bar"]
+  - id: edit-button
+    description: Edit button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[aria-label='Edit']
+  - id: clone-button
+    description: Clone button
+    locators:
+      - device: WEB
+        type: ID
+        value: cloneButton
+  - id: archive-button
+    description: Archive button
+    locators:
+      - device: WEB
+        type: ID
+        value: archiveButton
+  - id: refresh-count-value
+    description: Refresh count value
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class='refresh-count']
+  - id: view-list-button
+    description: View List button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='view-participants-btn']
+  - id: refresh-button
+    description: Refresh button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='refresh-btn']
+  - id: last-refresh-label
+    description: Last Refresh Label
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[contains(text(),'Last Refreshed')]
+  - id: view-list-button
+    description: Button view list
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*="view-participants-btn"]
+  - id: participants-view-list
+    description: List participants
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*="participants-view"]
+  - id: refresh-button
+    description: Refresh button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //button[@aria-label='Refresh']

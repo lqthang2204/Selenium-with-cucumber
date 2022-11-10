@@ -1,0 +1,839 @@
+elements:
+  - &prospect-history-option
+    id: prospect-history-option
+    description: Prospect history option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Prospect History']
+  - id: segmentation-name-input
+    description: Segmentation name input
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[placeholder='Segmentation Name']
+  - id: description-input
+    description: Description input
+    locators:
+      - device: WEB
+        type: CSS
+        value: textarea
+  - id: target-audience-dropdown-option
+    description: Target audience dropdown option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()="{text}"]
+  - &communication-channel-dropdown
+    id: communication-channel-dropdown
+    description: Communication channel dropdown
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //label[text()='Communication Channel']/following-sibling::div/div/div
+  - id: communication-channel-dropdown-option
+    description: Select communication channel dropdown option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()="{text}"]
+  - &email-option
+    id: email-option
+    description: Email option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Email']
+  - id: phone-email-option
+    description: Phone or email option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Phone or Email']
+  - &sms-option
+    id: sms-option
+    description: SMS option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='SMS']
+  - &target-audience-dropdown
+    id: target-audience-dropdown
+    description: Target audience dropdown
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[data-value="participants"]
+  - &prospect-option
+    id: prospect-option
+    description: Prospect option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Prospects']
+  - &participant-option
+    id: participant-option
+    description: Participant option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Participants']
+  - &organizational-structure-edit-button
+    id: organizational-structure-edit-button
+    description: Organizational structure edit button
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='pencil-button']
+  - &automation-org-checkbox
+    id: automation-org-checkbox
+    description: Automation Org checkbox
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[text()='Automation Org']
+  - &site-title
+    id: site-title
+    description: Site title
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[@class='title-hierarchy'][text()='Site']
+  - &organization-title
+    id: organization-title
+    description: Organization title
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[@class='title-hierarchy'][text()='Organization']
+  - &awardee-title
+    id: awardee-title
+    description: Awardee title
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[@class='title-hierarchy'][text()='Awardee']
+  - id: vrp-organization-title
+    description: Organization title in vrp
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[@class='title-hierarchy'])[last()]
+  - &site-view-all-button
+    id: site-view-all-button
+    description: site view all button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Site']//button[text()='View All']
+  - &organization-view-all-button
+    id: organization-view-all-button
+    description: organization view all button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Organization']//button[text()='View All']
+  - &awardee-view-all-button
+    id: awardee-view-all-button
+    description: Awardee view all button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Awardee']//button[text()='View All']
+  - id: vrp-organization-view-all-button
+    description: organization view all button in vrp
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Clinic Location']//button[text()='View All']
+  - &select-all-checkbox
+    id: select-all-checkbox
+    description: Select all checkbox
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[text()='Select All']
+  - &organizational-structure-save-button
+    id: organizational-structure-save-button
+    description: Organizational structure save button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='btn-save']
+  - &organizational-structure-cancel-button
+    id: organizational-structure-cancel-button
+    description: Organizational structure cancel button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='btn-cancel']
+  - &segmentation-dropdown
+    id: segmentation-dropdown
+    description: Dropdown Select a segmentation category
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[contains(text(), 'Select Filter')]
+  - id: segmentation-dropdown-option
+    description: Dropdown Select a segmentation category options
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[contains(text(), "{text}")]
+  - &geographic-segmentation-option
+    id: geographic-segmentation-option
+    description: Geographic segmentation option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Geographic Segmentation']
+  - &campaign-activity-option
+    id: campaign-activity-option
+    description: Campaign activity option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Campaign Activity']
+  - &upload-date-option
+    id: upload-date-option
+    description: Upload Date option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Upload Date']
+  - &add-category-button
+    id: add-category-button
+    description: Add category button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[aria-label="Add Category"]
+  - id: add-new-group-button
+    description: Add new group button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[aria-label="Add a New Group"]
+  - &primary-consent-option
+    id: primary-consent-option
+    description: Primary consent option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Primary Consent']
+  - &program-update-on-dna-option
+    id: program-update-on-dna-option
+    description: Program update on DNA option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Program Update on DNA']
+  - id: salivary-kit-request-option
+    description: Salivary Kit Request option
+    locators:
+      - device: WEB
+        type: XPATH
+        value:  //div[contains(text(), 'Salivary')]
+  - id: biospecimen-option
+    description: Biospecimen Kit Request option
+    locators:
+      - device: WEB
+        type: XPATH
+        value:  //div[text()='Biospecimen']
+  - id: biosample-option
+    description: Biosample option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Biosample']
+  - id: genomics-consent-repsonse-option
+    description: Genomic consent repsonse option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Genomics Consent Response']
+  - id: undecided-option
+    description: Undecided option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Undecided']
+  - id: basics-option
+    description: The Basics option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='The Basics']
+  - &operator-dropdown
+    id: operator-dropdown
+    description: Select filter operator dropdown
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Select Operator']
+  - &is-equal-to-only-option
+    id: is-equal-to-only-option
+    description: Is equal to only option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='is equal to only']
+  - id: is-equal-to-only-option-2
+    description: Is equal to only second group option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='is equal to only'])[2]
+  - id: is-equal-to-only-option-3
+    description: Is equal to only group option 3
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='is equal to only'])[3]
+  - id: is-equal-to-only-option-4
+    description: Is equal to only group option 4
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='is equal to only'])[4]
+  - id: is-equal-to-only-option-5
+    description: Is equal to only group option 5
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='is equal to only'])[5]
+  - id: is-equal-to-only-option-6
+    description: Is equal to only group option 6
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='is equal to only'])[6]
+  - id: is-equal-to-only-option-7
+    description: Is equal to only group option 7
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='is equal to only'])[7]
+  - id: is-equal-to-only-option-8
+    description: Is equal to only group option 8
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='is equal to only'])[8]
+  - id: is-equal-to-only-option-9
+    description: Is equal to only group option 9
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='is equal to only'])[9]
+  - id: is-equal-to-only-option-10
+    description: Is equal to only group option 10
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='is equal to only'])[10]
+  - id: is-equal-to-only-option-11
+    description: Is equal to only group option 11
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='is equal to only'])[11]
+  - id: is-equal-to-only-option-12
+    description: Is equal to only group option 12
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='is equal to only'])[12]
+  - id: is-equal-to-only-option-13
+    description: Is equal to only group option 13
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='is equal to only'])[13]
+  - id: is-not-equal-to-only-option
+    description: Is not equal to only option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='is not equal to only']
+  - &is-any-of-option
+    id: is-any-of-option
+    description: Is any of option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='is any of']
+  - &value-dropdown
+    id: value-dropdown
+    description: Select value dropdown
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Select Value']
+  - &eligible-but-not-started-option
+    id: eligible-but-not-started-option
+    description: Eligible but not started option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Eligible but Not Started']
+  - &select-date-range-dropdown
+    id: select-date-range-dropdown
+    description: Select date range dropdown
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[contains(@class,'date-operator')]/div
+  - &on-any-date-option
+    id: on-any-date-option
+    description: On any date option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='on any date']
+  - id: on-any-date-option-8
+    description: On any date option 8
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='on any date'])[8]
+  - id: on-any-date-option-9
+    description: On any date option 9
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='on any date'])[9]
+  - id: on-any-date-option-10
+    description: On any date option 10
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='on any date'])[10]
+  - id: on-any-date-option-11
+    description: On any date option 11
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='on any date'])[11]
+  - &save-button
+    id: save-button
+    description: Save button
+    locators:
+      - device: WEB
+        type: ID
+        value: saveButton
+  - &phone-only-option
+    id: phone-only-option
+    description: Phone Only option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Phone Only']
+  - &select-segmentation-category-dropdown
+    id: select-segmentation-category-dropdown
+    description: Dropdown Select a Segmentation Category
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //button[contains(.,'Add Category')]/preceding-sibling::div
+  - &program-milestones-option
+    id: program-milestones-option
+    description: Program milestones option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Program Milestones']
+  - &prospect-list-name-option
+    id: prospect-list-name-option
+    description: Prospect list name option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Prospect List Name']
+  - &demographic-segmentation-option
+    id: demographic-segmentation-option
+    description: Demographic Segmentation option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Demographic Segmentation']
+  - id: gender-option
+    description: Gender option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Gender']
+  - &automation-prospect-list-option
+    id: automation-prospect-list-option
+    description: Automation prospect list option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Automation prospect list']
+  - &age18-24-option
+    id: age18-24-option
+    description: Option age 18-24
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='18-24']
+  - &age25-34-option
+    id: age25-34-option
+    description: Option age 25-34
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='25-34']
+  - &age35-44-option
+    id: age35-44-option
+    description: Option age 35-44
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='35-44']
+  - &age45-54-option
+    id: age45-54-option
+    description: Option age 45-54
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='45-54']
+  - &age55-64-option
+    id: age55-64-option
+    description: Option age 55-64
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='55-64']
+  - &age-option
+    id: age-option
+    description: Age option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Age']
+  - id: race-option
+    description: Age option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Race']
+  - id: asian-option
+    description: Asian option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Asian']
+  - id: completed-value-option
+    description: Completed value option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Completed']
+  - id: not-completed-value-option
+    description: Not completed value option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Not Completed']
+  - id: completed-value-option-second-dropdown
+    description: Completed value option from the second dropdown
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='Completed'])[2]
+  - id: add-new-filter-button-1
+    description: Add a new filter within the group 1 button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//*[@class='btn btn-primary add-new-cat-btn'])[1]
+  - id: add-new-filter-button-2
+    description: Add a new filter within the group 2 button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//*[@class='btn btn-primary add-new-cat-btn'])[2]
+  - id: add-new-filter-button-3
+    description: Add a new filter within the group 3 button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//*[@class='btn btn-primary add-new-cat-btn'])[3]
+  - id: add-new-filter-button-4
+    description: Add a new filter within the group 4 button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//*[@class='btn btn-primary add-new-cat-btn'])[4]
+  - id: add-new-filter-button-5
+    description: Add a new filter within the group 5 button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//*[@class='btn btn-primary add-new-cat-btn'])[5]
+  - id: add-new-filter-button-6
+    description: Add a new filter within the group 6 button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//*[@class='btn btn-primary add-new-cat-btn'])[6]
+  - id: segmentation-name
+    description: Segmentation name
+    locators:
+      - device: WEB
+        type: CSS
+        value: div.multiSelect
+  - id: man-gender-option
+    description: Man gender option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Man']
+  - id: none-of-option
+    description: None of option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='is none of']
+  - id: completed-value-option-2
+    description: Completed value option 2
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='Completed'])[2]
+  - id: completed-value-option-3
+    description: Completed value option 3
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='Completed'])[3]
+  - id: completed-value-option-4
+    description: Completed value option 4
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='Completed'])[4]
+  - id: completed-value-option-5
+    description: Completed value option 5
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='Completed'])[5]
+  - id: completed-value-option-6
+    description: Completed value option 6
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='Completed'])[6]
+  - id: completed-value-option-7
+    description: Completed value option 7
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='Completed'])[7]
+  - id: completed-value-option-8
+    description: Completed value option 8
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='Completed'])[8]
+  - id: completed-value-option-9
+    description: Completed value option 9
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='Completed'])[9]
+  - id: completed-value-option-10
+    description: Completed value option 10
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='Completed'])[10]
+  - id: completed-value-option-11
+    description: Completed value option 11
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='Completed'])[11]
+  - id: overall-health-option
+    description: Overall Health option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Overall Health']
+  - id: overall-health-option-2
+    description: Overall Health option 2
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='Overall Health'])[2]
+  - id: lifestyle-option
+    description: Lifestyle option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Lifestyle']
+  - id: physical-measurements-option
+    description: Physical Measurements option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Physical Measurement']
+  - id: ehr-consent-response-option
+    description: EHR consent response option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='EHR Consent Response']
+  - id: ehr-consent-option
+    description: EHR consent option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Consent to Share Electronic Health Records']
+  - id: dv-ehr-consent-option
+    description: DV EHR consent option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Sharing Your Electronic Health Records']
+  - id: dv-ehr-consent-response-option
+    description: DV EHR consent response option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='DV EHR Consent Response']
+  - id: agreed-option-1
+    description: Agreed option 1
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='Agreed'])[1]
+  - id: agreed-option-2
+    description: Agreed option 2
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='Agreed'])[2]
+  - id: group-2-operator-dropdown
+    description: Group 2 operator dropdown
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Segmentation Group 2']//following::div[@class='select-custom-wrapper select-custom-wrapper']
+  - id: group-3-operator-dropdown
+    description: Group 3 operator dropdown
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Segmentation Group 3']//following::div[@class='select-custom-wrapper select-custom-wrapper']
+  - id: group-4-operator-dropdown
+    description: Group 4 operator dropdown
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Segmentation Group 4']//following::div[@class='select-custom-wrapper select-custom-wrapper']
+  - id: group-2-any-option
+    description: Group 2 operator any option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Segmentation Group 2']//following::div[text()='Any']
+  - id: group-3-any-option
+    description: Group 3 operator any option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Segmentation Group 3']//following::div[text()='Any']
+  - id: group-4-any-option
+    description: Group 4 operator any option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Segmentation Group 4']//following::div[text()='Any']
+  - id: healthcare-access-option
+    description: Healthcare access option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Health Care Access & Utilization']
+  - id: personal-medical-history-option
+    description: Personal medical history option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Personal and Family Health History']
+  - id: family-history-2020-option
+    description: Family history 2020 option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Family History 2020']
+  - id: within-the-last-option
+    description: Within the last date filter
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='within the last']
+  - id: within-the-last-option-2
+    description: Within the last date filter 2
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='within the last'])[2]
+  - id: within-the-last-option-3
+    description: Within the last date filter 3
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='within the last'])[3]
+  - id: within-the-last-option-4
+    description: Within the last date filter 4
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='within the last'])[4]
+  - id: duration-input
+    description: Duration input
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //input[@name='duration']
+  - id: duration-input-2
+    description: Duration input 2
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//input[@name='duration'])[2]
+  - id: duration-input-3
+    description: Duration input 3
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//input[@name='duration'])[3]
+  - id: duration-input-4
+    description: Duration input 4
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//input[@name='duration'])[4]
+  - id: fall-survey-minute-option
+    description: Fall survey minute
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(text(), 'Fall Minute Survey')]
+  - id: winter-survey-minute-option
+    description: Winter survey minute
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(text(), 'Winter Minute Survey')]
+  - &awardee-option-arizona
+    id: awardee-option-arizona
+    description: Awardee option arizona
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Arizona']

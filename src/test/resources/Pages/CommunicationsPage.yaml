@@ -1,0 +1,58 @@
+elements:
+  - id: segment-tab
+    description: Audience segmentation tab
+    locators:
+      - device: WEB
+        type: CSS
+        value: a[href='/communications/segmentation']
+  - id: campaigns-tab
+    description: Campaigns tab
+    locators:
+      - device: WEB
+        type: CSS
+        value: a[href='/communications/campaigns']
+  - id: case-management-tab
+    description: Case Management tab
+    locators:
+      - device: WEB
+        type: CSS
+        value: a[href="/communications/caseManagement"]
+  - id: template-tab
+    description: Template tab
+    locators:
+      - device: WEB
+        type: CSS
+        value: a[href="/communications/templates"]
+  - id: upload-engagement-tab
+    description: Template tab
+    locators:
+      - device: WEB
+        type: CSS
+        value: a[href="/communications/uploadEngagements"]
+  - &case-management-unselected-tab
+    id: case-management-unselected-tab
+    description: Unselected case Management tab
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@href='/communications/caseManagement']/parent::li[@class='sub-tab ']
+  - id: search-segmentation-input
+    description: Search segmentation input field
+    locators:
+      - device: WEB
+        type: CSS
+        value: input.searchinput
+  - id: segmentation-search-result-name
+    description: Name of the segmentation search result
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //a[@tabindex='0' and @role='link']
+actions:
+  - id: click-to-case-management-tab
+    description: Click to case management tab when tab is enabled
+    actionElements:
+      - element: *case-management-unselected-tab
+        condition: DISPLAYED
+        timeout: 2000
+        inputType: click
