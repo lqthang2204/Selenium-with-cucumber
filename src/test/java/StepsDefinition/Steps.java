@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class Steps {
-    public static  WebDriver driver;
+//    public static  WebDriver driver;
     TestBase testBase;
     ExecuteYaml execute;
     Map<String, Page> map;
@@ -67,7 +67,7 @@ public class Steps {
 
     @Given("I navigate to {word}")
     public void openBrowser(String url) {
-            this.driver = TestBase.OpenBrowser(testBase, this.driver, url);
+           TestBase.OpenBrowser(testBase, url);
     }
 
     @Given("I change the page spec to {word}")
@@ -80,18 +80,18 @@ public class Steps {
 
     @Given("I {word} element {}")
     public void mouseAction(String action, String element) {
-        testBase.mouseAction(this.page, action, this.driver, element,this.mapSaveText);
+        testBase.mouseAction(this.page, action, element,this.mapSaveText);
     }
     @And("I switch to browser window with index {string}")
     public void i_switch_to_browser_window_with_index(String index) {
-       testBase.switchTab(this.driver, Integer.parseInt(index));
+       testBase.switchTab(Integer.parseInt(index));
     }
 
 
 
     @When("I type {string} into element {word}")
     public void actionType(String content, String element) {
-        testBase.ActionType(this.page, this.driver, element, content, this.mapSaveText, this.userDTO);
+        testBase.ActionType(this.page, element, content, this.mapSaveText, this.userDTO);
 
     }
     @And("I run {word} with {word} data file")
@@ -106,7 +106,7 @@ public class Steps {
 
     @And("I wait for element {} to be {}")
     public void waitTo(String element, String status) {
-        testBase.showUI(this.page, this.driver, element, status, this.mapSaveText);
+        testBase.showUI(this.page,element, status, this.mapSaveText);
     }
     @Given("I become a random user")
     public void i_become_a_random_user() {
@@ -114,48 +114,48 @@ public class Steps {
     }
     @And("I verify the text for element {word} is {string}")
     public void verifyText(String element, String text) {
-        testBase.verifyText(this.page, this.driver, element, text, true, this.mapSaveText);
+        testBase.verifyText(this.page, element, text, true, this.mapSaveText, userDTO);
     }
 
     @And("I verify the exact text for element {word} is {string}")
     public void verifyExactText(String element, String text) {
-        testBase.verifyText(this.page, this.driver, element, text, false, this.mapSaveText);
+        testBase.verifyText(this.page,element, text, false, this.mapSaveText, userDTO);
     }
 
     @Given("I save the text for element {word} with key {string}")
     public void saveText(String element, String text) {
-        testBase.saveTextElement(this.page, this.driver, element, text, this.mapSaveText);
+        testBase.saveTextElement(this.page,element, text, this.mapSaveText);
     }
 
     @Given("I click keyboard {word} button on element {word}")
     public void i_click_keyboard_button_on_element(String Key, String element) {
-        testBase.keyBoard(this.page, this.driver, element, Key);
+        testBase.keyBoard(this.page, element, Key);
     }
 
     @Given("I {word} text from element {word}")
     public void clearText(String action, String element) {
-        testBase.mouseAction(this.page, action, this.driver, element,  this.mapSaveText);
+        testBase.mouseAction(this.page, action,element,  this.mapSaveText);
     }
 
     @Given("I scroll to element {word}")
     public void isScrollToElement(String element) {
-        testBase.scrollAction(this.driver, element, this.page);
+        testBase.scrollAction(element, this.page);
     }
 
     @Given("I perform {word} action")
     public void i_perform_to_action(String action) {
-        testBase.executeAction(this.driver, this.page, action, null, this.mapSaveText, this.userDTO);
+        testBase.executeAction(this.page, action, null, this.mapSaveText, this.userDTO);
 
     }
 
     @Given("I perform {word} action with override values")
     public void actionOverride(String action, DataTable dataTable) {
-        testBase.executeAction(this.driver, this.page, action, dataTable, this.mapSaveText, this.userDTO);
+        testBase.executeAction(this.page, action, dataTable, this.mapSaveText, this.userDTO);
     }
 
     @Given("I close browser with title is {string}")
     public void iCLoseBrowser(String title) {
-        testBase.CloseBrowser(this.driver, title);
+        testBase.CloseBrowser( title);
 
     }
     @Given("I run postman collection with link {word}")
@@ -165,9 +165,7 @@ public class Steps {
 
     @After
     public void tearDown() {
-        if(driver!=null){
-            this.driver.close();
-        }
+        testBase.closeBrowser();
     }
 
 }

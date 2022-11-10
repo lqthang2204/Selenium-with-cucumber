@@ -30,7 +30,7 @@ import java.util.stream.Stream;
 import static com.codeborne.selenide.Selenide.$;
 
 public class TestBase {
-    WebDriver driver;
+    public static WebDriver driver;
     private JsonNode arrayJsonNode;
     FakerData fake;
     public WebDriverWait wait;
@@ -70,7 +70,7 @@ public class TestBase {
         return driver;
     }
 
-    public static WebDriver OpenBrowser(TestBase testBase, WebDriver driver, String URl) {
+    public static void OpenBrowser(TestBase testBase, String URl) {
         try {
             if (driver == null) {
                 driver = testBase.getDriver();
@@ -92,10 +92,9 @@ public class TestBase {
             e.printStackTrace();
             Assert.assertTrue(false);
         }
-        return  driver;
     }
 
-    public void mouseAction(Page page, String action, WebDriver driver, String element, Map<String, String> map) {
+    public void mouseAction(Page page, String action, String element, Map<String, String> map) {
         Locators locators = getValueElement(page, element);
         String valueElement = getValueElementToWithText(locators, element,map);
 //        WebDriverWait wait = getWait(driver);
@@ -125,11 +124,11 @@ public class TestBase {
         }
 
     }
-    public void switchTab(WebDriver driver, int index){
+    public void switchTab( int index){
         try {
             ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
             System.out.println( "tab===="+ tabs.size());
-            driver.switchTo().window(tabs.get(index));
+            driver.switchTo().window(tabs.get(index-1));
         }catch (Exception e)
         {
             e.printStackTrace();
@@ -139,7 +138,7 @@ public class TestBase {
     }
 
 
-    public void showUI(Page page, WebDriver driver, String element, String status, Map<String, String> map) {
+    public void showUI(Page page, String element, String status, Map<String, String> map) {
         try {
             Locators locators = getValueElement(page, element);
             String valueElement = getValueElementToWithText(locators, element, map);
@@ -174,24 +173,27 @@ public class TestBase {
 
     }
 
-    public void verifyText(Page page, WebDriver driver, String element, String content, boolean status, Map<String, String> map) {
+    public void verifyText(Page page,String element, String content, boolean status, Map<String, String> map, UserDTO userDTO) {
         Locators locators = getValueElement(page, element);
         By by = getBy(driver, locators.getType(), locators.getValue());
-        scrollAction(this.driver, element, page);
+        scrollAction( element, page);
 
         try {
             if (map.containsKey(content)) {
                 content = map.get(content);
             }
             if (status) {
-                String finalResult = content;
+                String suffix = content.substring(5);
+                String finalResult = getProfileUser(suffix, userDTO);
+
                 new WebDriverWait(driver, Duration.ofMillis(Configuration.TIME_OUT)).until(new ExpectedCondition<Boolean>() {
                     public Boolean apply(WebDriver driver) {
                         return driver.findElement(by).getText().contains(finalResult);
                     }
                 });
             } else {
-                String finalResult = content;
+                String suffix = content.substring(5);
+                String finalResult = getProfileUser(suffix, userDTO);
                 new WebDriverWait(driver, Duration.ofMillis(Configuration.TIME_OUT)).until(new ExpectedCondition<Boolean>() {
                     public Boolean apply(WebDriver driver) {
                         return driver.findElement(by).getText().equals(finalResult);
@@ -207,7 +209,7 @@ public class TestBase {
 
     }
 
-    public void ActionType(Page page, WebDriver driver, String element, String content, Map<String, String> map, UserDTO userDTO) {
+    public void ActionType(Page page, String element, String content, Map<String, String> map, UserDTO userDTO) {
         try {
             String text = content;
             if (map.containsKey(content)) {
@@ -289,7 +291,7 @@ public class TestBase {
 //        }
 
     }
-    public void keyBoard(Page page, WebDriver driver,String element, String action){
+    public void keyBoard(Page page,String element, String action){
         Actions actions = new Actions(driver);
 //        WebDriverWait wait = getWait(driver);
         Locators locators = getValueElement(page, element);
@@ -328,7 +330,7 @@ public class TestBase {
 
     }
 
-    public void saveTextElement(Page page, WebDriver driver, String element, String text, Map<String, String> map) {
+    public void saveTextElement(Page page,String element, String text, Map<String, String> map) {
         if (map == null) {
             map = new HashMap<>();
         }
@@ -346,7 +348,7 @@ public class TestBase {
 
     }
 
-    public void scrollAction(WebDriver driver, String element, Page page) {
+    public void scrollAction(String element, Page page) {
         try {
             Locators locators = getValueElement(page, element);
 //            WebDriverWait wait = getWait(driver);
@@ -370,29 +372,39 @@ public class TestBase {
             Assert.assertTrue(false);
         }
     }
-    public void ExecuteWithOutToFile(String path, String... args) throws IOException, InterruptedException {
-        int exitCode = 0;
-        Process process = Runtime.getRuntime().exec(args);
-        BufferedReader stdInput = new BufferedReader(new InputStreamReader(process.getInputStream()));
+    public void ExecuteWithOutToFile(String path, String... args)  {
+        try {
+            int exitCode = 0;
+            Process process = Runtime.getRuntime().exec(args);
+            BufferedReader stdInput = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
-        StringBuilder outputBuilder;
-        String line;
-        for(outputBuilder = new StringBuilder(); process.isAlive(); exitCode = process.waitFor()) {
-            while((line = stdInput.readLine()) != null) {
-                outputBuilder.append(line).append("\n");
+            StringBuilder outputBuilder;
+            String line;
+            for(outputBuilder = new StringBuilder(); process.isAlive(); exitCode = process.waitFor()) {
+                while((line = stdInput.readLine()) != null) {
+                    outputBuilder.append(line).append("\n");
+                }
             }
-        }
-        if (exitCode != 0) {
-            System.out.println(outputBuilder.toString());
-        } else {
-            System.out.println(outputBuilder.toString());
-            stdInput.close();
+            if (exitCode != 0) {
+                System.out.println(outputBuilder.toString());
+                Assert.assertTrue(false);
+            } else {
+                System.out.println(outputBuilder.toString());
+                stdInput.close();
 
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            Assert.assertTrue(false);
         }
-        deleteFile(path);
+        finally {
+            deleteFile(path);
+        }
+
     }
 
-    public void executeAction(WebDriver driver, Page page, String action, DataTable dataTable,Map<String, String> map, UserDTO userDTO) {
+    public void executeAction(Page page, String action, DataTable dataTable,Map<String, String> map, UserDTO userDTO) {
         ActionsTest actions = getActions(page, action);
         WebDriverWait waitAction ;
         boolean flag= false;
@@ -516,7 +528,7 @@ public class TestBase {
 
         }
     }
-    public void CloseBrowser(WebDriver driver,String title){
+    public void CloseBrowser(String title){
         boolean flag = false;
         try {
             Set<String> windows =  driver.getWindowHandles();
@@ -791,6 +803,12 @@ public class TestBase {
             commandLineAggrument.add(1,"/c");
         }
         ExecuteWithOutToFile("", commandLineAggrument.toArray(new String[0]));
+    }
+    public void closeBrowser(){
+        if(driver!=null){
+            driver.quit();
+        }
+
     }
 
 }

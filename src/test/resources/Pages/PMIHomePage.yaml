@@ -1,0 +1,31 @@
+elements:
+  - id: zip-code-field
+    description: User field
+    locators:
+      - device: WEB
+        type: ID
+        value: zipCode
+  - id: start-button
+    description: start button
+    locators:
+      - device: WEB
+        type: ID
+        value: beginYourJournyContinueButton
+  - id: banner-welcome
+    description: Banner welcome user
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@class='banner-text ng-binding']
+  - id: ui-text-equal
+    description: Button login
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()="{text}"]
+  - id: email-input
+    description: Email input field
+    locators:
+      - device: WEB
+        type: ID
+        value: emailOrPhone

@@ -103,7 +103,7 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"Status code is 200\", function () {\r",
+              "pm.test(\"Status code is 201\", function () {\r",
               "    pm.response.to.have.status(201);\r",
               "})\r",
               "// pm.test(\"verify email\", function(){\r",
