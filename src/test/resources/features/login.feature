@@ -126,7 +126,20 @@ Feature: Login function
     And I click element launch-cati-button
     And I switch to browser window with index "2"
     And I change the page spec to PMIHomePage
-    And I wait for element logout to be DISPLAYED
+    And I wait for element zip-code-field to be DISPLAYED
+    And I type "85351" into element zip-code-field
+    And I click element ui-text-equal with text " Continue "
+    And I wait for element start-button to be ENABLED
+    And I click element start-button
+    And I wait for element banner-welcome to be DISPLAYED
+    And I verify the text for element banner-welcome is "USER.email"
+    And I click element ui-text-equal with text " Log Out "
+    And I wait for element email-input to be DISPLAYED
+    And I switch to browser window with index "1"
+    And I change the page spec to ProfilePage
+    And I wait for element start-cati-button to be ENABLED
+
+
 
 
 
