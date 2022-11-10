@@ -82,6 +82,12 @@ public class Steps {
     public void mouseAction(String action, String element) {
         testBase.mouseAction(this.page, action, this.driver, element,this.mapSaveText);
     }
+    @And("I switch to browser window with index {string}")
+    public void i_switch_to_browser_window_with_index(String index) {
+       testBase.switchTab(this.driver, Integer.parseInt(index));
+    }
+
+
 
     @When("I type {string} into element {word}")
     public void actionType(String content, String element) {
@@ -136,13 +142,13 @@ public class Steps {
         testBase.scrollAction(this.driver, element, this.page);
     }
 
-    @Given("I perform to action {word}")
+    @Given("I perform {word} action")
     public void i_perform_to_action(String action) {
         testBase.executeAction(this.driver, this.page, action, null, this.mapSaveText, this.userDTO);
 
     }
 
-    @Given("I perform to action {word} with override values")
+    @Given("I perform {word} action with override values")
     public void actionOverride(String action, DataTable dataTable) {
         testBase.executeAction(this.driver, this.page, action, dataTable, this.mapSaveText, this.userDTO);
     }

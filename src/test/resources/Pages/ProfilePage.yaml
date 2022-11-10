@@ -1,0 +1,2111 @@
+elements:
+  - id: reset-password-button
+    description: Button reset prospect's/participant's password
+    locators:
+      - device: WEB
+        type: ID
+        value: reset-pass-btn
+  - id: reset-security-button
+    description: Button reset security
+    locators:
+      - device: WEB
+        type: ID
+        value: reset-question-btn
+  - id: confirm-reset-button
+    description: Button confirm reset security
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[aria-label="Confirm"]
+  - id: change-lock-account-button
+    description: Button lock account
+    locators:
+      - device: WEB
+        type: ID
+        value: change-lock-btn
+  - id: sync-record-button
+    description: Button sync record
+    locators:
+      - device: WEB
+        type: ID
+        value: sync-record-btn
+  - id: update-profile-button
+    description: Button update profile
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='update-profile']
+  - id: confirm-password-modal
+    description: Popup confirm password appears when clicking button update profile
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='confirmPassword'] div[class*='modal-content']
+  - id: verify-participant-identity
+    description: Popup verify participant identity appears after confirming password
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='verifyParticipant'] div[class*='modal-content']
+  - id: confirm-password-input
+    description: input confirm password on popup
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[placeholder="Enter Password used at Sign In"]
+  - id: eyes-icon
+    description: Button has eyes icon to show/hide user's password
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='eyes-icon']
+  - id: confirm-message
+    description: Confirm message on popup confirm password
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class="confirm-message"]
+  - id: confirm-button
+    description: Button confirm password
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[aria-label="Confirm"]
+  - id: cancel-button
+    description: Button cancel popup
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[aria-label="Cancel"]
+  - id: close-button
+    description: Button close popup
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class="close"]
+  - id: popup-title
+    description: Popup title
+    locators:
+      - device: WEB
+        type: CSS
+        value: span[class="title-header"]
+  - id: confirm-text-1
+    description: Confirm text 1 on popup Profile Update Verification
+    locators:
+      - device: WEB
+        type: CSS
+        value: p[class='confirm-text']
+    values:
+      - lang: EN
+        value: What changes are needed on this participant’s profile?
+  - id: general-updates-option
+    description: General Updates Option on popup Profile Update Verification
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='General Updates']
+  - id: profile-updates-option
+    description: Profile Updates Option on popup Profile Update Verification
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(text(),'Profile updates')]
+  - id: confirm-text-2
+    description: Confirm text 2 on popup Profile Update Verification
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//p[@class="confirm-text"])[2]
+    values:
+      - lang: EN
+        value: Check off details as you verify them with the participant
+  - &verify-button
+    id: verify-button
+    description: Button verify on popup verify participant identity
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //button[.='Verify']
+  - id: cancel-verify-identity-button
+    description: Button cancel on popup verify participant identity
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //button[.='Cancel']
+  - &dob-checkbox
+    id: dob-checkbox
+    description: Checkbox date of birth on popup verify participant identity
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //input[@name='dob']/following-sibling::span[@class='checkmark']
+  - &name-checkbox
+    id: name-checkbox
+    description: Checkbox participant name on popup verify participant identity
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //input[@name='name']/following-sibling::span[@class='checkmark']
+  - &phone-checkbox
+    id: phone-checkbox
+    description: Checkbox participant phone on popup verify participant identity
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //input[@name='phone']/following-sibling::span[@class='checkmark']
+  - &home-address-checkbox
+    id: home-address-checkbox
+    description: Checkbox home address on popup verify participant identity
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //input[@name='address0']/following-sibling::span[@class='checkmark']
+  - &mobile-phone-checkbox
+    id: mobile-phone-checkbox
+    description: Checkbox mobile phone on popup verify participant identity
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //input[@name='mobilePhone']/following-sibling::span[@class='checkmark']
+  - &email-address-checkbox
+    id: email-address-checkbox
+    description: Checkbox email address on popup verify participant identity
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //input[@name='emailAddress']/following-sibling::span[@class='checkmark']
+  - id: general-updates-radio
+    description: General updates radio on popup verify participant identity
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//span[@class='radio-circle-round'])[1]
+  - id: edit-contact-details-button
+    description: Button edit contact details
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*="view-contact-details"] button[class*="btn"]
+  - id: editing-contact-details-button
+    description: Button edit contact details - editing mode
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*="edit-contact-details"] button[class*="edit-participant-btn"]
+  - id: edit-name-demographics-button
+    description: Button edit name and demographics
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[.="Name and Demographics"]/following::button[contains(@class,"edit-participant-btn")])[1]
+  - id: edit-address-button
+    description: Button edit participant's address
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*="participant-address-section"] button[class*="edit-participant-btn"]
+  - id: verified-primary-phone-number-input
+    description: Input verified primary phone number
+    locators:
+      - device: WEB
+        type: NAME
+        value: verifiedPrimaryPhoneNumber
+  - id: contact-phone-number-input
+    description: Input contact phone number
+    locators:
+      - device: WEB
+        type: NAME
+        value: phone
+  - id: schedule-appointment-button
+    description: Button schedule appointment on profile page
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='btn-schedule']
+  - id: cati-session-inactive-user-state
+    description: CATI session Inactive user state
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[@class="cati-icon"]/following::div[@role="presentation" and contains(text(), "Inactive")])[1]
+  - id: password-error
+    description: Message when inputing an error password
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class="password-error"]
+  - &dob-input
+    id: dob-input
+    description: Input date of birth
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*="rdt"] input
+  - id: firstname-input
+    description: Input first name
+    locators:
+      - device: WEB
+        type: NAME
+        value: firstName
+  - id: middle-name-input
+    description: Middle name input
+    locators:
+      - device: WEB
+        type: NAME
+        value: middleInitial
+  - id: prefer-name-input
+    description: Prefer name input
+    locators:
+      - device: WEB
+        type: NAME
+        value: preferredName
+  - id: prefix-dropdown
+    description: Prefix/Salutations dropdown
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Prefix/Salutations']/parent::div//div[contains(@class,'select-custom-wrapper')]
+  - id: suffix-dropdown
+    description: Suffix dropdown
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Suffix']/parent::div//div[contains(@class,'select-custom-wrapper')]
+  - id: language-dropdown
+    description: Language dropdown
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Language']/parent::div//div[contains(@class,'select-custom-wrapper')]
+  - id: lastname-input
+    description: Input last name
+    locators:
+      - device: WEB
+        type: NAME
+        value: lastName
+  - &save-changes-button
+    id: save-changes-button
+    description: Button save changes
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[type="submit"]
+  - id: cancel-changes-button
+    description: Button Cancel Changes
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='btn-secondary']
+  - id: cancel-editing-button
+    description: Button cancel changes
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //button[text()='Cancel']
+  - id: error-message
+    description: Error message
+    locators:
+      - device: WEB
+        type: CSS
+        value: span[class="error-msg"]
+  - id: home-address-country-field
+    description: Field country in home address form
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//span[.='Home Address']/following::div[.="Country"]/following::input)[1]
+  - id: mailing-address-country-field
+    description: Field country in mailing address form
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//span[.='Mailing Address']/following::div[.="Country"]/following::input)[1]
+  - id: mailing-address-street-field
+    description: Field street in mailing address form
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[.='Mailing Address']/following::input[@placeholder="Enter street address"]
+  - id: mailing-address-street1-field
+    description: Field street1 in mailing address form
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[name="1street1"]
+  - id: home-address-street1-field
+    description: Field street1 in home address form
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[name="0street1"]
+  - id: mailing-address-street2-field
+    description: Field street2 in mailing address form
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[.='Mailing Address']/following::input[@name="1street2"]
+  - id: mailing-address-city-field
+    description: Field city in mailing address form
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[name='1city']
+  - id: home-address-city-field
+    description: Field city in home address form
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[name='0city']
+  - id: mailing-address-select-state-field
+    description: Selectbox select state in mailing address form has been unselected yet
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[.='Mailing Address']/following::div[.='Select state']
+  - id: mailing-address-zipcode-field
+    description: Field zipcode in mailing address form
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[name="1zipCode"]
+  - id: home-address-zipcode-field
+    description: Field zipcode in home address form
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[name="0zipCode"]
+  - id: same-as-home-address
+    description: Checkbox same as home address
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //label[.='Same as Home Address']//span
+  - id: country-fields
+    description: Field country of home address and mailing address
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[contains(@class,'single-value--is-disabled')][.='USA']
+  - id: mailing-address-clear-address-button
+    description: Button clear address on mailing address form
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[.='Mailing Address']/following::button[contains(@class,'clear-address-btn')]
+  - id: mailing-address-state-dropdown
+    description: Dropdown state on mailing address form
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//span[.='Mailing Address']/following::div[contains(@class,"react-select__dropdown")])[1]
+  - id: mailing-address-state-dropdown-option
+    description: Mailing address state dropdown option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()="{text}"]
+  - id: home-address-state-dropdown
+    description: Dropdown state on home address form
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//span[.='Home Address']/following::div[contains(@class,"react-select__dropdown")])[1]
+  - id: home-address-state-dropdown-option
+    description: Home address state dropdown option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()="{text}"]
+  - id: full-name-value
+    description: Full name value
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='Full Name'] div[class='info']
+  - id: contact-phone-value
+    description: Contact Phone value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[@class='info-line Contact Phone']//div[@class='info'])[1]
+  - id: secondary-email-value
+    description: Secondary Email value
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='Secondary Email'] div[class='info']
+  - id: home-address-value
+    description: Home Address value on participant tab on paired profile
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//*[text()='Home Address']/following::div[@class='address-content'])[1]
+  - id: dob-value
+    description: Date of birth value
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='Date of Birth/Age'] div[class='info']
+  - id: modal-message
+    description: Message in modal
+    locators:
+      - device: WEB
+        type: CSS
+        value: p[class="modal-message "]
+  - id: continue-lock-button
+    description: Button continue lock
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[aria-label="Confirm"]
+  - id: cancel-lock-button
+    description: Button cancel lock
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[aria-label="Cancel"]
+  - &suggest-address
+    id: suggest-address
+    description: Div suggest address
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[@class="address-validation-title"][.='Suggested Address:']
+  - id: communication-channel-value
+    description: Communication Channel value
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class='info-line Communication Channel'] div[class='info']
+  - id: communication-channel-value-pair-prospect
+    description: Communication Channel value in prospect tab in paired profile
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[@class='info-line Communication Channel']//div[@class='info'])[2]
+  - id: verified-primary-email-input
+    description: Input field verified primary email
+    locators:
+      - device: WEB
+        type: NAME
+        value: email
+  - id: verified-primary-email-error-msg
+    description: Verified Primary Email error message
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Verified Primary Email']/following::span[@class='error-msg']
+  - id: secondary-email-input
+    description: Input field secondary email
+    locators:
+      - device: WEB
+        type: NAME
+        value: secondaryEmail
+  - id: secondary-email-value
+    description: Secondary email value
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='Secondary Email'] div[class='info']
+  - id: error-message-in-marketing-communication
+    description: Error message in marketing communication
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class="box-message-cancelled"] span[class="text"]
+  - id: start-cati-button
+    description: Button start CATI
+    locators:
+      - device: WEB
+        type: CSS
+        value: button.initiate-cati-button.btn.btn-default
+  - id: end-cati-button
+    description: Button end CATI
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*="end-cati-button"]
+  - id: modal-title
+    description: Title of the modal displays when clicking start CATI
+    locators:
+      - device: WEB
+        type: CSS
+        value: p[class='title no-icon']
+  - id: verify-cati-consent-checkmark
+    description: Verify cati consent checkmark
+    locators:
+      - device: WEB
+        type: CSS
+        value: .container.checkmark.checkbox-inline
+  - id: consent-button
+    description: Button consent on the modal
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*="button-primary"]
+  - id: decline-button
+    description: Decline button on the modal
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //button[text()='Decline']
+  - id: cati-password-input
+    description: Input CATI password on popup
+    locators:
+      - device: WEB
+        type: NAME
+        value: catiPassword
+  - id: cati-confirm-password-btn
+    description: Button confirm CATI password on popup
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[type="submit"]
+  - id: cati-password-error
+    description: Message when inputing an error CATI password
+    locators:
+      - device: WEB
+        type: CSS
+        value: span[class="help-block"]
+  - id: launch-cati-button
+    description: Button launch CATI
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='button-primary']
+  - id: cancel-cati-button
+    description: Button cancel CATI
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='btn-verify']
+  - id: end-cati-confirm-button
+    description: Button confirm ending CATI
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class="modal-footer"] button[class*='button-primary']
+  - id: cati-disabled-error
+    description: Error message when CATI is disabled
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[contains(@class,"catiConsentModalComponent")]//following::span[@class="text-content"]
+  - &cati-disabled-error-1
+    id: cati-disabled-error-1
+    description: First error message when CATI is disabled
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[contains(@class,"catiConsentModalComponent")]//following::span[@class="text-content"])[1]
+  - &cati-disabled-error-2
+    id: cati-disabled-error-2
+    description: Second error message when CATI is disabled
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[contains(@class,"catiConsentModalComponent")]//following::span[@class="text-content"])[2]
+  - &account-status-info
+    id: account-status-info
+    description: Status info of participant displayed on profile page
+    locators:
+      - device: WEB
+        type: CSS
+        value: .info-line.Account.Status div.info
+  - id: external-id-info
+    description: External ID of participant displayed on profile page
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class="basic-info"] div[class*="External ID"] div[class="info"]
+  - id: disabled-engagement-type
+    description: Field engagement type is disabled
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='type-engagement-field'] input[disabled]
+  - id: disabled-date-of-engagement
+    description: Field date of engagement is disabled
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='Date of Engagement'] p
+  - id: disabled-time-of-engagement
+    description: Field time of engagement is disabled
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='Start Time of Engagement'] p
+  - id: engagement-outcome
+    description: Field engagement outcome
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='outcome-engagement-field']
+  - id: engagement-outcome-dropdown
+    description: Dropdown engagement outcome
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='outcome-engagement-field'] div[class*="select-field"]
+  - id: engagement-outcome-dropdown-option
+    description: Option under engagement outcome dropdown
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()="{text}"]
+  - id: engagement-cancel-button
+    description: Button cancel engagement
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='cancel-engagement-btn']
+  - &engagement-save-button
+    id: engagement-save-button
+    description: Button save engagement
+    locators:
+      - device: WEB
+        type: CSS
+        value: div.save-engagement-btn
+  - &engagement-save-button-disabled
+    id: engagement-save-button-disabled
+    description: Disabled button save engagement
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //button[@class="btn btn-primary btn-save-engagement btn btn-default" and @disabled]
+  - id: engagement-duration-dropdown
+    description: Dropdown duration engagement
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*="duration-engagement-field"] div[class*="react-select__indicators"]
+  - id: engagement-duration-first-option
+    description: First option of duration engagement
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*="react-select__menu-list"] div:first-child
+  - id: engagement-duration-value
+    description: Selected option of duration engagement
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*="Duration of Engagement"]
+  - id: exact-cati-duration
+    description: Exact CATI duration in CATI engagement log
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(@class,'Exact CATI Duration')]//p
+  - id: engagement-form
+    description: Form engagement after clicking on edit engagement log button
+    locators:
+      - device: WEB
+        type: ID
+        value: new-engagement-form
+  - id: set-up-time-label
+    description: Label setup a time to follow up
+    locators:
+      - device: WEB
+        type: CSS
+        value: label[for*="timeSetUp"]
+  - &recontact-date-input
+    id: recontact-date-input
+    description: Input recontact date
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*="Recontact Date"] input
+  - &recontact-time-input
+    id: recontact-time-input
+    description: Input recontact time
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*="Recontact Time"] input
+  - &recontact-date-option-tomorrow
+    id: recontact-date-option-tomorrow
+    description: Option tomorrow on recontact date dropdown
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //a[.="Tomorrow"]
+  - &recontact-time-option-morning
+    id: recontact-time-option-morning
+    description: Option morning on recontact time dropdown
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //a[contains(.,"Morning")]
+  - id: activity-during-engagement-selected-option
+    description: Selected value on activity during engagement dropdown
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*="react-select__multi-value__label"]
+  - id: activity-during-engagement-dropdown
+    description: Activity during engagement dropdown
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*="activity-during-engagement-field"] div[class*="multi-select-field"]
+  - id: activity-during-engagement-dropdown-option
+    description: Option under activity during engagement dropdown
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()="{text}"]
+  - id: participant-profile-tab
+    description: Tab participant profile
+    locators:
+      - device: WEB
+        type: CSS
+        value: a[id*='management-prospect-tab-participant-profile']
+  - id: prospect-profile-tab
+    description: Prospect profile tab on profile detail
+    locators:
+      - device: WEB
+        type: CSS
+        value: a[id*='management-prospect-tab-prospect-profile']
+  - id: email-value
+    description: Email value in profile
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class='info-line Email'] div[class='info']
+  - id: participant-email-value
+    description: Participant email value in profile page
+    locators:
+      - device: WEB
+        type: CSS
+        value: div.info-line.Verified.Primary.Email .info
+  - id: verified-mobile-phone-value
+    description: Verified mobile phone value in profile
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='Verified Mobile Phone'] div[class='info']
+  - id: verified-mobile-phone-input
+    description: Verified mobile phone input in profile
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[name='verifiedPrimaryPhoneNumber']
+  - id: verified-mobile-phone-error-msg
+    description: Verified mobile phone error message
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Verified Mobile Phone']/following::span[@class='error-msg']
+  - id: additional-engagement-activity-value
+    description: Activity during engagement on engagement history table
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[contains(text(), "Additional Activity during Engagement")]//following::div[@class="engagement-detail-value"][1]
+  - id: duration-of-engagement
+    description: Duration of Engagement on engagement history table
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[@class='second-column col-xs-5'] //div[@class='engagement-detail-value'])[1]
+  - id: summary-of-engagement
+    description: Summary of Engagement display on engagement history table
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[@class='second-column col-xs-5'] //div[@class='engagement-detail-value'])[2]
+  - id: cati-helpful-feedback-yes
+    description: CATI experience feedback 'yes' in CATI engagement details
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(@class,'completing your surveys')]//child::span[contains(text(),'Yes')]
+  - id: cati-helpful-feedback-no
+    description: CATI experience feedback 'no' in CATI engagement details
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(@class,'completing your surveys')]//child::span[contains(text(),'No')]
+  - id: cati-feedback
+    description: Field CATI Feedback
+    locators:
+      - device: WEB
+        type: NAME
+        value: additionalCatiFeedback
+  - id: cati-feedback-yes
+    description: CATI phone feedback yes to complete  surveys over the phone in the future
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(@class, 'phoneFeedback')]//descendant::span[contains(text(),'Yes')]
+  - id: cati-feedback-no
+    description: CATI phone feedback no to complete  surveys over the phone in the future
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(@class, 'phoneFeedback')]//descendant::span[contains(text(),'No')]
+  - id: account-status-value
+    description: Account status value of prospect when has not paired in profile
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[@class='info-line Account Status']//div[@class='info'])[1]
+  - id: account-status-value-pair-prospect
+    description: Account status value of prospect when has paired in profile
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[@class='info-line Account Status']//div[@class='info'])[2]
+  - id: cati-help-radio-button-checked
+    description: CATI help radio button checked
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[name='catiHelpfulFeedback'][checked] + span
+  - id: cati-phone-radio-button-checked
+    description: CATI phone radio button checked
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[name='catiPhoneFeedback'][checked] + span
+  - id: internal-id-info
+    description: Internal ID of participant displayed on profile page
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class="basic-info"] div[class*="Internal ID"] div[class="info"]
+  - id: general-option
+    description: General option
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[id="general"] + span
+  - id: contact-details-section
+    description: Contact Details Section
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[contains(@class,'viewParticipant-contactDetails')])[1]
+  - id: name-demographics-section
+    description: Name and Demographics Section
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[@class='basic-info']/following::div[1]
+  - id: address-section
+    description: Address Section on Participant Profile page
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[contains(@class,'viewParticipant-addressSection')])[1]
+  - id: edit-engagement-confirm-button
+    description: Button confirm when editing engagement
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[aria-label="Confirm"]
+  - id: back-to-search-button
+    description: Back to search button
+    locators:
+      - device: WEB
+        type: CSS
+        value: a[class*='btn-link']
+  - id: back-to-previous-page-button
+    description: Back to previous page button
+    locators:
+      - device: WEB
+        type: CSS
+        value: a[class*='back-arrow']
+  - id: question-participant-feedback-1
+    description: Question participant feedback 1
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Was today’s call helpful with completing your surveys?']
+  - id: question-participant-feedback-2
+    description: Question participant feedback 1
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Would you like to complete your surveys over the phone in the future?']
+  - id: cati-activities-field
+    description: Cati activities field
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='cati-activities-field']
+  - id: ssn-value
+    description: Social security number value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(@class,'Social Security Number')]//*[@class='info']
+  - id: ssn-title
+    description: Social security number title
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(@class,'Social Security Number')]//*[text()='Social Security Number']
+  - id: ssn-tooltip
+    description: Tooltip text of Social security number
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(@class,'Social Security Number')]//*[@class='helptip']
+    values:
+      - lang: EN
+        value: The SSN can be viewed or edited by the participant in the portal. Enterprise users can only delete it upon participant request.
+  - id: delete-ssn-text
+    description: Delete ssn text
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@class='delete-ssn-text']
+  - id: confirm-delete-ssn-button
+    description: Confirm delete ssn button
+    locators:
+      - device: WEB
+        type: ID
+        value: disclaimer-continue-button
+  - id: cati-activities-value
+    description: Cati activities value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[contains(text(),"CATI Activities")]//following-sibling::div
+  - id: engagement-detail-value
+    description: Engagement detail value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[contains(text(),"Activity during Engagement")]//following-sibling::div
+  - id: completing-your-surveys-value
+    description: Call helpful with completing your surveys
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[contains(text(),"completing your surveys")]//following-sibling::div
+  - id: cati-feedback-value
+    description: Cati feedback value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[contains(text(),"CATI Feedback")]//following-sibling::div
+  - id: surveys-phone-value
+    description: Surveys phone value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[contains(text(),"surveys over the phone")]//following-sibling::div
+  - id: cati-schedule-value
+    description: Cati schedule value
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*="cati-schedule"]
+  - id: account-activity
+    description: Tab account activity
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(@id,'tab-account_activity')]
+  - id: disabled-engagement-edit-button
+    description: Disabled engagement edit button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='edit-record-btn'][disabled]
+  - id: edit-secondary-contacts-button
+    description: Edit secondary contacts button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Secondary Contacts']/parent::div//*[contains(@class,'edit-participant-btn')]
+  - id: prefer-not-to-answer-checkbox
+    description: Prefer not to answer checkbox checkbox
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(text(),'Prefer not to answer')]
+  - &secondary-contact-firstname-input
+    id: secondary-contact-firstname-input
+    description: Secondary contact firstname input
+    locators:
+      - device: WEB
+        type: NAME
+        value: 0firstName
+  - &secondary-contact-lastname-input
+    id: secondary-contact-lastname-input
+    description: Secondary contact lastname input
+    locators:
+      - device: WEB
+        type: NAME
+        value: 0lastName
+  - &secondary-contact-email-input
+    id: secondary-contact-email-input
+    description: Secondary contact email address input
+    locators:
+      - device: WEB
+        type: NAME
+        value: 0emailAddress
+  - &secondary-contact-phone-input
+    id: secondary-contact-phone-input
+    description: Secondary contact phone address input
+    locators:
+      - device: WEB
+        type: NAME
+        value: 0contactPhone
+  - id: add-edit-provisional-option
+    description: Add or edit provisional information option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(text(),'Add or edit provisional')]
+    values:
+      - lang: EN
+        value: Add or edit provisional information
+  - id: mark-information-outdated-option
+    description: Mark information as outdated option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(text(),'Mark information as outdated')]
+  - id: continue-button
+    description: Continue button in profile update verification pop-up
+    locators:
+      - device: WEB
+        type: ID
+        value: outdatedContinue
+  - id: verified-primary-email-outdated
+    description: Verified primary email mark outdated
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(@class,'Verified Primary Email')]//*[text()='Mark Outdated']
+  - id: secondary-email-outdated
+    description: Secondary email mark outdated
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(@class,'Secondary Email')]//*[text()='Mark Outdated']
+  - id: verified-mobile-phone-outdated
+    description: Verified mobile phone mark outdated
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(@class,'Verified Mobile Phone')]//*[text()='Mark Outdated']
+  - id: contact-phone-outdated
+    description: Contact phone mark outdated
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(@class,'Contact Phone')]//*[text()='Mark Outdated']
+  - id: home-address-outdated
+    description: Home address mark outdated
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@class='address-title']/parent::*//*[text()='Mark Outdated']
+  - id: confirm-provisional-detail-link
+    description: Confirm provisional details link
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Confirm Provisional Details']
+  - id: confirm-provisional-address-detail-link
+    description: Confirm provisional address details link
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Confirm Provisional Address Details']
+  - id: temp-verified-primary-email-input
+    description: Input field temp verified primary email
+    locators:
+      - device: WEB
+        type: NAME
+        value: email.tempValue
+  - id: temp-secondary-email-input
+    description: Input field temp secondary email
+    locators:
+      - device: WEB
+        type: NAME
+        value: secondaryEmail.tempValue
+  - id: temp-verified-mobile-phone-input
+    description: Input field temp mobile phone
+    locators:
+      - device: WEB
+        type: NAME
+        value: verifiedPrimaryPhoneNumber.tempValue
+  - id: temp-contact-phone-input
+    description: Input field contact phone
+    locators:
+      - device: WEB
+        type: NAME
+        value: contactPhone.tempValue
+  - id: outdate-primary-email-value
+    description: Outdate verified primary email value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Verified Primary Email']/parent::div/following-sibling::*[contains(@class,'checkbox-value')]
+  - id: provisional-primary-email-value
+    description: Provisional verified primary email value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//*[text()='Verified Primary Email']/parent::div/following-sibling::*[contains(@class,'checkbox-value')])[2]
+  - id: provisional-primary-email-checkbox
+    description: Provisional verified primary email checkbox
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@name='email']/following-sibling::*[@class='checkmark']
+  - id: outdate-secondary-email-value
+    description: Outdate secondary email value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Secondary Email']/parent::div/following-sibling::*[contains(@class,'checkbox-value')]
+  - id: provisional-secondary-email-value
+    description: Provisional secondary email value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//*[text()='Secondary Email']/parent::div/following-sibling::*[contains(@class,'checkbox-value')])[2]
+  - id: provisional-secondary-email-checkbox
+    description: Provisional secondary email checkbox
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@name='secondaryEmail']/following-sibling::*[@class='checkmark']
+  - id: outdate-mobile-phone-value
+    description: Outdate verified mobile phone value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Verified Mobile Phone']/parent::div/following-sibling::*[contains(@class,'checkbox-value')]
+  - id: provisional-mobile-phone-value
+    description: Provisional verified mobile phone value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//*[text()='Verified Mobile Phone']/parent::div/following-sibling::*[contains(@class,'checkbox-value')])[2]
+  - id: provisional-mobile-phone-checkbox
+    description: Provisional verified mobile phone checkbox
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@name='verifiedPrimaryPhoneNumber']/following-sibling::*[@class='checkmark']
+  - id: outdate-contact-phone-value
+    description: Outdate contact phone value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Contact Phone']/parent::div/following-sibling::*[contains(@class,'checkbox-value')]
+  - id: provisional-contact-phone-value
+    description: Provisional contact phone value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//*[text()='Contact Phone']/parent::div/following-sibling::*[contains(@class,'checkbox-value')])[2]
+  - id: provisional-contact-phone-checkbox
+    description: Provisional contact phone checkbox
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@name='phone']/following-sibling::*[@class='checkmark']
+  - id: outdate-home-address-value
+    description: Outdate home address value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Home Address']/parent::div/following-sibling::*[contains(@class,'checkbox-value')]/div
+  - id: provisional-home-address-value
+    description: Provisional home address value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//*[text()='Home Address']/parent::div/following-sibling::*[contains(@class,'checkbox-value')]/div)[2]
+  - id: outdate-mailling-address-value
+    description: Outdate mailling address value as same home address
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Mailing Address']/parent::div/following-sibling::*[contains(@class,'checkbox-value')]
+  - id: provisional-mailling-address-value
+    description: Provisional mailling address value as same home address
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//*[text()='Mailing Address']/parent::div/following-sibling::*[contains(@class,'checkbox-value')])[2]
+  - id: confirm-selected-button
+    description: Confirm selected
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Confirm Selected']
+  - id: reject-all-button
+    description: Reject all button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Reject All']
+  - id: add-provisional-detail-address-button
+    description: Button add provisional detail address
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*="participant-address-section"] button[class*="add-provisional-btn"]
+  - id: provisional-home-address-state-dropdown
+    description: Dropdown state on provisional home address dropdown
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//*[.='Provisional Home Address']/following::div[contains(@class,"react-select__dropdown")])[1]
+  - id: provisional-home-address-title
+    description: Provisional home address title in profile
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Provisional Home Address']
+    values:
+      - lang: EN
+        value: Provisional Home Address
+  - id: provisional-mail-address-title
+    description: Provisional mail address title in profile
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Provisional Mailing Address']
+    values:
+      - lang: EN
+        value: Provisional Mailing Address
+  - id: provisional-contact-detail-title
+    description: Provisional contact detail title in profile
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='content provisional-title']
+    values:
+      - lang: EN
+        value: Provisional Contact Details
+  - id: local-standard-operating-checkbox
+    description: Checkbox Local Standard Operating Procedure
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //input[@name='localSop']/following-sibling::span[@class='checkmark']
+  - id: mailing-address-value
+    description: Mailing address value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//*[text()='Mailing Address']/following::div[@class='address-content'])
+  - id: cati-email-address-value
+    description: Email address value on popup verify participant identity when starting CATI
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Email Address']/following::div[@class='checkbox-title'][1]
+  - id: cati-dob-value
+    description: Date of birth value on popup verify participant identity when starting CATI
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Date of Birth']/following::div[@class='checkbox-title'][1]
+  - id: cati-full-name-value
+    description: Fullname value on popup verify participant identity when starting CATI
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Name']/following::div[@class='checkbox-title'][1]
+  - id: home-address-mark-outdated
+    description: Home address mark outdate
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Home Address']/following::button[text()='Mark Outdated'][1]
+  - id: mailing-address-mark-outdated
+    description: Mailing address mark outdate
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Mailing Address']/following::button[text()='Mark Outdated']
+  - id: edit-mailing-address
+    description: Edit mailing address button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='edit-mailing-address']
+  - id: full-name-contact-one
+    description: Fullname contact one
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Contact 1']/following::div[text()='Full Name']/following-sibling::div
+  - id: email-contact-one
+    description: Email contact one
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Contact 1']/following::div[text()='Email']/following-sibling::div
+  - id: phone-contact-one
+    description: Phone contact one
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Contact 1']/following::div[text()='Phone']/following-sibling::div
+  - id: relation-contact-one
+    description: Relation contact one
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Contact 1']/following::div[text()='Relationship']/following-sibling::div
+  - id: address-contact-one
+    description: address contact one
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Contact 1']/following::div[text()='Address']/following-sibling::div
+  - id: checked-not-answer
+    description: Check box not answer 2
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Contact 2']/following::span[contains(@class,'checkbox-checkmark')]
+  - id: edit-secondary-contact
+    description: Edit secondary contact button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Secondary Contacts']//following-sibling::div/button
+  - id: firstname-contact-two
+    description: Firstname contact two
+    locators:
+      - device: WEB
+        type: NAME
+        value: 1firstName
+  - id: middle-name-contact-two
+    description: Middle name contact two
+    locators:
+      - device: WEB
+        type: NAME
+        value: 1middleInitial
+  - id: lastname-contact-two
+    description: Lastname contact two
+    locators:
+      - device: WEB
+        type: NAME
+        value: 1lastName
+  - id: email-contact-two
+    description: Email contact two
+    locators:
+      - device: WEB
+        type: NAME
+        value: 1emailAddress
+  - id: phone-contact-two
+    description: Phone 2 input
+    locators:
+      - device: WEB
+        type: NAME
+        value: 1contactPhone
+  - id: street-contact-one
+    description: street contact input one
+    locators:
+      - device: WEB
+        type: NAME
+        value: 1street1
+  - id: street-contact-two
+    description: street contact input two
+    locators:
+      - device: WEB
+        type: NAME
+        value: 1street2
+  - id: city-contact-two
+    description: City contact two
+    locators:
+      - device: WEB
+        type: NAME
+        value: 1city
+  - id: zip-contact-two
+    description: Zip contact two
+    locators:
+      - device: WEB
+        type: NAME
+        value: 1zipCode
+  - id: relation-contact-two-dropdown
+    description: Relation contact two
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Contact 2']/following::div[contains(@class,'undefined select-field')]
+  - id: state-contact-two
+    description: state contact two
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Select state']
+  - id: checked-not-answer-one
+    description: Check box not answer one
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Contact 1']/following::span[contains(@class,'checkbox-checkmark')][1]
+  - id: checked-not-answer-two
+    description: Check box not answer two
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Contact 2']/following::span[contains(@class,'checkbox-checkmark')]
+  - id: full-name-contact-two-value
+    description: Fullname contact two value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Contact 2']/following::div[text()='Full Name']/following-sibling::div
+  - id: email-contact-two-value
+    description: Email contact two value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Contact 2']/following::div[text()='Email']/following-sibling::div
+  - id: phone-contact-two-value
+    description: Phone contact two value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Contact 2']/following::div[text()='Phone']/following-sibling::div
+  - id: relation-contact-two-value
+    description: Relation contact two value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Contact 2']/following::div[text()='Relationship']/following-sibling::div
+  - id: address-contact-two-value
+    description: address contact two value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Contact 2']/following::div[text()='Address']/following-sibling::div
+  - id: clear-address-contact-one
+    description: Clear address button contact one
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='Contact 1']/following::button[contains(@class,'clear-address-btn')][1]
+  - id: first-name-invalid-input-error-message
+    description: Message first name invalid input error
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@name='1firstName']/ancestor::*[@class='info']//span
+    values:
+      - lang: EN
+        value: Please enter a valid first name.
+  - id: middle-name-invalid-input-error-message
+    description: Message middle name invalid input error
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@name='1middleInitial']/ancestor::*[@class='info']//span
+    values:
+      - lang: EN
+        value: Please enter a valid middlename initial.
+  - id: last-name-invalid-input-error-message
+    description: Message last name invalid input error
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@name='1lastName']/ancestor::*[@class='info']//span
+    values:
+      - lang: EN
+        value: Please enter a valid last name.
+  - id: message-phone-number-error
+    description: Message phone number error
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@name='1contactPhone']/ancestor::*[@class='info']//span
+    values:
+      - lang: EN
+        value: Phone number is invalid format - should be 10 digits.
+  - id: email-invalid-input-error-message
+    description: Message email invalid input error
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@name='1emailAddress']/ancestor::*[@class='info']//span
+    values:
+      - lang: EN
+        value: Email is invalid format.
+  - id: zipcode-invalid-input-error-message
+    description: Message zip code invalid input error
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@name='1zipCode']/ancestor::*[@class='info']//span
+    values:
+      - lang: EN
+        value: Please enter a valid zip code.
+  - id: email-contact-one-mark-outdate
+    description: Email contact one mark outdate
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@name='0emailAddress']/ancestor::*[@class='info']//button
+  - id: phone-contact-one-mark-outdate
+    description: Phone contact 1 mark outdate
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@name='0contactPhone']/ancestor::*[@class='info']//button
+  - id: do-not-save-button
+    description: Do not save button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='btn-donot']
+  - id: language-value
+    description: Language value
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='Language'] div[class='info']
+  - id: gender-value
+    description: Gender value
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='Gender'] div[class*='info']
+  - id: race-value
+    description: Race value
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='Race'] div[class*='info']
+  - id: event-activity-column
+    description: Event column of account activity
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='table'] td[tabindex='2'] span
+  - id: reset-password-email-option
+    description: Email option of reset password pop-up
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@class='modal-content']//*[text()='Email']
+  - id: send-option
+    description: Send button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@type='submit']
+  - id: click-here-link
+    description: Click here link
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='click here']
+  - id: share-electronic-health
+    description: Share electronic health
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[contains(@id,'Consent to Share Electronic Health Records')]
+  - id: participant-profile-page-title
+    description: Participant or prospect profile page title
+    locators:
+      - device: WEB
+        type: CSS
+        value: div.prospects-name
+  - id: basics-completed-checkmark
+    description: The basics survey completed checkmark
+    locators:
+      - device: WEB
+        type: ID
+        value: "The Basics-Completed-tooltip"
+  - id: call-out-reach-out-and-outcome-tab
+    description: Call out reach out and outcome tab
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@data-field="attemptCounter"]
+  - id: engagement-list-name-tab
+    description: Associated engagement list name tab
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@data-field="engagementListName"]
+  - id: primary-consented-date-value
+    description: Primary Consented Date value
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='Primary Consented Date'] div[class='info']
+  - id: contact-one-last-update-date
+    description: Lastest update date for first secondary contact detail
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[@class='title-section']/span[@class='last-updated'])[1]
+  - id: contact-two-last-update-date
+    description: Lastest update date for second secondary contact detail
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[@class='title-section']/span[@class='last-updated'])[2]
+  - id: verified-phone-number-value
+    description: Verified primary phone number value
+    locators:
+      - device: WEB
+        type: CSS
+        value: .info-line.Verified.Mobile.Phone a
+  - id: contact-phone-number-value
+    description: Verified primary phone number value
+    locators:
+      - device: WEB
+        type: CSS
+        value: .info-line.Contact.Phone a
+  - id: profile-update-verification-phone-value
+    description: Phone value on the profile update verification modal
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()="Mobile Phone"]/following::div[@class="checkbox-title"]/div
+  - id: end-cati-button-disabled
+    description: End cati button in disabled state
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //button[contains(@class,"end-cati-button") and @disabled]
+  - id: com-channel-value-pair-prospect
+    description: Communication Channel value on prospect tab in paired profile
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[@class='info-line Communication Channel']/div[@class='info'])[2]
+  - id: updated-by-inactive-user
+    description: Updated by inactive user field
+    locators:
+      - device: WEB
+        type: XPATH
+        value: '//strong["Updated: "]/parent::div[contains(text(),"Inactive")]'
+  - id: page-title
+    description: Page title
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //h1[text()='Prospect Management']
+  - id: appointment-empty-detail
+    description: Appointment empty detail
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[aria-hidden='false'] div[class*='appointment-detail empty-detail']
+  - id: mobile-phone-value
+    description: Mobile phone value in profile
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class='info-line Mobile Phone'] div[class='info']
+  - id: home-phone-value-pair-prospect
+    description: Home phone value in prospect tab in paired profile
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(@class,'Home Phone')]//div[2]
+  - id: work-phone-value-pair-prospect
+    description: Work phone value in prospect tab in paired profile
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(@class,'Work Phone')]//div[2]
+  - id: edit-button
+    description: Edit button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='edit-prospect-profile']
+  - id: archive-button
+    description: Archive button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='archive-btn']
+  - id: archive-profile-button
+    description: Archive profile button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='button-warning__restore']
+  - id: edit-org-button
+    description: Edit org button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='edit-org-btn'] svg
+  - id: full-name-value-pair-prospect
+    description: Full name value of paired prospect in profile page
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[@class='info-line Full Name']//div[@class='info'])[2]
+  - id: preferred-name-value-pair-prospect
+    description: Preferred name value in prospect tab in paired profile
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[@class='info-line Preferred Name']//div[@class='info'])[2]
+  - id: additional-information-expand-toggle
+    description: Additional information expand toggle
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='prospectProfile-expandToggle']
+  - id: dob-value-pair-prospect
+    description: DOB value on prosepct tab in paired profile
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[@class='info-line Date of Birth/Age']//div[@class='info'])[2]
+  - id: home-address-value-pair-prospect
+    description: Home Address value on prospect tab on paired profile
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//*[text()='Home Address'])[2]/following::div[@class='address-content']
+  - id: appointment-item-title
+    description: Appointment item title
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[text()='Appointment Details']/following::div[@class='accordion-title'][last()]
+  - id: appointment-expand-button
+    description: Appointment expand button
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='accordion-icon']
+  - id: appointment-time
+    description: Time of appointment
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='Time']/following::div[1])[last()]
+  - id: appointment-location
+    description: Location of appointment
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[text()='Location']/following::div[1])[last()]
+  - id: profile-navigation-header
+    description: Profile navigation header
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //a[@role='presentation' and contains(text(), 'Back to')]
+  # Engagement History Section
+  - id: profile-log-session-location
+    description: Profile log session block is below profile layout block
+    locators:
+      - device: WEB
+        type: ID
+        value: profile-log-session-tabs
+  - id: head-type
+    description: Type header on engagement table
+    locators:
+      - device: WEB
+        type: CSS
+        value: th[data-field='type'] span[class='headertext']
+  - id: head-call-outcome
+    description: Call outcome header on engagement table
+    locators:
+      - device: WEB
+        type: CSS
+        value: th[data-field='attemptCounter'] span[class='headertext']
+  - id: head-summary
+    description: Summary header on engagement table
+    locators:
+      - device: WEB
+        type: CSS
+        value: th[data-field='summary'] span[class='headertext']
+  - id: head-add-by
+    description: Add by header on engagement table
+    locators:
+      - device: WEB
+        type: CSS
+        value: th[data-field='addedBy'] span[class='headertext']
+  - id: head-engagement-list-name
+    description: Engagement list name header on engagement table
+    locators:
+      - device: WEB
+        type: CSS
+        value: th[data-field='engagementListName'] span[class='headertext']
+  - id: info-type-bar
+    description: Info type bar
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[contains(@class, 'dataTable')]/following::div[@class='info-type']
+  - id: pagination
+    description: Pagination page 1
+    locators:
+      - device: WEB
+        type: CSS
+        value: a[aria-label='Go to page number 1']
+  - &engagement-history-tab
+    id: engagement-history-tab
+    description: Engagement history tab
+    locators:
+      - device: WEB
+        type: ID
+        value: profile-log-session-tabs-tab-engagement_history
+  - id: tab-title
+    description: Tab title
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='src-components-prospects-components'] div[class='title-content']
+  - id: engagement-count
+    description: Engagement history count
+    locators:
+      - device: WEB
+        type: CSS
+        value: p[class='count-engagement']
+  - id: total-record
+    description: Total record in engagement history section
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class='showTotalRecords']
+  - id: engagement-type-icon
+    description: Type icon in engagement log
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class="{text}"]
+  - id: engagement-type-desc
+    description: Type description in engagement log
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='hint-text']
+  - id: outcome-status-dot
+    description: Outcome status dot in engagement log
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='first-column'] span[class*="{text}"]
+  - id: engagement-attempt-text
+    description: Attempt text in engagement log
+    locators:
+      - device: WEB
+        type: CSS
+        value: p[class='attempt']
+  - id: engagement-outcome-name
+    description: Outcome name in engagement log
+    locators:
+      - device: WEB
+        type: CSS
+        value: span[class="outcome-name"]
+  - id: engagement-summary
+    description: Summary field in engagement log
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class="engagement-history-table"] td[tabindex="4"] div
+  - id: engagement-added-by
+    description: Added by field in engagement log
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class="engagement-history-table"] td[tabindex="5"] div
+  - id: associated-engagement-list
+    description: Associated engagement list in engagement log
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class="engagement-history-table"] td[tabindex="6"] div
+  - &engagement-edit-button
+    id: engagement-edit-button
+    description: Edit engagement button in engagement log accordion
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='edit-record-btn'] svg
+  - &engagement-expand-button
+    id: engagement-expand-button
+    description: Expand engagement button in engagement log
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[@class='toggle']//div[@class='down'])[1]
+  - &add-new-engagement-button
+    id: add-new-engagement-button
+    description: Button add new engagement on profile page
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='add-new-engagement-btn']
+  - id: cati-engagement-updated-summary-field
+    description: CATI engagement update summary field
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[@class='cell-container' and contains(text(), 'Test Automation')]
+  - id: phone-engagement-inactive-user-state
+    description: Inactive user state
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[@class="phone-icon"]/following::div[@role="presentation" and contains(text(), "Inactive")])[1]
+  - id: cati-engagement-history
+    description: CATI log in engagement history result table
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class="engagement-history-container"] div[class="cati-icon"]
+  - id: follow-up-recontact
+    description: Follow up recontact information in engagement log
+    locators:
+      - device: WEB
+        type: CSS
+        value: p[class="follow-up-recontact"]
+  - id: deceased-status-text
+    description: Deceased status text
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//*[@class="text-content" and (contains(text(), "is deceased"))])
+  - id: collapse-tab
+    description: Collapse tab with more information
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[data-accordion-component="AccordionItemButton"]
+  - id: paired-site-value
+    description: Paired site value on participant profile
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[text()="{text}"]
+  - id: engagement-summary-input
+    description: Engagement summary input
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='Summary'] textarea
+actions:
+  - id: complete-step-verify-participant-identity
+    description: Complete step verify participant identity by checking checkboxes and click button verify
+    actionElements:
+      - element: *dob-checkbox
+        condition: DISPLAYED
+        timeout: 10000
+        inputType: click
+      - element: *name-checkbox
+        condition: DISPLAYED
+        timeout: 1000
+        inputType: click
+      - element: *phone-checkbox
+        condition: DISPLAYED
+        timeout: 1000
+        inputType: click
+      - element: *home-address-checkbox
+        condition: DISPLAYED
+        timeout: 1000
+        inputType: click
+      - element: *mobile-phone-checkbox
+        condition: DISPLAYED
+        timeout: 1000
+        inputType: click
+      - element: *email-address-checkbox
+        condition: DISPLAYED
+        timeout: 1000
+        inputType: click
+      - element: *verify-button
+        condition: ENABLED
+        inputType: click
+  - id: save-address
+    description: Save changes address
+    actionElements:
+      - element: *save-changes-button
+        inputType: click
+      - element: *suggest-address
+        condition: DISPLAYED
+        timeout: 2000
+        inputType: click
+      - element: *save-changes-button
+        condition: DISPLAYED
+        timeout: 2000
+        inputType: click
+  - id: save-engagement-log
+    description: Wait and save engagement log
+    actionElements:
+      - element: *engagement-history-tab
+        condition: NOT_ENABLED
+        timeout: 5000
+      - element: *engagement-save-button
+        inputType: click
+      - element: *engagement-save-button-disabled
+        condition: NOT_DISPLAYED
+      - element: *engagement-save-button
+        condition: DISPLAYED
+        timeout: 2000
+        inputType: click
+  - id: wait-for-2-minutes
+    description: Wait For 2 Minutes delay
+    actionElements:
+      - element: *add-new-engagement-button
+        condition: NOT_DISPLAYED
+        timeout: 120000
+        inputType: click
+  - id: set-up-time
+    description: set up time in engagement history
+    actionElements:
+      - element: *recontact-date-input
+        inputType: click
+      - element: *recontact-date-option-tomorrow
+        inputType: click
+      - element: *recontact-time-input
+        inputType: click
+      - element: *recontact-time-option-morning
+        inputType: click
+  - id: edit-engagement
+    description: Edit engagement
+    actionElements:
+      - element: *engagement-expand-button
+        condition: NOT_DISPLAYED
+        timeout: 3000
+      - element: *engagement-expand-button
+        inputType: click
+      - element: *engagement-edit-button
+        inputType: click
+  - id: input-dob
+    description: Input data date of birth
+    actionElements:
+      - element: *dob-input
+        condition: DISPLAYED
+        inputType: text
+      - element: *save-changes-button
+        condition: ENABLED
+        inputType: click
+  - id: input-secondary-contact
+    description: Input secondary contact
+    actionElements:
+      - element: *secondary-contact-firstname-input
+        condition: DISPLAYED
+        infoType: firstName
+        inputType: text
+      - element: *secondary-contact-lastname-input
+        infoType: lastName
+        inputType: text
+      - element: *secondary-contact-email-input
+        infoType: email
+        inputType: text
+      - element: *secondary-contact-phone-input
+        infoType: phoneNumber
+        inputType: text

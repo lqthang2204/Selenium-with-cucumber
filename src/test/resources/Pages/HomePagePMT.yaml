@@ -255,6 +255,6 @@ actions:
     description: Wait for a 10 second timeout
     actionElements:
       - element: *search-icon
-        condition: NOT_DISPLAYED
+        condition: DISPLAYED
         timeout: 10000
         inputType: click
