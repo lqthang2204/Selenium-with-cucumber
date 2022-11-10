@@ -1,0 +1,163 @@
+{
+  "info": {
+    "_postman_id": "69a88d6d-7186-4780-9b93-c2868c544564",
+    "name": "CreateParticipant",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "12276119"
+  },
+  "item": [
+    {
+      "name": "get token",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "json_response = JSON.parse(responseBody);\r",
+              "\r",
+              "token = json_response.access_token;\r",
+              "pm.globals.set(\"token\", token);\r",
+              "\r",
+              "// idToken = json_response.id_token;\r",
+              "// pm.globals.set(\"idToken\", idToken);\r",
+              "\r",
+              "// refreshToken = json_response.refresh_token;\r",
+              "// pm.globals.set(\"refreshToken\", refreshToken);\r",
+              "\r",
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "})\r",
+              "\r",
+              "// pm.test(\"Body contains variable\", function () {\r",
+              "//     pm.expect(json_response.expires_in).to.equal(300);\r",
+              "// });\r",
+              "\r",
+              "// tests[\"Access Token is not blank\"] = json_response.access_token !== \"\";\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Api-Token",
+            "value": "8c32b5e812840810d6449c99dcdc9bf7",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "grant_type",
+              "value": "{{grant_type}}",
+              "type": "text"
+            },
+            {
+              "key": "client_id",
+              "value": "{{client_id}}",
+              "type": "text"
+            },
+            {
+              "key": "client_secret",
+              "value": "{{client_secret}}",
+              "type": "text"
+            },
+            {
+              "key": "scope",
+              "value": "{{scope}}",
+              "type": "text"
+            },
+            {
+              "key": "username",
+              "value": "{{username}}",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{keycloakUrl}}auth/realms/{{enterpriseRealm}}/protocol/openid-connect/token",
+          "host": [
+            "{{keycloakUrl}}auth"
+          ],
+          "path": [
+            "realms",
+            "{{enterpriseRealm}}",
+            "protocol",
+            "openid-connect",
+            "token"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Participant",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(201);\r",
+              "})\r",
+              "// pm.test(\"verify email\", function(){\r",
+              "//     const response = pm.response.json();\r",
+              "//     pm.expect(response.)\r",
+              "// });"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          },
+          {
+            "key": "Cookie",
+            "value": "timezone=Asia/Bangkok; AUTH_SESSION_ID=57571ab3-d5ef-4915-8fa2-b98248b3e8c5.keycloak-daily-1; AUTH_SESSION_ID_LEGACY=57571ab3-d5ef-4915-8fa2-b98248b3e8c5.keycloak-daily-1; _gid=GA1.2.532495918.1656402623; _gat_UA-83540536-2=1; _ga=GA1.1.291404144.1656402622; _ga_CNMKX1CCF4=GS1.1.1656402622.1.1.1656402663.19",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"language\": \"en\",\r\n  \"phone\": null,\r\n  \"email\": \"{{email}}\",\r\n  \"password\": \"Password123!\",\r\n  \"programDistributionCode\": \"PMI\",\r\n  \"timezone\": \"UTC\",\r\n  \"secretQuestions\": [\r\n    {\r\n      \"id\": null,\r\n      \"displayOrder\": 0,\r\n      \"answer\": \"3mbbsskh6n\",\r\n      \"questionId\": 31,\r\n      \"userId\": null\r\n\r\n    },\r\n        {\r\n      \"id\": null,\r\n      \"displayOrder\": 1,\r\n      \"answer\": \"3mbaxvdh6n\",\r\n      \"questionId\": 32,\r\n      \"userId\": null\r\n\r\n    },\r\n        {\r\n      \"id\": null,\r\n      \"displayOrder\": 2,\r\n      \"answer\": \"3mbtgvdkhkh\",\r\n      \"questionId\": 33,\r\n      \"userId\": null\r\n\r\n    }\r\n  ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{keycloakUrl}}auth/realms/{{enterpriseRealm}}/user",
+          "host": [
+            "{{keycloakUrl}}auth"
+          ],
+          "path": [
+            "realms",
+            "{{enterpriseRealm}}",
+            "user"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

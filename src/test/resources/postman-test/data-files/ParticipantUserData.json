@@ -1,0 +1,12 @@
+[ {
+  "enterpriseRealm" : "dho_participant_realm",
+  "hostUrl" : "https://pmt-dho.qak8s.vibrenthealth.com/",
+  "keycloakUrl" : "https://keycloak-daily.vibrenthealth.com/",
+  "client_secret" : "2bdbdc0a-c2e5-4884-87b4-e39c47f4ff90",
+  "grant_type" : "client_credentials",
+  "client_id" : "automation",
+  "scope" : "openid",
+  "username" : "automation",
+  "email" : "user.email"
+
+} ]

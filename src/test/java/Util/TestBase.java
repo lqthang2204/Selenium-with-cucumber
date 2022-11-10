@@ -14,7 +14,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -46,20 +45,20 @@ public class TestBase {
     public WebDriver getDriver() {
         switch (Configuration.WEB_BROWSER) {
             case "CHROME":
-                WebDriverManager.chromedriver().clearDriverCache();
-                WebDriverManager.chromedriver().setup();
+//                WebDriverManager.chromedriver().clearDriverCache();
+//                WebDriverManager.chromedriver().setup();
                 driver = new  ChromeDriver();
                 break;
             case "FIREFOX":
-                WebDriverManager.firefoxdriver().setup();
+//                WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver();
                 break;
-            case "OPERA":
-                WebDriverManager.operadriver().setup();
-                driver = new OperaDriver();
-                break;
+//            case "OPERA":
+////                WebDriverManager.operadriver().setup();
+//                driver = new
+//                break;
             case "EDGE":
-                WebDriverManager.edgedriver().setup();
+//                WebDriverManager.edgedriver().setup();
                 driver = new EdgeDriver();
                 break;
             default:
@@ -121,6 +120,18 @@ public class TestBase {
 
             }
         } catch (Exception e) {
+            e.printStackTrace();
+            Assert.assertTrue(false);
+        }
+
+    }
+    public void switchTab(WebDriver driver, int index){
+        try {
+            ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+            System.out.println( "tab===="+ tabs.size());
+            driver.switchTo().window(tabs.get(index));
+        }catch (Exception e)
+        {
             e.printStackTrace();
             Assert.assertTrue(false);
         }
@@ -385,9 +396,10 @@ public class TestBase {
         ActionsTest actions = getActions(page, action);
         WebDriverWait waitAction ;
         boolean flag= false;
+        boolean temp= false;
         List<ActionElements> list = actions.getList();
             String value="";
-            for (int i = 0; i < list.size(); i++) {
+            for (int i = 0; i <list.size(); i++) {
 
                 try {
                  if(dataTable!=null){
@@ -408,12 +420,15 @@ public class TestBase {
                 if(list.get(i).getCondition()!=null){
                     waitAction = getWaitAction(driver,list.get(i).getTimeout());
                     if(waitAction!=null){
-                        flag = true;
+                        temp = true;
                     }else{
                         waitAction = this.wait;
                     }
                     switch (list.get(i).getCondition()){
                         case "DISPLAYED":
+                            if(temp){
+                                flag = temp;
+                            }
                             flag = waitAction.until(new ExpectedCondition<Boolean>() {
                                 public Boolean apply(WebDriver driver) {
                                     return driver.findElement(by).isDisplayed();
@@ -425,9 +440,41 @@ public class TestBase {
 
                             break;
                         case "NOT_DISPLAYED":
+                            if(temp){
+                                flag = temp;
+                            }
+//                            flag = waitAction.until(ExpectedConditions.invisibilityOfElementLocated(by));
                             flag = waitAction.until(new ExpectedCondition<Boolean>() {
                                 public Boolean apply(WebDriver driver) {
                                     return !driver.findElement(by).isDisplayed();
+                                }
+                            });
+                            if(list.get(i).getInputType()!=null){
+                                runType(driver,by, list.get(i).getInputType(),value);
+                            }
+                            break;
+                        case "ENABLED":
+                            if(temp){
+                                flag = temp;
+                            }
+//                            flag = waitAction.until(ExpectedConditions.invisibilityOfElementLocated(by));
+                            flag = waitAction.until(new ExpectedCondition<Boolean>() {
+                                public Boolean apply(WebDriver driver) {
+                                    return driver.findElement(by).isEnabled();
+                                }
+                            });
+                            if(list.get(i).getInputType()!=null){
+                                runType(driver,by, list.get(i).getInputType(),value);
+                            }
+                            break;
+                        case "NOT_ENABLED":
+                            if(temp){
+                                flag = temp;
+                            }
+//                            flag = waitAction.until(ExpectedConditions.invisibilityOfElementLocated(by));
+                            flag = waitAction.until(new ExpectedCondition<Boolean>() {
+                                public Boolean apply(WebDriver driver) {
+                                    return !driver.findElement(by).isEnabled();
                                 }
                             });
                             if(list.get(i).getInputType()!=null){
