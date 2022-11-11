@@ -1,0 +1,516 @@
+elements:
+  - &upload-prospect-button
+    id: upload-prospect-button
+    description: Upload prospect button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='btn-upload-file']
+  - &add-prospect-button
+    id: add-prospect-button
+    description: Add prospect button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='btn-add-prospect']
+  - &filter-button
+    id: filter-button
+    description: Filter button
+    locators:
+      - device: WEB
+        type: ID
+        value: dropdown-filter-options
+  - &search-input
+    id: search-input
+    description: Search input
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[class*='search-input']
+  - &search-button
+    id: search-button
+    description: Search button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='search-btn']
+  - &upload-input
+    id: upload-input
+    description: Upload input
+    locators:
+      - device: WEB
+        type: ID
+        value: file-id
+  - &validation-complete-title
+    id: validation-complete-title
+    description: Validation complete title
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class='complete-title']
+    values:
+      - lang: EN
+        value: Validation Complete!
+  - &submit-list-button
+    id: submit-list-button
+    description: Submit list button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='submit-list-btn']
+  - &name-of-first-record
+    id: name-of-first-record
+    description: Name of first record
+    locators:
+      - device: WEB
+        type: CSS
+        value: a[class='prospect-name'] div
+  - &email-of-first-record
+    id: email-of-first-record
+    description: Email of first record
+    locators:
+      - device: WEB
+        type: CSS
+        value: td[tabindex='3'] div
+  - &phone-of-first-record
+    id: phone-of-first-record
+    description: Phone of first record
+    locators:
+      - device: WEB
+        type: CSS
+        value: td[tabindex='4'] div[class='cell-container'] a
+  - id: language-of-first-record
+    description: Language of first record
+    locators:
+      - device: WEB
+        type: CSS
+        value: td[tabindex='5'] div[class='cell-container']
+  - id: status-of-first-record
+    description: Status of first record
+    locators:
+      - device: WEB
+        type: CSS
+        value: td[tabindex='6'] div[class='cell-container'] div
+  - id: upload-date-of-first-record
+    description: Upload date of first record
+    locators:
+      - device: WEB
+        type: CSS
+        value: td[tabindex='7'] div[class='cell-container']
+  - &expand-button
+    id: expand-button
+    description: Expand button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@class='down']
+  - &archive-button
+    id: archive-button
+    description: Archive button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='delete-btn']
+  - &archive-profile-button
+    id: archive-profile-button
+    description: Archive profile button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='button-warning__restore']
+  - &empty-table
+    id: empty-table
+    description: Empty table
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class='no-data']
+  - &filter-button
+    id: filter-button
+    description: Filter button
+    locators:
+      - device: WEB
+        type: ID
+        value: dropdown-filter-options
+  - &toggle-button
+    id: toggle-button
+    description: Toggle button
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class='ballslider']
+  - &apply-button
+    id: apply-button
+    description: Apply button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class='apply-btn']
+  - &prospect-name
+    id: prospect-name
+    description: Prospect name
+    locators:
+      - device: WEB
+        type: CSS
+        value: a[class='prospect-name']
+  - id: first-name
+    description: First name
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='First Name:')]//p
+  - id: middle-name
+    description: Middle name
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Middle Name:')]//p
+  - id: last-name
+    description: Last name
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Last Name:')]//p
+  - id: external-id
+    description: External id
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='External ID:')]//p
+  - id: email-prospect
+    description: Email prospect
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Email:')]//p
+  - id: secondary-email
+    description: Secondary email
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Secondary email:')]//p
+  - id: mobile-phone
+    description: Mobile phone
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Mobile Phone:')]//a
+  - id: home-phone
+    description: Home phone
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Home Phone:')]/p
+  - id: work-phone
+    description: Work phone
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Work Phone:')]/p
+  - id: cohort-prospect
+    description: Cohort prospect
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Cohort:')]//p
+  - id: list-name
+    description: List name
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='List Name:')]//p
+  - id: country-prospect
+    description: Country prospect
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Country:')]//p
+  - id: communication-preference
+    description: Communication preference
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Communication Preference:')]//p
+  - id: dob-prospect
+    description: Date of birth prospect
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='DOB:')]//p
+  - id: gender-prospect
+    description: Gender prospect
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Gender:')]//p
+  - id: race-prospect
+    description: Race prospect
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Race:')]//p
+  - id: language-prospect
+    description: Language prospect
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Language:')]//p
+  - id: event-id
+    description: Event id
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Event ID:')]//p
+  - id: event-name
+    description: Event name
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Event Name:')]//p
+  - id: source-1
+    description: Source 1
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Source 1:')]//p
+  - id: source-2
+    description: Source 2
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Source 2:')]//p
+  - id: source-3
+    description: Source 3
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Source 3:')]//p
+  - id: source-4
+    description: Source 4
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Source 4:')]//p
+  - id: source-5
+    description: Source 5
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Source 5:')]//p
+  - id: source-6
+    description: Source 6
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Source 6:')]//p
+  - id: source-7
+    description: Source 7
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Source 7:')]//p
+  - id: source-8
+    description: Source 8
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Source 8:')]//p
+  - id: source-9
+    description: Source 9
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Source 9:')]//p
+  - id: source-10
+    description: Source 10
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Source 10:')]//p
+  - id: source-11
+    description: Source 11
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Source 11:')]//p
+  - id: source-12
+    description: Source 12
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //div[(text()='Source 12:')]//p
+  - id: no-data-message
+    description: Message when search prospect not exist
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='no-data'] h3
+    values:
+      - lang: EN
+        value: No prospect profiles available.
+  - id: view-archived-toggle
+    description: Toggle view archived
+    locators:
+      - device: WEB
+        type: CSS
+        value: div[class*='switch']
+  - id: restore-button
+    description: Restore button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='delete-btn']
+  - id: restore-profile-button
+    description: Restore profile button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class*='button-warning__archive']
+  - id: twenty-records-value
+    description: Show twenty records on page one
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[contains(@class,'pagination')]//*[contains(.,'Showing 1-20')]
+  - id: prospect-title
+    description: Prospect title
+    locators:
+      - device: WEB
+        type: CSS
+        value: span[class='prospects-title']
+  - id: filter-status-value
+    description: Filter status value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[(text()='Prospect, Registered Prospect')]
+    values:
+      - lang: EN
+        value: Prospect, Registered Prospect
+  - id: filter-list-name-value
+    description: Filter list name value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()='List Name']/following::div[text()='Select']
+  - id: option-registered-prospect-status
+    description: Option registered prospect status
+    locators:
+      - device: WEB
+        type: XPATH
+        value:  //label[contains(.,'Registered Prospect')]
+  - id: option-prospect-status
+    description: Option prospect status
+    locators:
+      - device: WEB
+        type: XPATH
+        value:  //label[contains(.,'Prospect')]
+  - id: option-participant-status
+    description: Option participant status
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //label[contains(.,'Participant')]
+  - id: option-automation-awardee
+    description: Option automation awardee
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[text()='Awardee']/following::label[contains(.,'Automation Awardee')]
+  - id: option-automation-organization
+    description: Option automation organization
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[text()='Organization']/following::label[contains(.,'Automation Org')]
+  - id: option-site-one
+    description: Option site one
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[text()='Site']/following::label[contains(.,'Automation Site 1')]
+  - id: filter-organization-value
+    description: Filter organization value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[text()='Organization']/following-sibling::div[1]
+  - id: filter-site-value
+    description: Filter site value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[text()='Site']/following-sibling::div[1]
+  - id: toogle-default-value
+    description: Toogle default value
+    locators:
+      - device: WEB
+        type: CSS
+        value: .inactive-text
+  - id: filter-awardee-value
+    description: Filter awardee value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[text()='Awardee']/following-sibling::div[1]
+  - id: filter-cohort-group-value
+    description: Filter cohort group value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[text()='Cohort Group']/following-sibling::div
+  - id: clear-all-button
+    description: Clear all button
+    locators:
+      - device: WEB
+        type: CSS
+        value: button[class='clear-btn']
+  - id: prospect-archived-text
+    description: Pospect archived text
+    locators:
+      - device: WEB
+        type: CSS
+        value: .prospect-archived-text
+  - id: filter-calendar-default
+    description: Calendar default value
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[text()='Date Range']/following::button[contains(@class,' calendar-button')]
+  - id: today-option
+    description: Today option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //a[text()='Today']
+  - id: yesterday-option
+    description: Date Range Yesterday option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //a[text()='Yesterday']
+  - id: last-7-days-option
+    description: Date Range Last 7 days option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //a[text()='Last 7 Days']
+  - id: last-30-days-option
+    description: Date Range Last 30 days option
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //a[text()='Last 30 Days']
+actions:
+  - id: search-email
+    description: Search existing email
+    actionElements:
+      - element: *search-input
+        infoType: email
+        inputType: text
+      - element: *search-button
+        inputType: click
+      - element: *name-of-first-record
+        inputType: click
+
+

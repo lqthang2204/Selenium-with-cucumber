@@ -434,19 +434,6 @@ elements:
       - device: WEB
         type: CSS
         value: div[role="presentation"] a[href]
-  - &spinner
-    id: spinner
-    description: Spinner icon while loading
-    locators:
-      - device: WEB
-        type: CSS
-        value: div[class*='spinner-container']
-  - id: success-alert
-    description: Success alert in pmt application
-    locators:
-      - device: WEB
-        type: CSS
-        value: .alert.animated.fade.success.in
 actions:
   - id: create-engagement-list
     description: Click button create list on creating engagement page

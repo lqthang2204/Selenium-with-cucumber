@@ -110,18 +110,6 @@ elements:
       - device: WEB
         type: XPATH
         value:  //div[text()="Select an account status"]/following-sibling::input[@disabled]
-  - id: spinner
-    description: Spinner icon while loading
-    locators:
-      - device: WEB
-        type: CSS
-        value: div[class*='spinner-container']
-  - id: success-alert
-    description: Success alert in pmt application
-    locators:
-      - device: WEB
-        type: CSS
-        value: .alert.animated.fade.success.in
 actions:
   - id: click-first-name-if-displayed
     description: Click first name in user table if there is data

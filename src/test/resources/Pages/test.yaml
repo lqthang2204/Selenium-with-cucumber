@@ -1067,13 +1067,6 @@ elements:
       - device: WEB
         type: CSS
         value: div[class*="activity-during-engagement-field"] div[class*="multi-select-field"]
-  - &spinner
-    id: spinner
-    description: Spinner icon while loading
-    locators:
-      - device: WEB
-        type: CSS
-        value: div[class*='spinner-container']
   - &prospect-profile-tab
     id: prospect-profile-tab
     description: Prospect profile tab on profile detail

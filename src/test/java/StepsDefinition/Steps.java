@@ -22,7 +22,7 @@ public class Steps {
 //    public static  WebDriver driver;
     TestBase testBase;
     ExecuteYaml execute;
-    Map<String, Page> map;
+//    Map<String, Page> map;
     Page page;
     Map<String, String> mapSaveText;
     public static String titlePage;
@@ -30,9 +30,6 @@ public class Steps {
     Scenario scenario;
     List<UserDTO> listUserDTO;
     UserDTO userDTO;
-    public Map<String, Page> getMap() {
-        return map;
-    }
 
     public Steps() {
     }
@@ -41,7 +38,7 @@ public class Steps {
     public void setUp(Scenario scenario) {
         testBase = new TestBase();
         execute = new ExecuteYaml();
-        map = new HashMap<>();
+//        map = new HashMap<>();
         page = new Page();
         userDTO = new UserDTO();
         mapSaveText = new HashMap<>();
@@ -49,6 +46,7 @@ public class Steps {
         execute.findFile(new File(System.getProperty("user.dir") + "/src/test/resources/Pages"), this.mapFileYaml);
         this.scenario = scenario;
         listUserDTO = new LinkedList<>();
+//        testBase.readYamlFile("CommonPage", this.mapFileYaml);
 
 
     }
@@ -62,6 +60,7 @@ public class Steps {
         }
 
 
+
     }
 
 
@@ -72,7 +71,7 @@ public class Steps {
 
     @Given("I change the page spec to {word}")
     public void updateYaml(String yaml) {
-        page = execute.updateYaml(yaml, map, this.mapFileYaml);
+       this.page = testBase.readYamlFile(yaml, this.mapFileYaml);
 
         this.titlePage = yaml;
     }

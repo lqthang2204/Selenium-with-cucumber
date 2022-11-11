@@ -190,13 +190,6 @@ elements:
       - device: WEB
         type: CSS
         value: button[class*='dropdown-toggle']
-  - &spinner
-    id: spinner
-    description: Spinner icon while loading
-    locators:
-      - device: WEB
-        type: CSS
-        value: div[class*='spinner-container']
 actions:
   - id: change-to-program-manager-role
     description: Change to program manager role
