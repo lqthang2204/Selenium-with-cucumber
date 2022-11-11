@@ -22,13 +22,13 @@ Feature: Login function
     And I navigate to refresh-page
     And I type "Admin" into element user-field
     And I type "Admin123" into element pass-field
-    And I save the text for element location-option-inpatient with key "location"
+    And I save text for element location-option-inpatient with key "location"
     And I click element location-option-inpatient
     And I click element login-button
     And I change the page spec to IndexPage
     And I wait for element welcome-user to be DISPLAYED
     And I verify the text for element welcome-user is "KEY.location"
-    And I save the text for element welcome-user with key "user"
+    And I save text for element welcome-user with key "user"
     And I wait for element log-out to be DISPLAYED
     And I click element log-out
     And I change the page spec to LoginPage
@@ -45,7 +45,7 @@ Feature: Login function
     And I navigate to "https://www.google.com.vn/"
     And I change the page spec to test
     And I type "Đăng nhập" into element field-search
-    And I save the text for element field-search with key "name"
+    And I save text for element field-search with key "name"
     And I clear text from element field-search
     And I click element ui-text-equal with text "Sign in"
     And I wait for element ui-text-equal with text "KEY.name" to be DISPLAYED
@@ -139,6 +139,81 @@ Feature: Login function
     And I change the page spec to ProfilePage
     And I wait for element start-cati-button to be ENABLED
 
+  @mc-create-case-Management
+  Scenario: Create case management
+    Given I navigate to "https://pmt-dho.qak8s.vibrenthealth.com/"
+    And I change the page spec to AdminLoginPage
+    And I perform fill-admin-sign-in-form action with override values
+#          |username-input | quangthangle1402@gmail.com |
+#      |password-input | Password123$              |
+      |username-input | mcadmin@vibrenthealth.com |
+      |password-input | Password123$              |
+    And I change the page spec to HomePagePMT
+    And I perform change-to-program-manager-role action
+    And I wait for element communications-icon to be ENABLED
+    And I click element communications-icon
+    And I wait for element spinner to be NOT_DISPLAYED
+    And I change the page spec to SegmentationPage
+    And I wait for element create-segmentation-button to be ENABLED
+    And I click element create-segmentation-button
+    And I change the page spec to CreateSegmentationParticipantPage
+    And I type "UNIQUE.TA-Segmentation 1-on-1" into element segmentation-name-input
+    And I save text for element segmentation-name-input with key "segmentation.name"
+    And I type "Create a 1-on-1 participant segment for engagement" into element description-input
+    And I perform create-1-on-1-participants-segmentation action
+    And I change the page spec to CreateSegmentationPage
+    And I scroll to element save-button
+    And I wait for element save-button to be ENABLED
+    And I click element save-button
+    And I change the page spec to CreateSegmentationResultPage
+    And I wait for element segmentation-name to be DISPLAYED
+    # END Create 1-on-1 participants segmentation
+    # START Create new engagement list
+    And I change the page spec to CommunicationsPage
+    And I click element case-management-tab
+    And I change the page spec to CaseManagementPage
+    And I wait for element create-engagement-button to be ENABLED
+    And I click element create-engagement-button
+    And I wait for element spinner to be NOT_DISPLAYED
+    And I wait for element next-button to be NOT_ENABLED
+    And I wait for element save-as-draft to be NOT_ENABLED
+    And I click element engagement-name-input
+    And I click element engagement-goal-drop-down
+    And I wait for element name-required-error to be DISPLAYED
+    And I type "UNIQUE.TA-Active engagement list" into element engagement-name-input
+    And I save text for element engagement-name-input with key "engagement.list.name"
+    And I click element engagement-goal-drop-down
+    And I click element first-engagement-goal
+    And I change the page spec to CommonPage
+    And I click element oss-edit-button
+    And I click element oss-title with text "Organization"
+    And I click element oss-view-all-button with text "Organization"
+    And I click element oss-radio-option with text "Automation Org"
+    And I click element oss-title with text "Assignees"
+    And I click element oss-view-all-button with text "Assignees"
+    And I click element oss-radio-option with text "Select All"
+    And I click element oss-save-button
+    And I change the page spec to CaseManagementPage
+    And I wait for element next-button to be ENABLED
+    And I click element next-button
+    And I wait for element spinner to be NOT_DISPLAYED
+#    And I verify the text for element step-title
+    And I click element first-segmentation
+    And I click element next-button
+    And I wait for element spinner to be NOT_DISPLAYED
+    And I wait for element review-step-title to be DISPLAYED
+    And I wait for element automation-awardee-level-title to be DISPLAYED
+    And I wait for element engagement-goal-info to be DISPLAYED
+    And I wait for element refresh-count to be DISPLAYED
+    And I scroll to element create-list
+    And I wait for element create-list to be ENABLED
+    And I click element create-list
+    And I wait for element success-alert to be DISPLAYED
+    And I click element search-engagement
+    And I type "KEY.engagement.list.name" into element search-engagement
+    And I wait for element loading-indicator to be NOT_DISPLAYED
+    And I verify the text for element engagement-on-list is "KEY.engagement.list.name"
+    And I verify the text for element engagement-status-on-list is "Active"
 
 
 

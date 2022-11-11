@@ -215,9 +215,12 @@ public class TestBase {
             if (map.containsKey(content)) {
                 text = map.get(content);
             }
-            if(content.contains("USER.")){
+           else if(content.contains("USER.")){
                 String suffix = content.substring(5);
                 text = getProfileUser(suffix, userDTO);
+            }
+          else if(content.contains("UNIQUE.")){
+                text= getReplaceValue(content, userDTO, map);
             }
             Locators locators = getValueElement(page, element);
 //            WebDriverWait wait = getWait(driver);
