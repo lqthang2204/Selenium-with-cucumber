@@ -35,6 +35,8 @@ public class TestBase {
     FakerData fake;
     public WebDriverWait wait;
     public Actions actions;
+    public Map<String, Page> map = new HashMap<>();
+    ExecuteYaml yamlExecute = new ExecuteYaml();
 
     public TestBase() {
         Configuration.ReadConfig();
@@ -574,9 +576,14 @@ public class TestBase {
                     return page.getElements().get(i).getLocator();
                 }
             }
-
         System.out.println("Not Found element "+ id+  " in file "+ Steps.titlePage+".yaml");
-        return null;
+        System.out.println("get locator in common page");
+         page = getPage();
+        return getValueElement(page, id);
+    }
+    public Page getPage(){
+        Page page = this.map.get("CommonPage");
+        return page;
     }
 
     public ActionsTest getActions(Page page, String action_id) {
@@ -615,7 +622,13 @@ public class TestBase {
     }
     public String getValueElementToWithText(Locators locator, String element, Map<String, String> map){
         String elementText=null;
-        String value=locator.getValue();
+        String value = null;
+        try {
+            value=locator.getValue();
+        }catch (Exception e){
+
+        }
+
         if(element.contains("with text")){
             String split[] =  element.split("with text");
             elementText = split[1].trim().replace("\"","");
@@ -806,6 +819,10 @@ public class TestBase {
             commandLineAggrument.add(1,"/c");
         }
         ExecuteWithOutToFile("", commandLineAggrument.toArray(new String[0]));
+    }
+    public Page readYamlFile(String yaml, Map<String, String> mapFileYaml){
+        Page page = yamlExecute.updateYaml(yaml,this.map, mapFileYaml);
+        return page;
     }
     public void closeBrowser(){
         if(driver!=null){

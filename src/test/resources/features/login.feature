@@ -184,7 +184,6 @@ Feature: Login function
     And I save text for element engagement-name-input with key "engagement.list.name"
     And I click element engagement-goal-drop-down
     And I click element first-engagement-goal
-    And I change the page spec to CommonPage
     And I click element oss-edit-button
     And I click element oss-title with text "Organization"
     And I click element oss-view-all-button with text "Organization"
@@ -209,11 +208,13 @@ Feature: Login function
     And I wait for element create-list to be ENABLED
     And I click element create-list
     And I wait for element success-alert to be DISPLAYED
+    And I wait for element success-alert to be NOT_DISPLAYED
     And I click element search-engagement
     And I type "KEY.engagement.list.name" into element search-engagement
     And I wait for element loading-indicator to be NOT_DISPLAYED
     And I verify the text for element engagement-on-list is "KEY.engagement.list.name"
     And I verify the text for element engagement-status-on-list is "Active"
+
 
 
 
