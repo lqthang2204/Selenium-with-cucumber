@@ -48,3 +48,9 @@ elements:
       - device: WEB
         type: XPATH
         value: //label[contains(text(),'Organizational Structure')]
+  - id: success-alert
+    description: Success alert in pmt application
+    locators:
+      - device: WEB
+        type: CSS
+        value: .alert.animated.fade.success.in

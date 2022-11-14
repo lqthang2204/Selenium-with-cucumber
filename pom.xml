@@ -7,11 +7,13 @@
     <groupId>org.example</groupId>
     <artifactId>FrameworkAuto</artifactId>
     <version>1.0-SNAPSHOT</version>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
                 <configuration>
                     <source>17</source>
                     <target>17</target>
@@ -29,7 +31,6 @@
             </plugin>
         </plugins>
     </build>
-
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
@@ -38,10 +39,11 @@
         <selenium.version>4.6.0</selenium.version>
         <cucumber.version>6.11.0</cucumber.version>
         <junit.version>4.13.2</junit.version>
-<!--        <webdrivermanager.version>5.1.0</webdrivermanager.version>-->
-<!--        <maven.compiler.plugin.version>3.7.0</maven.compiler.plugin.version>-->
+        <!--        <webdrivermanager.version>5.1.0</webdrivermanager.version>-->
+        <!--                <maven.compiler.plugin.version>3.7.0</maven.compiler.plugin.version>-->
         <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
     </properties>
+
     <dependencies>
         <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
         <dependency>

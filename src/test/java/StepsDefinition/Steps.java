@@ -128,12 +128,14 @@ public class Steps {
 
     @Given("I click keyboard {word} button on element {word}")
     public void i_click_keyboard_button_on_element(String Key, String element) {
-        testBase.keyBoard(this.page, element, Key);
+//        testBase.keyBoard(this.page, element, Key);
+        testBase.ActionType(this.page, element, "keyboard."+Key, this.mapSaveText, this.userDTO);
     }
 
     @Given("I {word} text from element {word}")
     public void clearText(String action, String element) {
         testBase.mouseAction(this.page, action,element,  this.mapSaveText);
+
     }
 
     @Given("I scroll to element {word}")

@@ -63,4 +63,7 @@ Here Login.feature file is selected in point 4.
 
 You can also use `Ctrl+Shift+f` on Windows and `Cmd+Shift+f` on Mac to search for a feature name, test name or a certain test tag.
 
+Config to run
+
+https://drive.google.com/drive/u/0/folders/1sbxz5E3KQtjgaZdzSr1yBthj9280dEpK
 

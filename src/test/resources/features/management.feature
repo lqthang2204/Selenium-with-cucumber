@@ -1,4 +1,3 @@
-
 @feature-mc-21946 @notification @casereminder @smoke @aou @qa-regression
 Feature: Case Management Reminder Notification
   As a user
@@ -42,7 +41,7 @@ Feature: Case Management Reminder Notification
         And I change the page spec to ProspectManagementPage
         And I wait for element success-alert to be DISPLAYED
             # Create PMT user in automation site 3 for assignee in case list
-        And I change the page spec to HomePage
+        And I change the page spec to HomePagePMT
         And I wait for element user-admin-icon to be ENABLED
         And I click element user-admin-icon
         And I become a random user

@@ -74,7 +74,7 @@ public class TestBase {
 
     public static void OpenBrowser(TestBase testBase, String URl) {
         try {
-            if (driver == null) {
+            if (driver == null ) {
                 driver = testBase.getDriver();
                 System.out.println("Duration.ofMillis(Configuration.PAGE_LOAD_TIME)=="+ Duration.ofMillis(Configuration.PAGE_LOAD_TIME));
                 driver.manage().timeouts().pageLoadTimeout(Duration.ofMillis(Configuration.PAGE_LOAD_TIME));
@@ -184,21 +184,22 @@ public class TestBase {
             if (map.containsKey(content)) {
                 content = map.get(content);
             }
+            if(content.toLowerCase().contains("user.")){
+                content = content.substring(5);
+                content = getProfileUser(content, userDTO);
+            }
             if (status) {
-                String suffix = content.substring(5);
-                String finalResult = getProfileUser(suffix, userDTO);
-
+            String result = content;
                 new WebDriverWait(driver, Duration.ofMillis(Configuration.TIME_OUT)).until(new ExpectedCondition<Boolean>() {
                     public Boolean apply(WebDriver driver) {
-                        return driver.findElement(by).getText().contains(finalResult);
+                        return driver.findElement(by).getText().contains(result);
                     }
                 });
             } else {
-                String suffix = content.substring(5);
-                String finalResult = getProfileUser(suffix, userDTO);
+                String result = content;
                 new WebDriverWait(driver, Duration.ofMillis(Configuration.TIME_OUT)).until(new ExpectedCondition<Boolean>() {
                     public Boolean apply(WebDriver driver) {
-                        return driver.findElement(by).getText().equals(finalResult);
+                        return driver.findElement(by).getText().equals(result);
                     }
                 });
             }
@@ -207,6 +208,7 @@ public class TestBase {
             System.out.println("Actual Text verify: " + driver.findElement(by).getText());
             System.out.println("Expect Text verify: " + content);
             Assert.assertTrue(false);
+            Assert.fail("Actual Text verify: " + driver.findElement(by).getText()+"\n + Expect Text verify: " + content);
         }
 
     }
@@ -214,6 +216,10 @@ public class TestBase {
     public void ActionType(Page page, String element, String content, Map<String, String> map, UserDTO userDTO) {
         try {
             String text = content;
+            Locators locators = getValueElement(page, element);
+//            WebDriverWait wait = getWait(driver);
+            By by = getBy(driver, locators.getType(), locators.getValue());
+            wait.until(ExpectedConditions.elementToBeClickable(by));
             if (map.containsKey(content)) {
                 text = map.get(content);
             }
@@ -224,12 +230,11 @@ public class TestBase {
           else if(content.contains("UNIQUE.")){
                 text= getReplaceValue(content, userDTO, map);
             }
-            Locators locators = getValueElement(page, element);
-//            WebDriverWait wait = getWait(driver);
-            By by = getBy(driver, locators.getType(), locators.getValue());
-            wait.until(ExpectedConditions.elementToBeClickable(by));
-//            driver.findElement(by).clear();
-            driver.findElement(by).sendKeys(text);
+//          else if(content.contains("keyboard."){
+//                text = Keys.getKeyFromUnicode()
+//
+//            }
+            driver.findElement(by).sendKeys(new CharSequence[]{text});
         } catch (Exception e) {
             e.printStackTrace();
             Assert.assertTrue(false);
@@ -663,7 +668,7 @@ public class TestBase {
                 String number = suffix.substring(7);
                 replaceValue= getRandomNumber(Integer.parseInt(number));
             }else{
-                replaceValue =  getRandomCharacter(value);
+                replaceValue =  getRandomCharacter(value.replace("UNIQUE.","").replace("number.",""));
             }
 
         }
@@ -827,6 +832,7 @@ public class TestBase {
     public void closeBrowser(){
         if(driver!=null){
             driver.quit();
+            driver=null;
         }
 
     }
