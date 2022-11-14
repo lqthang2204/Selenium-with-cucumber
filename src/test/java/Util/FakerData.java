@@ -7,7 +7,7 @@ public class FakerData {
 
     public UserDTO CreateUser(){
         Faker fake = new Faker();
-        UserDTO user = new UserDTO(fake.name().lastName(), fake.name().firstName(),fake.date().birthday()+"", fake.internet().emailAddress(), fake.phoneNumber()+"", fake.address().fullAddress());
+        UserDTO user = new UserDTO(fake.name().lastName(), fake.name().firstName(),fake.date().birthday()+"", fake.internet().emailAddress(), fake.phoneNumber().cellPhone()+"", fake.address().fullAddress());
         return user;
     }
 }

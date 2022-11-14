@@ -213,7 +213,7 @@ Feature: Login function
     And I type "KEY.engagement.list.name" into element search-engagement
     And I wait for element loading-indicator to be NOT_DISPLAYED
     And I verify the text for element engagement-on-list is "KEY.engagement.list.name"
-    And I verify the text for element engagement-status-on-list is "Active"
+    And I verify the text for element engagement-status-on-list is "dsds"
 
 
 
