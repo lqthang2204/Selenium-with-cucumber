@@ -64,7 +64,7 @@ public class TestBase {
                 driver = new EdgeDriver();
                 break;
             default:
-                System.out.println("Browser "+ Configuration.PAGE_LOAD_TIME + " is not suuport");
+                System.out.println("Browser "+ Configuration.WEB_BROWSER + " is not suuport");
                 Assert.assertTrue(false);
                 break;
         }

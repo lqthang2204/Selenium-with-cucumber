@@ -1,4 +1,6 @@
+@feature-mc-21946
 Feature: Login function
+
   @mc-login
   Scenario: Negative to web URL
 #    Given I navigate to "https://zingnews.vn/"
@@ -6,6 +8,7 @@ Feature: Login function
     And I change the page spec to test
     And I become a random user
     And I type "USER.email" into element field-search
+    And I clear text from element field-search
     And I type "lqthang" into element field-search
 #    And I click element button-search
     And I navigate to "https://demo.openmrs.org/openmrs/login.htm"
@@ -39,7 +42,7 @@ Feature: Login function
 #    And I run test.json with data.json data file with override values
 #      | search-input | USER.email |
 
-  @mc-test2
+  @mc-test123456
   Scenario: Negative to web URL
     Given I navigate to "https://zingnews.vn/"
     And I navigate to "https://www.google.com.vn/"
@@ -47,15 +50,15 @@ Feature: Login function
     And I type "Đăng nhập" into element field-search
     And I save text for element field-search with key "name"
     And I clear text from element field-search
-    And I click element ui-text-equal with text "Sign in"
+    And I click element ui-text-equal with text "Đăng nhập"
     And I wait for element ui-text-equal with text "KEY.name" to be DISPLAYED
     And I click element ui-text-equal with text "KEY.name"
-    And I wait for element ui-text-equal with text "Next" to be DISPLAYED
-      And I become a random user
-    And I run test.json with data.json data file
-    And I run test.json with data.json data file with override values
-      | test2 | KEY.name |
-    And I run postman collection with link "https://www.getpostman.com/collections/be1065f3f80e40af800f"
+    And I wait for element ui-text-equal with text "Tiếp theo" to be DISPLAYED
+#      And I become a random user
+#    And I run test.json with data.json data file
+#    And I run test.json with data.json data file with override values
+#      | test2 | KEY.name |
+#    And I run postman collection with link "https://www.getpostman.com/collections/be1065f3f80e40af800f"
 
   @mc-loginPMT
   Scenario: Logib PMT and changeRole
