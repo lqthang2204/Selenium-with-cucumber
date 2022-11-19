@@ -4,10 +4,13 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features ="src/test/resources/features", glue = {"StepsDefinition"},
-        plugin = {
-                "pretty",
-                "html:target/cucumber-report/cucumber-html-report.html"
-        },monochrome = true
+        plugin = {"json:target/cucumber.json", "pretty"},
+        monochrome = true
+
+        //run with comman line mvaven
+//        mvn clean verify  -Dcucumber.filter.tags=@mc-test2
+//        mvn clean verify  -Dcucumber.filter.tags="@"mc-test2 or @mc-login""
+//
 )
 public class TestRunner {
 

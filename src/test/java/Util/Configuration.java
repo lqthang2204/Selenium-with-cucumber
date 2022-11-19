@@ -16,20 +16,22 @@ public class Configuration {
 //    private static final SelenideConfig defaults = new SelenideConfig();
 
     public static void  ReadConfig(){
-        if(CheckParameter("WEB_BROWSER")){
-            Configuration.WEB_BROWSER = System.getenv("WEB_BROWSER");
-        }
-        Configuration.TIME_OUT = Long.parseLong(System.getProperty("timeout"));
-        Configuration.PAGE_LOAD_TIME = Integer.parseInt(System.getProperty("pageLoadTimeout"));
-        Configuration.DEFAULT_MAXIMUM = Boolean.parseBoolean(System.getProperty("startMaximized"));
+        CheckParameter("WEB_BROWSER");
+        Configuration.TIME_OUT = Long.parseLong(System.getProperty("timeout")==null ? "10000" : System.getProperty("timeout"));
+        Configuration.PAGE_LOAD_TIME = Integer.parseInt(System.getProperty("pageLoadTimeout")==null ? "10000" : System.getProperty("pageLoadTimeout"));
+        Configuration.DEFAULT_MAXIMUM = Boolean.parseBoolean(System.getProperty("startMaximized")==null ? "true" : System.getProperty("startMaximized"));
         Configuration.PATH_POSTMAN = getFilePath(System.getProperty("user.dir")+"/src/test/resources/postman-test");
 //        TIME_OUT = defaults.timeout();
     }
-    public static boolean CheckParameter(String para){
+    public static void CheckParameter(String para){
         if(System.getenv(para)!=null){
-            return true;
+            Configuration.WEB_BROWSER =   System.getenv("WEB_BROWSER");
+        }else
+        {
+            Configuration.WEB_BROWSER=  "CHROME";
         }
-        return false;
+
+
     }
     public static String getFilePath(String filePath){
         return filePath.replace("\\", File.separator).replace("/", File.separator);
