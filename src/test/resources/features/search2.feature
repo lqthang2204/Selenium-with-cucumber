@@ -1,4 +1,4 @@
-
+@regression
 Feature: Search function
   @mc-1
   Scenario: test Search function

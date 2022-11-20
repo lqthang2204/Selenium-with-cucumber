@@ -49,7 +49,7 @@ public class TestBase {
             case "CHROME":
 //                WebDriverManager.chromedriver().clearDriverCache();
 //                WebDriverManager.chromedriver().setup();
-                driver = new  ChromeDriver();
+                this.driver = new  ChromeDriver();
                 break;
             case "FIREFOX":
 //                WebDriverManager.firefoxdriver().setup();
