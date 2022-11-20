@@ -1,4 +1,4 @@
-@feature-mc-21946 @notification @casereminder @smoke @aou @qa-regression
+@feature-mc-21946 @notification @casereminder @smoke @aou @regression
 Feature: Case Management Reminder Notification
   As a user
   I should be able to receive the follow up reminder notification

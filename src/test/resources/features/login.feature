@@ -1,4 +1,4 @@
-@feature-mc-21946
+@feature-mc-21946 @regression
 Feature: Login function
 
   @mc-login

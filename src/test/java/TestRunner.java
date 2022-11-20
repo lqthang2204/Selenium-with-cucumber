@@ -9,8 +9,9 @@ import org.junit.runner.RunWith;
 
         //run with comman line mvaven
 //        mvn clean verify  -Dcucumber.filter.tags=@mc-test2
-//        mvn clean verify  -Dcucumber.filter.tags="@"mc-test2 or @mc-login""
-//
+//        mvn clean verify  -Dcucumber.filter.tags="@mc-test2 or @mc-login"
+//        mvn clean verify  -Dcucumber.filter.tags="@mc-test2 and @mc-login"
+//mvn clean verify
 )
 public class TestRunner {
 
