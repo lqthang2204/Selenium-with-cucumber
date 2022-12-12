@@ -42,7 +42,10 @@ Follow https://github.com/lqthang2204/FrameworkAuto for cloning a repository.
 . VM options : -Dtimeout=120000 -DpageLoadTimeout=120000 -DstartMaximized=true
 . Environment Variables: WEB_BROWSER=FIREFOX
 
-
+How to run
+To run Selenide+Cucumber tests, just type from command line:
+mvn clean verify  -Dcucumber.filter.tags=@example
+or Run all ferature mvn clean verify
 
 === How do I search for a feature file or a test?
 For searching a specific feature, you can navigate along the path,
