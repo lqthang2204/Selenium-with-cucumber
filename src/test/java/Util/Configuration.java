@@ -17,8 +17,8 @@ public class Configuration {
 
     public static void  ReadConfig(){
         CheckParameter("WEB_BROWSER");
-        Configuration.TIME_OUT = Long.parseLong(System.getProperty("timeout")==null ? "10000" : System.getProperty("timeout"));
-        Configuration.PAGE_LOAD_TIME = Integer.parseInt(System.getProperty("pageLoadTimeout")==null ? "10000" : System.getProperty("pageLoadTimeout"));
+        Configuration.TIME_OUT = Long.parseLong(System.getProperty("timeout")==null ? "30000" : System.getProperty("timeout"));
+        Configuration.PAGE_LOAD_TIME = Integer.parseInt(System.getProperty("pageLoadTimeout")==null ? "30000" : System.getProperty("pageLoadTimeout"));
         Configuration.DEFAULT_MAXIMUM = Boolean.parseBoolean(System.getProperty("startMaximized")==null ? "true" : System.getProperty("startMaximized"));
         Configuration.PATH_POSTMAN = getFilePath(System.getProperty("user.dir")+"/src/test/resources/postman-test");
 //        TIME_OUT = defaults.timeout();

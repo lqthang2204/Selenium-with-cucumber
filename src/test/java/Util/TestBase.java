@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.Scenario;
-//import io.github.bonigarcia.wdm.WebDriverManager;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -47,8 +47,8 @@ public class TestBase {
     public WebDriver getDriver() {
         switch (Configuration.WEB_BROWSER) {
             case "CHROME":
-//                WebDriverManager.chromedriver().clearDriverCache();
-//                WebDriverManager.chromedriver().setup();
+                WebDriverManager.chromedriver().clearDriverCache();
+                WebDriverManager.chromedriver().setup();
                 this.driver = new  ChromeDriver();
                 break;
             case "FIREFOX":
@@ -64,7 +64,8 @@ public class TestBase {
                 driver = new EdgeDriver();
                 break;
             default:
-                this.driver = new  ChromeDriver();
+                System.out.println("Not support to run browser");
+                Assert.assertTrue(false);
                 break;
         }
         wait = getWait(driver);
