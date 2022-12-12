@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.Scenario;
-import io.github.bonigarcia.wdm.WebDriverManager;
+//import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -27,7 +27,7 @@ import java.time.Duration;
 import java.util.*;
 import java.util.stream.Stream;
 
-import static com.codeborne.selenide.Selenide.$;
+//import static com.codeborne.selenide.Selenide.$;
 
 public class TestBase {
     public static WebDriver driver;
@@ -64,8 +64,7 @@ public class TestBase {
                 driver = new EdgeDriver();
                 break;
             default:
-                System.out.println("Browser "+ Configuration.WEB_BROWSER + " is not suuport");
-                Assert.assertTrue(false);
+                this.driver = new  ChromeDriver();
                 break;
         }
         wait = getWait(driver);
