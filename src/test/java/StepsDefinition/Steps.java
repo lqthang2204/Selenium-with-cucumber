@@ -11,6 +11,8 @@ import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
 import javax.xml.crypto.Data;
@@ -19,7 +21,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class Steps {
-//    public static  WebDriver driver;
+    public static  WebDriver driver;
     TestBase testBase;
     ExecuteYaml execute;
 //    Map<String, Page> map;
@@ -66,7 +68,7 @@ public class Steps {
 
     @Given("I navigate to {word}")
     public void openBrowser(String url) {
-           TestBase.OpenBrowser(testBase, url);
+           this.driver = TestBase.OpenBrowser(testBase, url);
     }
 
     @Given("I change the page spec to {word}")
@@ -165,7 +167,12 @@ public class Steps {
     }
 
     @After
-    public void tearDown() {
+    public void tearDown(Scenario scenario) {
+        this.scenario = scenario;
+        if(scenario.isFailed()){
+            final  byte[]  screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(screenshot, "image/png",scenario.getName());
+        }
         testBase.closeBrowser();
     }
 
