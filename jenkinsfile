@@ -25,7 +25,7 @@ pipeline {
                 success {
 //                     publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/cucumber-report-html/cucumber-html-reports', reportFiles: 'overview-features.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
 //             cucumber buildStatus: 'null', customCssFiles: '', customJsFiles: '', fileIncludePattern: '**/overview-features.html', jsonReportDirectory: '**/target/cucumber-report-html/cucumber-html-reports', reportTitle: 'Report', sortingMethod: 'ALPHABETICAL'
-            cucumber buildStatus: 'null', customCssFiles: '', customJsFiles: '', fileIncludePattern: '**/cucumber.json', jsonReportDirectory: '**/target/cucumber-report-html/cucumber-html-reports/overview-features.html', sortingMethod: 'ALPHABETICAL'
+            cucumber buildStatus: 'UNSTABLE', fileIncludePattern: '**/cucumber.json', jsonReportDirectory: '**/target/cucumber-report-html/cucumber-html-reports/overview-features.html'
                 }
             }
         }
