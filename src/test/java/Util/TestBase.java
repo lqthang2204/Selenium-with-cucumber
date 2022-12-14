@@ -72,7 +72,7 @@ public class TestBase {
         return driver;
     }
 
-    public static void OpenBrowser(TestBase testBase, String URl) {
+    public static WebDriver OpenBrowser(TestBase testBase, String URl) {
         try {
             if (driver == null ) {
                 driver = testBase.getDriver();
@@ -94,6 +94,7 @@ public class TestBase {
             e.printStackTrace();
             Assert.assertTrue(false);
         }
+        return driver;
     }
 
     public void mouseAction(Page page, String action, String element, Map<String, String> map) {

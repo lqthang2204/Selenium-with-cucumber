@@ -129,10 +129,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.plugin.version}</version>
-<!--                <configuration>-->
-<!--                    <parallel>both</parallel>-->
-<!--                    <threadCount>2</threadCount>-->
-<!--                </configuration>-->
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                </configuration>
 
             </plugin>
 
