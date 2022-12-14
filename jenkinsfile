@@ -23,7 +23,8 @@ pipeline {
                 // If Maven was able to run the tests, even if some of the test
                 // failed, record the test results and archive the jar file.
                 success {
-                    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/cucumber-report-html/cucumber-html-reports', reportFiles: 'overview-features.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+//                     publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/cucumber-report-html/cucumber-html-reports', reportFiles: 'overview-features.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+            cucumber buildStatus: 'null', customCssFiles: '', customJsFiles: '', fileIncludePattern: '**/overview-features.html', jsonReportDirectory: '**/target/cucumber-report-html/cucumber-html-reports', reportTitle: 'Report', sortingMethod: 'ALPHABETICAL'
                 }
             }
         }
