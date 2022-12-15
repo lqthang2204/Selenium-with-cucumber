@@ -25,16 +25,9 @@ pipeline {
                 success {
 
 //                     publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/cucumber-report-html/cucumber-html-reports', reportFiles: 'overview-features.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
-//                         cucumber buildStatus: 'null', customCssFiles: '', customJsFiles: '', fileIncludePattern: '**/cucumber.json', sortingMethod: 'ALPHABETICAL'
+                        cucumber buildStatus: 'UNSTABLE', customCssFiles: '', customJsFiles: '', fileIncludePattern: '**/cucumber.json'
                 }
             }
         }
     }
-    stage('Generate HTML report') {
-            cucumber buildStatus: 'UNSTABLE',
-                    reportTitle: 'My report',
-                    fileIncludePattern: '**/*.json',
-                    trendsLimit: 10,
-
-        }
 }
