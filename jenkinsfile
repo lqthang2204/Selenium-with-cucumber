@@ -34,11 +34,6 @@ pipeline {
          cucumber buildStatus: 'UNSTABLE', customCssFiles: '', customJsFiles: '', fileIncludePattern: '**/cucumber.json'
         }
         }
-        stage('Verify docker'){
-            steps{
-               bat "docker version"
-            }
-        }
     }
 
 }
