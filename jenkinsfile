@@ -7,32 +7,32 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('get Code to GitHub') {
             steps {
                 // Get some code from a GitHub repository
                 git 'https://github.com/lqthang2204/FrameworkAuto.git'
-
-                // Run Maven on a Unix agent.
-                bat "mvn clean verify  -Dcucumber.filter.tags=%tag% -Dtimeout=%timeout% -DpageLoadTimeout=%page_load_time%"
-
-                // To run Maven on a Windows agent, use
-                // bat "mvn -Dmaven.test.failure.ignore=true clean package"
             }
 
-            post {
-                // If Maven was able to run the tests, even if some of the test
-                // failed, record the test results and archive the jar file.
-                success {
 
-//                     publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/cucumber-report-html/cucumber-html-reports', reportFiles: 'overview-features.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
-                        cucumber buildStatus: 'UNSTABLE', customCssFiles: '', customJsFiles: '', fileIncludePattern: '**/cucumber.json'
+//             post {
+//                 // If Maven was able to run the tests, even if some of the test
+//                 // failed, record the test results and archive the jar file.
+//                 success {
+//
+// //                     publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/cucumber-report-html/cucumber-html-reports', reportFiles: 'overview-features.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+//                         cucumber buildStatus: 'UNSTABLE', customCssFiles: '', customJsFiles: '', fileIncludePattern: '**/cucumber.json'
+//                 }
+//             }
+        }
+         stage ('Running FrameworkAuto'){
+                  bat "mvn clean verify  -Dcucumber.filter.tags=%tag% -Dtimeout=%timeout% -DpageLoadTimeout=%page_load_time%"
                 }
-            }
+        stage ('Generated report HTML'){
+          cucumber buildStatus: 'UNSTABLE', customCssFiles: '', customJsFiles: '', fileIncludePattern: '**/cucumber.json'
         }
         stage('Verify docker'){
             steps{
-               bat "docker info"
-                bat "docker version"
+               bat "docker version"
             }
         }
     }
