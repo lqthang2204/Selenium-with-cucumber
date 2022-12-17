@@ -25,10 +25,14 @@ pipeline {
 //             }
         }
          stage ('Running FrameworkAuto'){
-                  bat "mvn clean verify  -Dcucumber.filter.tags=%tag% -Dtimeout=%timeout% -DpageLoadTimeout=%page_load_time%"
-                }
+         steps{
+           bat "mvn clean verify  -Dcucumber.filter.tags=%tag% -Dtimeout=%timeout% -DpageLoadTimeout=%page_load_time%"
+         }
+ }
         stage ('Generated report HTML'){
-          cucumber buildStatus: 'UNSTABLE', customCssFiles: '', customJsFiles: '', fileIncludePattern: '**/cucumber.json'
+        steps{
+         cucumber buildStatus: 'UNSTABLE', customCssFiles: '', customJsFiles: '', fileIncludePattern: '**/cucumber.json'
+        }
         }
         stage('Verify docker'){
             steps{
