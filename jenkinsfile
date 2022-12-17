@@ -29,12 +29,5 @@ pipeline {
                 }
             }
         }
-        stage('Verify docker'){
-            steps{
-               bat "docker info"
-                bat "docker version"
-            }
-        }
     }
-
 }
