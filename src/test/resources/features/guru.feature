@@ -1,4 +1,4 @@
-@regression
+@mc-guru
 Feature: Login function
   Scenario: Negative to web URL
     Given I navigate to "https://www.google.com.vn/"

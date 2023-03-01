@@ -1,52 +1,55 @@
 {
-  "info": {
-    "_postman_id": "cb929d5b-eded-489f-ada5-0bc70851221f",
-    "name": "example",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "12276119"
-  },
-  "item": [
-    {
-      "name": "New Request",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "json_response = JSON.parse(responseBody);\r",
-              "\r",
-              "console.log(json_response)\r",
-              "pm.globals.set(\"arr\", json_response);\r",
-              "\r",
-              "pm.test(\"Status code is 200\", function () {\r",
-              "    pm.response.to.have.status(200);\r",
-              "})"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{url}}/api/users?page=2",
-          "host": [
-            "{{url}}"
-          ],
-          "path": [
-            "api",
-            "users"
-          ],
-          "query": [
-            {
-              "key": "page",
-              "value": "2"
-            }
-          ]
-        }
-      },
-      "response": []
-    }
-  ]
+	"info": {
+		"_postman_id": "8473c640-a4e2-4cd9-bfb1-dd3da3f746d0",
+		"name": "example",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12276119"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"json_response = JSON.parse(responseBody);\r",
+							"\r",
+							"console.log(json_response)\r",
+							"pm.globals.set(\"arr\", json_response);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/users?page=2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
 }

@@ -47,12 +47,12 @@ public class TestBase {
     public WebDriver getDriver() {
         switch (Configuration.WEB_BROWSER) {
             case "CHROME":
-                WebDriverManager.chromedriver().clearDriverCache();
-                WebDriverManager.chromedriver().setup();
-                this.driver = new  ChromeDriver();
-                break;
+//                    WebDriverManager.chromedriver().clearDriverCache();
+//                    WebDriverManager.chromedriver().setup();
+                    this.driver = new  ChromeDriver();
+                    break;
             case "FIREFOX":
-//                WebDriverManager.firefoxdriver().setup();
+                WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver();
                 break;
 //            case "OPERA":
@@ -60,13 +60,13 @@ public class TestBase {
 //                driver = new
 //                break;
             case "EDGE":
-//                WebDriverManager.edgedriver().setup();
+                WebDriverManager.edgedriver().setup();
                 driver = new EdgeDriver();
                 break;
             default:
-                System.out.println("Not support to run browser");
-                Assert.assertTrue(false);
-                break;
+                    System.out.println("Not support to run browser");
+                    Assert.assertTrue(false);
+                    break;
         }
         wait = getWait(driver);
         return driver;
@@ -91,8 +91,8 @@ public class TestBase {
 
 
         } catch (Exception e) {
-            e.printStackTrace();
-            Assert.assertTrue(false);
+                e.printStackTrace();
+                Assert.assertTrue(false);
         }
         return driver;
     }
@@ -218,7 +218,7 @@ public class TestBase {
         try {
             String text = content;
             Locators locators = getValueElement(page, element);
-//            WebDriverWait wait = getWait(driver);
+            WebDriverWait wait = getWait(driver);
             By by = getBy(driver, locators.getType(), locators.getValue());
             wait.until(ExpectedConditions.elementToBeClickable(by));
             if (map.containsKey(content)) {

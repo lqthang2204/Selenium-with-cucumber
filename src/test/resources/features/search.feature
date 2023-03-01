@@ -15,6 +15,6 @@ Feature: PMT Search
     And I perform buy-one-mobile action with override values
       | search-input | test mobile |
     Examples:
-      | product                  |
-      | mobile-button      |
-#      | tv-button  |
+      | product        |
+      | mobile-button  |
+      | tv-button  |
