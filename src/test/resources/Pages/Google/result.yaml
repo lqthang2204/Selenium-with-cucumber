@@ -1,0 +1,7 @@
+elements:
+  - id: result-search
+    description: result search
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//*[@id="search"]//h3)[1]

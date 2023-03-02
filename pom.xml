@@ -16,7 +16,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <selenium.version>4.6.0</selenium.version>
         <cucumber.version>6.11.0</cucumber.version>
-        <junit.version>4.13.2</junit.version>
+<!--        <junit.version>4.13.2</junit.version>-->
         <failsafe.version>3.0.0-M5</failsafe.version>
         <threads>5</threads>
         <!--        <webdrivermanager.version>5.1.0</webdrivermanager.version>-->
@@ -40,17 +40,31 @@
             <scope>test</scope>
         </dependency>
         <!-- JUnit Dependency -->
+<!--        <dependency>-->
+<!--            <groupId>junit</groupId>-->
+<!--            <artifactId>junit</artifactId>-->
+<!--            <version>${junit.version}</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.github.bonigarcia</groupId>-->
+<!--            <artifactId>webdrivermanager</artifactId>-->
+<!--            <version>4.4.0</version>-->
+<!--        </dependency>-->
+        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.6.1</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
         <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>4.4.0</version>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>7.7.0</version>
         </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 <!--        <dependency>-->
 <!--            <groupId>org.seleniumhq.selenium</groupId>-->
@@ -99,20 +113,6 @@
             <artifactId>guava</artifactId>
             <version>31.0.1-jre</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.codeborne</groupId>-->
-<!--            <artifactId>selenide</artifactId>-->
-<!--            <version>6.6.6</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
-        <!-- https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit -->
-<!--        <dependency>-->
-<!--            <groupId>com.squareup.retrofit2</groupId>-->
-<!--            <artifactId>retrofit</artifactId>-->
-<!--            <version>2.9.0</version>-->
-<!--        </dependency>-->
-
-
     </dependencies>
     <build>
         <plugins>

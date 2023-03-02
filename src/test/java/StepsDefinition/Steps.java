@@ -165,6 +165,15 @@ public class Steps {
     public void i_run_postman_collection_with_link(String link) throws IOException, InterruptedException {
         testBase.ExecutePostmanCollectionWithLink(link);
     }
+    @Given("I generate {} file with header {}")
+    public void i_generate_test_file_csv_file_with_header(String filename, String header) throws IOException {
+            testBase.createFile(filename, header);
+    }
+    @Given("I write {} into file {}")
+    public void i_write_into_file(String data, String fileName) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
 
     @After
     public void tearDown(Scenario scenario) {
