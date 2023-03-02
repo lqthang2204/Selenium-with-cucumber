@@ -7,8 +7,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.Scenario;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -17,13 +15,12 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.file.Paths;
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -49,10 +46,10 @@ public class TestBase {
             case "CHROME":
 //                    WebDriverManager.chromedriver().clearDriverCache();
 //                    WebDriverManager.chromedriver().setup();
-                    this.driver = new  ChromeDriver();
+                    this.driver = new ChromeDriver();
                     break;
             case "FIREFOX":
-                WebDriverManager.firefoxdriver().setup();
+//                WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver();
                 break;
 //            case "OPERA":
@@ -60,12 +57,12 @@ public class TestBase {
 //                driver = new
 //                break;
             case "EDGE":
-                WebDriverManager.edgedriver().setup();
+//                WebDriverManager.edgedriver().setup();
                 driver = new EdgeDriver();
                 break;
             default:
                     System.out.println("Not support to run browser");
-                    Assert.assertTrue(false);
+                Assert.assertTrue(false);
                     break;
         }
         wait = getWait(driver);
@@ -92,7 +89,7 @@ public class TestBase {
 
         } catch (Exception e) {
                 e.printStackTrace();
-                Assert.assertTrue(false);
+                    Assert.assertTrue(false);
         }
         return driver;
     }
@@ -830,12 +827,57 @@ public class TestBase {
         Page page = yamlExecute.updateYaml(yaml,this.map, mapFileYaml);
         return page;
     }
+    public void createFile(String file_name, String header) throws IOException {
+        try {
+            String [] var =  file_name.split("\\.");
+            String fileType = var[1];
+            String fileName = var[0];
+            String[] headerName = header.replace("\"","").split(",");
+            switch (fileType){
+                case "csv" :
+                    WriteFileCSV(file_name, headerName);
+                    break;
+                default:
+                    throw new RuntimeException("Not support with file type "+ fileType);
+            }
+            Assert.assertTrue(true);
+        }catch (Exception e){
+            e.printStackTrace();
+            Assert.assertTrue(false);
+        }
+
+
+    }
+    public void W
+
     public void closeBrowser(){
         if(driver!=null){
             driver.quit();
             driver=null;
         }
 
+    }
+    public void WriteFileCSV(String fileName, String[] headerName,String data) throws IOException {
+        File fileCSV = new File(System.getProperty("user.dir") + "/src/test/resources/FileCSV/"+fileName+".csv");
+        FileWriter fileWriter = null;
+        StringBuilder line = null;
+        if(fileCSV.exists()){
+            fileWriter = new FileWriter(fileCSV);
+
+        }else{
+             fileWriter = new FileWriter(fileCSV, true);
+             line = new StringBuilder();
+            for(int i=0;i<headerName.length;i++){
+                line.append(headerName[i]);
+                if(i!=headerName.length-1){
+                    line.append(";");
+                }
+            }
+        }
+
+
+        fileWriter.write(line.toString());
+        fileWriter.close();
     }
 
 }

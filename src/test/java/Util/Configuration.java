@@ -8,7 +8,7 @@ import java.sql.Time;
 public class Configuration {
     public static String WEB_BROWSER = "";
     public static long  TIME_OUT= 0;
-    public static int PAGE_LOAD_TIME= 0;
+    public static long PAGE_LOAD_TIME= 0;
     public static boolean DEFAULT_MAXIMUM =true;
     public static String PATH_POSTMAN;
     public static String[] PREFIX= new String[]{"unique.", "user.","key."};

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <parameter name="timeout" value="120000"></parameter>
+    <parameter name="pageLoadTimeout" value="60000"></parameter>
+    <parameter name="startMaximized" value="true"></parameter>
+
+    <test verbose="2" preserve-order="true" name="E:/workspace-research/FrameworkAuto">
+        <parameter name="web_browser" value="CHROME"></parameter>
+        <classes>
+            <class name="TestRunner"></class>
+        </classes>
+    </test>
+</suite>
