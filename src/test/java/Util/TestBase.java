@@ -835,7 +835,7 @@ public class TestBase {
             String[] headerName = header.replace("\"","").split(",");
             switch (fileType){
                 case "csv" :
-                    WriteFileCSV(file_name, headerName);
+                    WriteFileCSV(file_name, headerName,"");
                     break;
                 default:
                     throw new RuntimeException("Not support with file type "+ fileType);
@@ -848,7 +848,6 @@ public class TestBase {
 
 
     }
-    public void W
 
     public void closeBrowser(){
         if(driver!=null){
