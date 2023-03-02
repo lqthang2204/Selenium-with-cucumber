@@ -7,6 +7,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.Scenario;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -34,6 +36,7 @@ public class TestBase {
     public Actions actions;
     public Map<String, Page> map = new HashMap<>();
     ExecuteYaml yamlExecute = new ExecuteYaml();
+    ProcessFile fileProcess = new ProcessFile();
 
     public TestBase() {
         Configuration.ReadConfig();
@@ -835,7 +838,7 @@ public class TestBase {
             String[] headerName = header.replace("\"","").split(",");
             switch (fileType){
                 case "csv" :
-                    WriteFileCSV(file_name, headerName,"");
+                    fileProcess.createFileCSV(fileName, headerName);
                     break;
                 default:
                     throw new RuntimeException("Not support with file type "+ fileType);
@@ -847,6 +850,10 @@ public class TestBase {
         }
 
 
+
+    }
+    public void writeCSV(String data, String fileName, Map<String, String> map) throws IOException {
+        fileProcess.WriteDataCSV(data, fileName, map);
     }
 
     public void closeBrowser(){
@@ -856,27 +863,4 @@ public class TestBase {
         }
 
     }
-    public void WriteFileCSV(String fileName, String[] headerName,String data) throws IOException {
-        File fileCSV = new File(System.getProperty("user.dir") + "/src/test/resources/FileCSV/"+fileName+".csv");
-        FileWriter fileWriter = null;
-        StringBuilder line = null;
-        if(fileCSV.exists()){
-            fileWriter = new FileWriter(fileCSV);
-
-        }else{
-             fileWriter = new FileWriter(fileCSV, true);
-             line = new StringBuilder();
-            for(int i=0;i<headerName.length;i++){
-                line.append(headerName[i]);
-                if(i!=headerName.length-1){
-                    line.append(";");
-                }
-            }
-        }
-
-
-        fileWriter.write(line.toString());
-        fileWriter.close();
-    }
-
 }

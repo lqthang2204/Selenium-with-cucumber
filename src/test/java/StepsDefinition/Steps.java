@@ -170,9 +170,8 @@ public class Steps {
             testBase.createFile(filename, header);
     }
     @Given("I write {} into file {}")
-    public void i_write_into_file(String data, String fileName) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void i_write_into_file(String data, String fileName) throws IOException {
+        testBase.writeCSV(data.replace("\"",""), fileName,this.mapSaveText);
     }
 
     @After
