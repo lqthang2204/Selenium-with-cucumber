@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.Scenario;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -845,6 +846,12 @@ public class TestBase {
                 case "csv" :
                     fileProcess.createFileCSV(fileName, headerName);
                     break;
+                case "xlsx" :
+                    fileProcess.createFileExcel(fileName, headerName, fileType);
+                    break;
+                case "xls" :
+                    fileProcess.createFileExcel(fileName, headerName, fileType);
+                    break;
                 default:
                     throw new RuntimeException("Not support with file type "+ fileType);
             }
@@ -857,6 +864,12 @@ public class TestBase {
 
 
     }
+    public void WriteExcel(String data, String columnName, String rowNumber, String fileName, Map<String, String> map) throws IOException, InvalidFormatException {
+            fileProcess.WriteDataExcel(data, columnName, rowNumber, fileName, map);
+
+
+    }
+
     public void writeCSV(String data, String fileName, Map<String, String> map) throws IOException {
         fileProcess.WriteDataCSV(data, fileName, map);
     }

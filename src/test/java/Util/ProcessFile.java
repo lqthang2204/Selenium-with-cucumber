@@ -1,14 +1,24 @@
 package Util;
 
+import io.cucumber.java.sl.In;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.testng.Assert;
 
 import java.io.*;
 import java.util.Map;
 
 public class ProcessFile {
     public void createFileCSV(String fileName, String[] headerName) throws IOException {
-        File fileCSV = new File(System.getProperty("user.dir") + "/src/test/resources/FileCSV/"+fileName+".csv");
+        String path = System.getProperty("user.dir") + "/src/test/resources";
+        path =  createFolderIfNotExist(path,"FileCSV");
+        File fileCSV = new File(path+"/"+fileName+".csv");
         FileWriter fileWriter = null;
         StringBuilder line = null;
         if(fileCSV.exists()){
@@ -26,6 +36,34 @@ public class ProcessFile {
         fileWriter.write(line.toString());
         fileWriter.close();
     }
+    public void createFileExcel(String fileName, String[] headerName, String fileType) throws IOException {
+        String path = System.getProperty("user.dir") + "/src/test/resources";
+        path =  createFolderIfNotExist(path,"FileExcel");
+       Workbook wb = getWorkbook(fileType);
+       Sheet sheet =  wb.createSheet("automation");
+       Row row = sheet.createRow(0);
+       for(int i=0;i<headerName.length;i++){
+           row.createCell(i).setCellValue(headerName[i].replace("\"",""));
+       }
+        OutputStream fileOut = new FileOutputStream(path+"/"+fileName+"."+fileType);
+        System.out.println("Excel File has been created successfully.");
+        wb.write(fileOut);
+    }
+    private Workbook getWorkbook(String excelFilePath)
+            throws IOException {
+        Workbook workbook = null;
+
+        if (excelFilePath.endsWith("xlsx")) {
+            workbook = new XSSFWorkbook();
+        } else if (excelFilePath.endsWith("xls")) {
+            workbook = new HSSFWorkbook();
+        } else {
+            throw new IllegalArgumentException("The specified file is not Excel file");
+        }
+
+        return workbook;
+    }
+
     public void WriteDataCSV(String data, String fileName, Map<String, String> map) throws IOException {
         FileWriter  fileCSV = new FileWriter(System.getProperty("user.dir") + "/src/test/resources/FileCSV/"+fileName.replace("\"",""), true);
         BufferedWriter out = new BufferedWriter(fileCSV);
@@ -37,9 +75,62 @@ public class ProcessFile {
         out.close();
     }
 
-    public void WriteFileExcel(String fileName, String sheetName, String header){
-        Workbook wb = new HSSFWorkbook();
-        wb.createSheet(sheetName);
+        public void WriteDataExcel(String data, String columNumber, String rowNumber, String fileName, Map<String, String> map) throws IOException, InvalidFormatException {
+        String path = System.getProperty("user.dir")+"/src/test/resources/FileExcel/";
+        String file = path+fileName;
+        data = data.replace("\"","");
+        if(map.containsKey(data)){
+            data = map.get(data);
+        }
+        if(checkFileExist(file))
+        {
+            File f = new File(file);
+            FileInputStream fis = new FileInputStream(f);
+            Workbook wb = WorkbookFactory.create(fis);
+            Sheet sheet = wb.getSheetAt(0);
+            Row row;
+            if(sheet.getLastRowNum()>=(Integer.parseInt(rowNumber)-1) ){
+                 row = sheet.getRow(checkNumer(rowNumber));
+            }else{
+                row = sheet.createRow(checkNumer(rowNumber));
+            }
+            row.createCell(checkNumer(columNumber)).setCellValue(data);
+            fis.close();
+            FileOutputStream fos = new FileOutputStream(file);
+            wb.write(fos);
+            fos.close();
+        }else{
+            throw new FileNotFoundException("Not found file excel "+ fileName);
+        }
 
     }
+    public String createFolderIfNotExist(String path, String folderName){
+        File f = new File(path+"/"+folderName);
+        if(!f.exists()){
+            f.mkdir();
+        }
+        return  f.toString();
+    }
+    public int checkNumer(String number){
+        try {
+            int num = Integer.parseInt(number);
+            return num-1;
+        }
+        catch (RuntimeException e){
+            e.printStackTrace();
+            throw new RuntimeException(number +" not a number, please input a number");
+        }
+
+
+    }
+    public boolean checkFileExist(String file){
+       File f = new File(file);
+        if(f.exists()){
+            return true;
+        }
+        return false;
+
+    }
+
+
 }
