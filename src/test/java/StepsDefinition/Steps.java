@@ -128,10 +128,10 @@ public class Steps {
         testBase.saveTextElement(this.page,element, text, this.mapSaveText);
     }
 
+    //reference key enum: https://github.com/SeleniumHQ/selenium/blob/selenium-4.2.0/java/src/org/openqa/selenium/Keys.java#L28
     @Given("I click keyboard {word} button on element {word}")
     public void i_click_keyboard_button_on_element(String Key, String element) {
-//        testBase.keyBoard(this.page, element, Key);
-        testBase.ActionType(this.page, element, "keyboard."+Key, this.mapSaveText, this.userDTO);
+        testBase.keyBoard(this.page, element, Key);
     }
 
     @Given("I {word} text from element {word}")

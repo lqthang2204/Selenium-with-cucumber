@@ -231,11 +231,12 @@ public class TestBase {
           else if(content.contains("UNIQUE.")){
                 text= getReplaceValue(content, userDTO, map);
             }
-//          else if(content.contains("keyboard."){
-//                text = Keys.getKeyFromUnicode()
+//          else if(content.contains("keyboard.")){
+//                text = text.replace("keyboard.","");
+//               driver.findElement(by).sendKeys(Keys.getKeyFromUnicode('a'));
 //
 //            }
-            driver.findElement(by).sendKeys(new CharSequence[]{text});
+            driver.findElement(by).sendKeys(text);
         } catch (Exception e) {
             e.printStackTrace();
             Assert.assertTrue(false);
@@ -308,11 +309,8 @@ public class TestBase {
         Locators locators = getValueElement(page, element);
         By by = getBy(driver, locators.getType(), locators.getValue());
         wait.until(ExpectedConditions.visibilityOfElementLocated(by));
-        WebElement ele = null;
+        WebElement ele = driver.findElement(by);
         switch (action){
-            case "ENTER":
-                actions.sendKeys(Keys.ENTER).perform();
-                break;
             case "DOUBLE-CLICK":
                 ele = driver.findElement(by);
                 actions.doubleClick(ele).perform();
@@ -332,8 +330,15 @@ public class TestBase {
                 actions.perform();
                 break;
             default:
-                System.out.println("Not suuport case  "+action );
-                Assert.assertTrue(false);
+                try {
+                    actions.sendKeys(Keys.valueOf(action)).perform();
+                }
+                catch (NotFoundException e){
+                    System.out.println("Not support case  "+action );
+                    e.printStackTrace();
+                    Assert.assertTrue(false);
+                }
+
         }
 
 
