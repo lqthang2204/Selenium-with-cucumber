@@ -174,9 +174,9 @@ public class Steps {
     public void i_write_csv(String data, String fileName) throws IOException, InvalidFormatException {
         testBase.writeCSV(data.replace("\"",""), fileName,this.mapSaveText);
     }
-    @Given("I write {word} in the column {} and row {} with file {}")
-    public void i_write_in_the_column_and_row_with_file_test_file_xlsx(String data, String columnName, String rowNumber, String fileName) throws IOException, InvalidFormatException {
-            testBase.WriteExcel(data,columnName,rowNumber,fileName, mapSaveText);
+    @Given("I write data {} into file {}")
+    public void i_write_data_into_file_test_file_xlsx(String data, String fileName) throws IOException, InvalidFormatException {
+        testBase.WriteExcel(data,fileName, this.mapSaveText);
     }
 
     @After

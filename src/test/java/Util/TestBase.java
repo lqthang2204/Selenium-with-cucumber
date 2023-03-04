@@ -864,8 +864,8 @@ public class TestBase {
 
 
     }
-    public void WriteExcel(String data, String columnName, String rowNumber, String fileName, Map<String, String> map) throws IOException, InvalidFormatException {
-            fileProcess.WriteDataExcel(data, columnName, rowNumber, fileName, map);
+    public void WriteExcel(String data, String fileName, Map<String, String> map) throws IOException, InvalidFormatException {
+            fileProcess.WriteDataExcel(data, fileName, map);
 
 
     }

@@ -75,26 +75,22 @@ public class ProcessFile {
         out.close();
     }
 
-        public void WriteDataExcel(String data, String columNumber, String rowNumber, String fileName, Map<String, String> map) throws IOException, InvalidFormatException {
+        public void WriteDataExcel(String data, String fileName, Map<String, String> map) throws IOException, InvalidFormatException {
         String path = System.getProperty("user.dir")+"/src/test/resources/FileExcel/";
         String file = path+fileName;
         data = data.replace("\"","");
-        if(map.containsKey(data)){
-            data = map.get(data);
-        }
+        String[] arrData = getArrayDataToScript(data, map);
         if(checkFileExist(file))
         {
             File f = new File(file);
             FileInputStream fis = new FileInputStream(f);
             Workbook wb = WorkbookFactory.create(fis);
             Sheet sheet = wb.getSheetAt(0);
-            Row row;
-            if(sheet.getLastRowNum()>=(Integer.parseInt(rowNumber)-1) ){
-                 row = sheet.getRow(checkNumer(rowNumber));
-            }else{
-                row = sheet.createRow(checkNumer(rowNumber));
+            int rowNumber = sheet.getLastRowNum();
+            Row row = sheet.createRow(rowNumber+1);
+            for(int i=0;i<arrData.length;i++){
+                row.createCell(i).setCellValue(arrData[i]);
             }
-            row.createCell(checkNumer(columNumber)).setCellValue(data);
             fis.close();
             FileOutputStream fos = new FileOutputStream(file);
             wb.write(fos);
@@ -121,6 +117,19 @@ public class ProcessFile {
             throw new RuntimeException(number +" not a number, please input a number");
         }
 
+
+    }
+    public String[] getArrayDataToScript(String data, Map<String, String> map){
+        String[] arrDataTemp =  data.split(",");
+        String[] arrData= new String[arrDataTemp.length];
+        for (int i=0;i<arrDataTemp.length;i++){
+            if(map.containsKey(arrDataTemp[i])){
+                arrData[i] = map.get(arrDataTemp[i]);
+            }else{
+                arrData[i] = arrDataTemp[i];
+            }
+        }
+        return  arrData;
 
     }
     public boolean checkFileExist(String file){

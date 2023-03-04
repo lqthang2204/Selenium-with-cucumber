@@ -25,6 +25,16 @@ Feature: Login function
     And I save text for element result-search-2 with key "data_temp-2"
     And I save text for element result-search-3 with key "data_temp-3"
     And I generate test_file.xlsx file with header "column1, column2, column3"
-    And I write "KEY.data_temp" in the column 1 and row 2 with file test_file.xlsx
-    And I write "KEY.data_temp-2" in the column 2 and row 2 with file test_file.xlsx
-    And I write "KEY.data_temp-3" in the column 3 and row 2 with file test_file.xlsx
+#    And I write data "KEY.data_temp,KEY.data_temp-2,KEY.data_temp-3" into file test_file.xlsx
+    And I write data ",,KEY.data_temp-3" into file test_file.xlsx
+    And I write data ",KEY.data_temp-2,KEY.data_temp-3" into file test_file.xlsx
+    And I change the page spec to test
+    And I click element field-search
+    And I clear element field-search
+    And I type "zing" into element field-search
+    And I click keyboard ENTER button on element field-search
+    And I change the page spec to result
+    And I wait for element result-search to be DISPALYED
+    And I save text for element result-search with key "data_temp_4"
+    And I write data "KEY.data_temp_4,," into file test_file.xlsx
+
