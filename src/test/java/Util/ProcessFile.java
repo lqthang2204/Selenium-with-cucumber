@@ -68,10 +68,13 @@ public class ProcessFile {
         FileWriter  fileCSV = new FileWriter(System.getProperty("user.dir") + "/src/test/resources/FileCSV/"+fileName.replace("\"",""), true);
         BufferedWriter out = new BufferedWriter(fileCSV);
         out.write("\n");
-        if(map.containsKey(data)){
-            data = map.get(data);
+        String[] arrData = getArrayDataToScript(data, map);
+        for(int i=0;i<arrData.length;i++){
+            out.write(arrData[i]);
+            if(i!=arrData.length-1){
+                out.write(";");
+            }
         }
-        out.write(data.replace("\"",""));
         out.close();
     }
 
@@ -99,6 +102,35 @@ public class ProcessFile {
             throw new FileNotFoundException("Not found file excel "+ fileName);
         }
 
+    }
+    public String getDataFromCSV(String data, String fileName) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir") + "/src/test/resources/FileCSV/"+fileName+".csv"));
+        int lineNUmber = 0;
+        String nextLine;
+        String[] arr = data.split("\\.");
+         data = arr[0];
+        int line = Integer.parseInt(arr[1]);
+       String data_header =  br.readLine();
+      String[] arrHeader =  data_header.split(";");
+        int index = getIndex(arrHeader, data);
+        for(int i=0;i<line;i++){
+                    if(i+1== line){
+                    data =  br.readLine();
+                        String[] arrData = data.split(";");
+                        return  arrData[index];
+                    }else{
+                        br.readLine();
+                    }
+        }
+        throw new RuntimeException("Not Found data that have column "+ data_header);
+    }
+    public int getIndex(String[] arrHeader, String data ){
+        for(int i=0;i<arrHeader.length;i++){
+            if(arrHeader[i].equals(data)){
+                return  i;
+            }
+        }
+        throw new RuntimeException("Not Found column in file csv");
     }
     public String createFolderIfNotExist(String path, String folderName){
         File f = new File(path+"/"+folderName);
