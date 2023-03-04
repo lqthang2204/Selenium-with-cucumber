@@ -11,6 +11,7 @@ import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -169,9 +170,13 @@ public class Steps {
     public void i_generate_test_file_csv_file_with_header(String filename, String header) throws IOException {
             testBase.createFile(filename, header);
     }
-    @Given("I write {} into file {}")
-    public void i_write_into_file(String data, String fileName) throws IOException {
+    @Given("I write {word} into file {}")
+    public void i_write_csv(String data, String fileName) throws IOException, InvalidFormatException {
         testBase.writeCSV(data.replace("\"",""), fileName,this.mapSaveText);
+    }
+    @Given("I write data {} into file {}")
+    public void i_write_data_into_file_test_file_xlsx(String data, String fileName) throws IOException, InvalidFormatException {
+        testBase.WriteExcel(data,fileName, this.mapSaveText);
     }
 
     @After

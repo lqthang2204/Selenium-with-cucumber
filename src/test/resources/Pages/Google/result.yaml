@@ -5,3 +5,15 @@ elements:
       - device: WEB
         type: XPATH
         value: (//*[@id="search"]//h3)[1]
+  - id: result-search-2
+    description: result search
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//*[@id="search"]//h3)[2]
+  - id: result-search-3
+    description: result search
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//*[@id="search"]//h3)[3]
