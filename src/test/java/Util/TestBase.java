@@ -881,7 +881,11 @@ public class TestBase {
                 case "xlsx":
                     data = fileProcess.getDataFormExcel(data, fileName, fileType);
                     Type(data, element, page);
-
+                case "xls":
+                    data = fileProcess.getDataFormExcel(data, fileName, fileType);
+                    Type(data, element, page);
+                default:
+                    throw new RuntimeException("Not found support file "+ fileType);
 
             }
         }catch (RuntimeException | InvalidFormatException r){
