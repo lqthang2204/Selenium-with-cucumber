@@ -16,7 +16,7 @@ pipeline {
         }
                      stage('install nodejs') {
                                             steps {
-                                               sh 'npm install -g newman'
+                                               bat 'npm install -g newman'
                                             }
          }
          stage ('Running FrameworkAuto'){
