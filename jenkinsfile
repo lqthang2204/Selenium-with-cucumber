@@ -12,12 +12,13 @@ pipeline {
                 // Get some code from a GitHub repository
                 git 'https://github.com/lqthang2204/FrameworkAuto.git'
             }
-             stage('install nodejs') {
-                                    steps {
-                                       sh 'npm install -g newman'
-                                    }
 
         }
+                     stage('install nodejs') {
+                                            steps {
+                                               sh 'npm install -g newman'
+                                            }
+         }
          stage ('Running FrameworkAuto'){
          steps{
            bat "mvn clean verify  -Dcucumber.filter.tags=%tag% -Dtimeout=%timeout% -DpageLoadTimeout=%page_load_time%"
