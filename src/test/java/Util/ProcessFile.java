@@ -4,11 +4,9 @@ import io.cucumber.java.sl.In;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.NotFoundException;
 import org.testng.Assert;
 
 import java.io.*;
@@ -57,6 +55,20 @@ public class ProcessFile {
             workbook = new XSSFWorkbook();
         } else if (excelFilePath.endsWith("xls")) {
             workbook = new HSSFWorkbook();
+        } else {
+            throw new IllegalArgumentException("The specified file is not Excel file");
+        }
+
+        return workbook;
+    }
+    private Workbook getWorkbookFromExcel(String excelFilePath, FileInputStream fis)
+            throws IOException {
+        Workbook workbook = null;
+
+        if (excelFilePath.endsWith("xlsx")) {
+            workbook = new XSSFWorkbook(fis);
+        } else if (excelFilePath.endsWith("xls")) {
+            workbook = new HSSFWorkbook(fis);
         } else {
             throw new IllegalArgumentException("The specified file is not Excel file");
         }
@@ -124,6 +136,31 @@ public class ProcessFile {
         }
         throw new RuntimeException("Not Found data that have column "+ data_header);
     }
+    public String getDataFormExcel(String data, String fileName, String fileType) throws IOException, InvalidFormatException {
+        String[] arr = data.split("\\.");
+        String header = arr[0];
+        int index = Integer.parseInt(arr[1]);
+        File f = new File(System.getProperty("user.dir") + "/src/test/resources/FileExcel/"+fileName+"."+ fileType);
+        FileInputStream fis = new FileInputStream(f);
+        Workbook wb = getWorkbookFromExcel(fileType, fis);
+        Sheet sheet = wb.getSheetAt(0);
+        Row rowHeader = sheet.getRow(0);
+        int indexFromHeaderExcel = getIndexFromHeaderExcel(header, rowHeader);
+        Row row = sheet.getRow(index-1);
+        data = row.getCell(indexFromHeaderExcel).toString();
+        return data;
+    }
+    public int getIndexFromHeaderExcel(String header, Row rowHeader ){
+            int cellNumber = rowHeader.getLastCellNum();
+            for(int i=0;i<cellNumber;i++){
+                if(rowHeader.getCell(i).toString().trim().equals(header)){
+                    return i;
+                }
+
+            }
+            throw new NotFoundException("Not Found header "+ header + " in excel file");
+    }
+
     public int getIndex(String[] arrHeader, String data ){
         for(int i=0;i<arrHeader.length;i++){
             if(arrHeader[i].equals(data)){

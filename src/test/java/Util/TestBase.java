@@ -878,10 +878,13 @@ public class TestBase {
                 case "csv":
                     data = fileProcess.getDataFromCSV(data, fileName);
                     Type(data, element, page);
+                case "xlsx":
+                    data = fileProcess.getDataFormExcel(data, fileName, fileType);
+                    Type(data, element, page);
 
 
             }
-        }catch (RuntimeException r){
+        }catch (RuntimeException | InvalidFormatException r){
             r.printStackTrace();
             Assert.assertTrue(false);
         }

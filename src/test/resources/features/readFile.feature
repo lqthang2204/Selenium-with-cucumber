@@ -46,4 +46,6 @@ Feature: Login function
     And I wait for element result-search to be DISPALYED
     And I save text for element result-search with key "data_temp_4"
     And I write data "KEY.data_temp_4,," into file test_file.xlsx
+    And I change the page spec to test
+    And I type "column3.2" from test_file.xlsx into element field-search
 
