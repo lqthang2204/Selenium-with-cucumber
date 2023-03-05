@@ -117,7 +117,6 @@ public class ProcessFile {
     }
     public String getDataFromCSV(String data, String fileName) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir") + "/src/test/resources/FileCSV/"+fileName+".csv"));
-        int lineNUmber = 0;
         String nextLine;
         String[] arr = data.split("\\.");
          data = arr[0];

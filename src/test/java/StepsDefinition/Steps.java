@@ -191,7 +191,7 @@ public class Steps {
             final  byte[]  screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot, "image/png",scenario.getName());
         }
-//        testBase.closeBrowser();
+        testBase.closeBrowser();
     }
 
 }
