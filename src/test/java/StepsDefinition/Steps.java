@@ -178,6 +178,11 @@ public class Steps {
     public void i_write_data_into_file_test_file_xlsx(String data, String fileName) throws IOException, InvalidFormatException {
         testBase.WriteExcel(data,fileName, this.mapSaveText);
     }
+    @Given("I type {string} from {word} into element {word}")
+    public void i_type_from_file_test_file_csv_into_element_field_search(String data, String file, String element) throws IOException {
+
+                testBase.getDataFromFile(data, file,element, this.page);
+    }
 
     @After
     public void tearDown(Scenario scenario) {

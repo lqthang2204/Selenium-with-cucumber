@@ -237,6 +237,8 @@ public class TestBase {
 //               driver.findElement(by).sendKeys(Keys.getKeyFromUnicode('a'));
 //
 //            }
+            driver.findElement(by).click();
+          driver.findElement(by).clear();
             driver.findElement(by).sendKeys(text);
         } catch (Exception e) {
             e.printStackTrace();
@@ -866,8 +868,40 @@ public class TestBase {
     }
     public void WriteExcel(String data, String fileName, Map<String, String> map) throws IOException, InvalidFormatException {
             fileProcess.WriteDataExcel(data, fileName, map);
+    }
+    public void getDataFromFile(String data, String fileName, String element, Page page) throws IOException {
+        try {
+            String[] arr = fileName.split("\\.");
+            String fileType = arr[1];
+            fileName = arr[0];
+            switch (fileType){
+                case "csv":
+                    data = fileProcess.getDataFromCSV(data, fileName);
+                    Type(data, element, page);
+                case "xlsx":
+                    data = fileProcess.getDataFormExcel(data, fileName, fileType);
+                    Type(data, element, page);
+                case "xls":
+                    data = fileProcess.getDataFormExcel(data, fileName, fileType);
+                    Type(data, element, page);
+                default:
+                    throw new RuntimeException("Not found support file "+ fileType);
 
+            }
+        }catch (RuntimeException | InvalidFormatException r){
+            r.printStackTrace();
+            Assert.assertTrue(false);
+        }
 
+    }
+    public void Type(String data, String element, Page page){
+        Locators locators = getValueElement(page, element);
+        WebDriverWait wait = getWait(driver);
+        By by = getBy(driver, locators.getType(), locators.getValue());
+        wait.until(ExpectedConditions.elementToBeClickable(by));
+        driver.findElement(by).click();
+        driver.findElement(by).clear();
+        driver.findElement(by).sendKeys(data);
     }
 
     public void writeCSV(String data, String fileName, Map<String, String> map) throws IOException {

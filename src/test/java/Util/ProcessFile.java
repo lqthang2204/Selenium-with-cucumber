@@ -4,11 +4,9 @@ import io.cucumber.java.sl.In;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.NotFoundException;
 import org.testng.Assert;
 
 import java.io.*;
@@ -63,15 +61,32 @@ public class ProcessFile {
 
         return workbook;
     }
+    private Workbook getWorkbookFromExcel(String excelFilePath, FileInputStream fis)
+            throws IOException {
+        Workbook workbook = null;
+
+        if (excelFilePath.endsWith("xlsx")) {
+            workbook = new XSSFWorkbook(fis);
+        } else if (excelFilePath.endsWith("xls")) {
+            workbook = new HSSFWorkbook(fis);
+        } else {
+            throw new IllegalArgumentException("The specified file is not Excel file");
+        }
+
+        return workbook;
+    }
 
     public void WriteDataCSV(String data, String fileName, Map<String, String> map) throws IOException {
         FileWriter  fileCSV = new FileWriter(System.getProperty("user.dir") + "/src/test/resources/FileCSV/"+fileName.replace("\"",""), true);
         BufferedWriter out = new BufferedWriter(fileCSV);
         out.write("\n");
-        if(map.containsKey(data)){
-            data = map.get(data);
+        String[] arrData = getArrayDataToScript(data, map);
+        for(int i=0;i<arrData.length;i++){
+            out.write(arrData[i]);
+            if(i!=arrData.length-1){
+                out.write(";");
+            }
         }
-        out.write(data.replace("\"",""));
         out.close();
     }
 
@@ -99,6 +114,59 @@ public class ProcessFile {
             throw new FileNotFoundException("Not found file excel "+ fileName);
         }
 
+    }
+    public String getDataFromCSV(String data, String fileName) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir") + "/src/test/resources/FileCSV/"+fileName+".csv"));
+        String nextLine;
+        String[] arr = data.split("\\.");
+         data = arr[0];
+        int line = Integer.parseInt(arr[1]);
+       String data_header =  br.readLine();
+      String[] arrHeader =  data_header.split(";");
+        int index = getIndex(arrHeader, data);
+        for(int i=0;i<line;i++){
+                    if(i+1== line){
+                    data =  br.readLine();
+                        String[] arrData = data.split(";");
+                        return  arrData[index];
+                    }else{
+                        br.readLine();
+                    }
+        }
+        throw new RuntimeException("Not Found data that have column "+ data_header);
+    }
+    public String getDataFormExcel(String data, String fileName, String fileType) throws IOException, InvalidFormatException {
+        String[] arr = data.split("\\.");
+        String header = arr[0];
+        int index = Integer.parseInt(arr[1]);
+        File f = new File(System.getProperty("user.dir") + "/src/test/resources/FileExcel/"+fileName+"."+ fileType);
+        FileInputStream fis = new FileInputStream(f);
+        Workbook wb = getWorkbookFromExcel(fileType, fis);
+        Sheet sheet = wb.getSheetAt(0);
+        Row rowHeader = sheet.getRow(0);
+        int indexFromHeaderExcel = getIndexFromHeaderExcel(header, rowHeader);
+        Row row = sheet.getRow(index-1);
+        data = row.getCell(indexFromHeaderExcel).toString();
+        return data;
+    }
+    public int getIndexFromHeaderExcel(String header, Row rowHeader ){
+            int cellNumber = rowHeader.getLastCellNum();
+            for(int i=0;i<cellNumber;i++){
+                if(rowHeader.getCell(i).toString().trim().equals(header)){
+                    return i;
+                }
+
+            }
+            throw new NotFoundException("Not Found header "+ header + " in excel file");
+    }
+
+    public int getIndex(String[] arrHeader, String data ){
+        for(int i=0;i<arrHeader.length;i++){
+            if(arrHeader[i].equals(data)){
+                return  i;
+            }
+        }
+        throw new RuntimeException("Not Found column in file csv");
     }
     public String createFolderIfNotExist(String path, String folderName){
         File f = new File(path+"/"+folderName);
