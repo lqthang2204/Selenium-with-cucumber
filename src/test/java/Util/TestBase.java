@@ -39,8 +39,10 @@ public class TestBase {
     ExecuteYaml yamlExecute = new ExecuteYaml();
     ProcessFile fileProcess = new ProcessFile();
 
+
     public TestBase() {
         Configuration.ReadConfig();
+
 
     }
 
@@ -878,21 +880,22 @@ public class TestBase {
                 case "csv":
                     data = fileProcess.getDataFromCSV(data, fileName);
                     Type(data, element, page);
+                    break;
                 case "xlsx":
                     data = fileProcess.getDataFormExcel(data, fileName, fileType);
                     Type(data, element, page);
+                    break;
                 case "xls":
                     data = fileProcess.getDataFormExcel(data, fileName, fileType);
                     Type(data, element, page);
+                    break;
                 default:
                     throw new RuntimeException("Not found support file "+ fileType);
-
             }
         }catch (RuntimeException | InvalidFormatException r){
             r.printStackTrace();
             Assert.assertTrue(false);
         }
-
     }
     public void Type(String data, String element, Page page){
         Locators locators = getValueElement(page, element);
@@ -904,8 +907,25 @@ public class TestBase {
         driver.findElement(by).sendKeys(data);
     }
 
-    public void writeCSV(String data, String fileName, Map<String, String> map) throws IOException {
-        fileProcess.WriteDataCSV(data, fileName, map);
+    public void writeFile(String data, String fileName, Map<String, String> map) throws IOException, InvalidFormatException {
+        String[] arr = fileName.split("\\.");
+        String fileType = arr[1];
+        switch (fileType){
+            case "csv":
+                fileProcess.WriteDataCSV(data, fileName, map);
+                break;
+            case "xls":
+                fileProcess.WriteDataExcel(data, fileName, map);
+                break;
+            case "xlsx":
+                fileProcess.WriteDataExcel(data, fileName, map);
+                break;
+            default:
+                throw new NotFoundException("Not support file type "+ fileType);
+        }
+
+
+
     }
 
     public void closeBrowser(){
