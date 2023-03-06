@@ -1,0 +1,25 @@
+elements:
+  - id: amount_5000
+    description: Amount is 5000
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@id="fourth"][1]
+  - id: amount_target_1
+    description: target
+    locators:
+      - device: WEB
+        type: ID
+        value: amt7
+  - id: drag_from
+    description: target
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()="Drag me to my target"][1]
+  - id: drop_To
+    description: target
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[text()="Drop here"]

@@ -2,6 +2,8 @@ package Util;
 
 import StepsDefinition.Steps;
 import bean.*;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.impl.JavaScript;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -105,6 +107,8 @@ public class TestBase {
         String valueElement = getValueElementToWithText(locators, element,map);
 //        WebDriverWait wait = getWait(driver);
         By by = getBy(driver, locators.getType(), valueElement);
+        WebElement ele =   driver.findElement(by);
+        beforeAction(ele);
         try {
             switch (action) {
                 case "click":
@@ -239,9 +243,11 @@ public class TestBase {
 //               driver.findElement(by).sendKeys(Keys.getKeyFromUnicode('a'));
 //
 //            }
-            driver.findElement(by).click();
-          driver.findElement(by).clear();
-            driver.findElement(by).sendKeys(text);
+          WebElement ele =   driver.findElement(by);
+          beforeAction(ele);
+            ele.click();
+            ele.clear();
+            ele.sendKeys(text);
         } catch (Exception e) {
             e.printStackTrace();
             Assert.assertTrue(false);
@@ -315,6 +321,7 @@ public class TestBase {
         By by = getBy(driver, locators.getType(), locators.getValue());
         wait.until(ExpectedConditions.visibilityOfElementLocated(by));
         WebElement ele = driver.findElement(by);
+        beforeAction(ele);
         switch (action){
             case "DOUBLE-CLICK":
                 ele = driver.findElement(by);
@@ -370,15 +377,27 @@ public class TestBase {
     }
 
     public void scrollAction(String element, Page page) {
+        WebElement ele = null;
         try {
             Locators locators = getValueElement(page, element);
 //            WebDriverWait wait = getWait(driver);
             By by = getBy(driver, locators.getType(), locators.getValue());
             wait.until(ExpectedConditions.visibilityOfElementLocated(by));
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(by));
+             ele = driver.findElement(by);
+            Actions actions = new Actions(driver);
+            actions.moveToElement(ele);
+            actions.perform();
         } catch (Exception e) {
-            e.printStackTrace();
-            Assert.assertTrue(false);
+            try{
+                e.printStackTrace();
+                System.out.println("try to scroll by javascript");
+                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", ele);
+            }
+            catch (RuntimeException r){
+                r.printStackTrace();
+                Assert.assertTrue(false);
+            }
+
         }
     }
     public void scrollToElement(WebDriver driver, By by) {
@@ -897,6 +916,42 @@ public class TestBase {
             Assert.assertTrue(false);
         }
     }
+    public void actionDragAndDrop(String element, String target, Page page){
+        try {
+            Locators locatorsFrom = getValueElement(page, element);
+            By byFrom = getBy(driver, locatorsFrom.getType(), locatorsFrom.getValue());
+            Locators locatorsTo = getValueElement(page, target);
+            By byTo = getBy(driver, locatorsTo.getType(), locatorsTo.getValue());
+            wait.until(ExpectedConditions.visibilityOfElementLocated(byFrom));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(byTo));
+            new Actions(driver).dragAndDrop(driver.findElement(byFrom),driver.findElement(byTo)).perform();
+            Assert.assertTrue(true);
+        }catch (Exception e){
+            e.printStackTrace();
+            Assert.assertEquals("Not execute drag and drop"," execute");
+        }
+    }
+    public void actionDragAndDropByJS(String element, String target, Page page){
+        try {
+            Locators locatorsFrom = getValueElement(page, element);
+            By byFrom = getBy(driver, locatorsFrom.getType(), locatorsFrom.getValue());
+            Locators locatorsTo = getValueElement(page, target);
+            By byTo = getBy(driver, locatorsTo.getType(), locatorsTo.getValue());
+            wait.until(ExpectedConditions.visibilityOfElementLocated(byFrom));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(byTo));
+          WebElement eleFrom =  driver.findElement(byFrom);
+            WebElement eleTo = driver.findElement(byTo);
+            JavaScript js = new JavaScript("drag_and_drop_script.js");
+            js.execute(driver,eleFrom,eleTo);
+            Assert.assertTrue(true);
+        }catch (Exception e){
+            e.printStackTrace();
+            Assert.assertEquals("Not execute drag and drop"," execute");
+        }
+
+
+    }
+
     public void Type(String data, String element, Page page){
         Locators locators = getValueElement(page, element);
         WebDriverWait wait = getWait(driver);
@@ -935,4 +990,24 @@ public class TestBase {
         }
 
     }
+    public void beforeAction(WebElement element){
+        try {
+            Actions actions = new Actions(driver);
+            actions.moveToElement(element);
+            actions.perform();
+        }catch (Exception e){
+            try {
+                System.out.println("try to scroll by javascript");
+                JavascriptExecutor js = (JavascriptExecutor) driver;
+                js.executeScript("arguments[0].scrollIntoView(true);", element);
+
+            }
+            catch (RuntimeException r){
+                throw  new RuntimeException(r.getMessage());
+            }
+
+        }
+
+    }
+
 }

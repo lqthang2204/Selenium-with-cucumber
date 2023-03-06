@@ -174,14 +174,18 @@ public class Steps {
     public void i_write_csv(String data, String fileName) throws IOException, InvalidFormatException {
         testBase.writeFile(data.replace("\"",""), fileName,this.mapSaveText);
     }
-//    @Given("I write {} into file {}")
-//    public void i_write_data_into_file_test_file_xlsx(String data, String fileName) throws IOException, InvalidFormatException {
-//        testBase.writeFile(data,fileName, this.mapSaveText);
-//    }
     @Given("I type {string} from {word} into element {word}")
     public void i_type_from_file_test_file_csv_into_element_field_search(String data, String file, String element) throws IOException {
 
                 testBase.getDataFromFile(data, file,element, this.page);
+    }
+    @Given("I drag and drop element {word} to element {word}")
+    public void i_drag_and_drop_element_amount_to_element_amount_target(String element, String target) {
+        testBase.actionDragAndDrop(element, target, this.page);
+    }
+    @Given("I drag and drop element {word} to element {word} by javascript")
+    public void i_drag_and_drop_element_amount_to_element_amount_target_by_javascript(String element, String target) {
+        testBase.actionDragAndDropByJS(element, target, this.page);
     }
 
     @After

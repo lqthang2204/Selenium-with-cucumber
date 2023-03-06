@@ -10,11 +10,10 @@ Feature: Login function
     And I change the page spec to HomePage
     And I wait for element page-title to be DISPLAYED
     And I perform buy-one-mobile action
-#    And I verify the text for element page-title is "This is demo site for"
-#    And I wait for element mobile-button to be DISPLAYED
-#    And I click element mobile-button
-#    And I change the page spec to MobilePage
-#    And I wait for element product-one to be DISPLAYED
-#    And I click element product-one
-#    And I clear text from element field-search
-#    And I scroll to element bottom-page
+#    And I verify the text for element page-title is "Mobile"
+    And I wait for element mobile-button to be DISPLAYED
+    And I click element mobile-button
+    And I change the page spec to MobilePage
+    And I wait for element product-one to be DISPLAYED
+    And I click element product-one
+    And I scroll to element bottom-page
