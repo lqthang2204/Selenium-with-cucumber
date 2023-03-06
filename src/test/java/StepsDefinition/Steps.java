@@ -172,12 +172,12 @@ public class Steps {
     }
     @Given("I write {word} into file {}")
     public void i_write_csv(String data, String fileName) throws IOException, InvalidFormatException {
-        testBase.writeCSV(data.replace("\"",""), fileName,this.mapSaveText);
+        testBase.writeFile(data.replace("\"",""), fileName,this.mapSaveText);
     }
-    @Given("I write data {} into file {}")
-    public void i_write_data_into_file_test_file_xlsx(String data, String fileName) throws IOException, InvalidFormatException {
-        testBase.WriteExcel(data,fileName, this.mapSaveText);
-    }
+//    @Given("I write {} into file {}")
+//    public void i_write_data_into_file_test_file_xlsx(String data, String fileName) throws IOException, InvalidFormatException {
+//        testBase.writeFile(data,fileName, this.mapSaveText);
+//    }
     @Given("I type {string} from {word} into element {word}")
     public void i_type_from_file_test_file_csv_into_element_field_search(String data, String file, String element) throws IOException {
 
@@ -191,7 +191,7 @@ public class Steps {
             final  byte[]  screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot, "image/png",scenario.getName());
         }
-        testBase.closeBrowser();
+//        testBase.closeBrowser();
     }
 
 }
