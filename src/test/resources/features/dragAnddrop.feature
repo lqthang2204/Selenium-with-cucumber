@@ -19,3 +19,9 @@ Feature: Login function
     Given I navigate to "https://demo.guru99.com/test/drag_drop.html"
     And I change the page spec to Page_DragDrop
     And I drag and drop element amount_5000 to element amount_target_1 by javascript
+
+  @mc-drag_and_drop_4
+  Scenario: Negative to web URL
+    Given I navigate to "http://the-internet.herokuapp.com/drag_and_drop"
+    And I change the page spec to Page_DragDrop
+    And I drag and drop element column_a to element column_b by javascript

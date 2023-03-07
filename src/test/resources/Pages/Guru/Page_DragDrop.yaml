@@ -23,3 +23,15 @@ elements:
       - device: WEB
         type: XPATH
         value: //*[text()="Drop here"]
+  - id: column_a
+    description: target
+    locators:
+      - device: WEB
+        type: ID
+        value: column-a
+  - id: column_b
+    description: target
+    locators:
+      - device: WEB
+        type: ID
+        value: column-b
