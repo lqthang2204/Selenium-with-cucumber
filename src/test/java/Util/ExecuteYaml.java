@@ -18,7 +18,6 @@ public class ExecuteYaml {
             ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
             Object obj = objectMapper.readValue(f, Object.class);
             ObjectMapper json = new ObjectMapper();
-            System.out.println(obj.toString());
             return json.writeValueAsString(obj);
         } catch (Exception e) {
             e.printStackTrace();
