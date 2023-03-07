@@ -3,8 +3,8 @@ Feature: Login function
 
   @mc-WriteFileCSV
   Scenario: Negative to web URL
-    And I wait 10 seconds
-#      And I navigate to "https://www.google.com.vn/"
+    Given I wait 2-5 seconds
+      And I navigate to "https://www.google.com.vn/"
 #    And I change the page spec to test
 #    And I type "tin tuc" into element field-search
 #    And I click keyboard ENTER button on element field-search

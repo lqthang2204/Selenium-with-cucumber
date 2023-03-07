@@ -836,14 +836,16 @@ public class TestBase {
         return value;
     }
     public static void main(String[] args) {
-        final String number = "0123456789";
-        final int N = number.length();
-        Random r = new Random();
-        String value = "";
-        for (int i = 0; i < 10; i++) {
-            value = value+number.charAt(r.nextInt(N));
-        }
-        System.out.println("value =="+ value);
+//        final String number = "0123456789";
+//        final int N = number.length();
+//        Random r = new Random();
+//        String value = "";
+//        for (int i = 0; i < 10; i++) {
+//            value = value+number.charAt(r.nextInt(N));
+//        }
+//        System.out.println("value =="+ value);
+
+//        System.out.println("number == "+getRandomNumber(5,""));
 
     }
     public void ExecutePostmanCollectionWithLink(String link) throws IOException, InterruptedException {
@@ -959,14 +961,17 @@ public class TestBase {
             }if(!isNumber(arrSecond[0]) && !isNumber(arrSecond[1])){
                 throw new RuntimeException("seconds must be a number");
         }
-            if(Integer.parseInt(arrSecond[0])>Integer.parseInt(arrSecond[1])){
-                throw new RuntimeException("Wait seconds range: wait seconds from should be less than wait seconds to");
-            }
-            else{
+            if(arrSecond.length==2){
+                if(Integer.parseInt(arrSecond[0])>Integer.parseInt(arrSecond[1])){
+                    throw new RuntimeException("Wait seconds range: wait seconds from should be less than wait seconds to");
+                }else{
                     int number = getRandomNumber(Integer.parseInt(arrSecond[0]), Integer.parseInt(arrSecond[1]));
-                    Selenide
-
+                    Selenide.sleep((long)number*1000L);
+                }
+            }else{
+                Selenide.sleep((long)Integer.parseInt(arrSecond[0])*1000L);
             }
+
 
     }
 

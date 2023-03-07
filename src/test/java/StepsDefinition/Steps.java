@@ -191,6 +191,7 @@ public class Steps {
 
     @Given("I wait {word} seconds")
     public void i_wait_seconds(String seconds) {
+        testBase.iwaitSeconds(seconds);
 
     }
 
@@ -201,7 +202,7 @@ public class Steps {
             final  byte[]  screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot, "image/png",scenario.getName());
         }
-//        testBase.closeBrowser();
+        testBase.closeBrowser();
     }
 
 }
