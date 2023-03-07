@@ -24,6 +24,7 @@ import org.testng.Assert;
 
 import java.io.*;
 import java.nio.file.Paths;
+import java.security.SecureRandom;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -951,6 +952,23 @@ public class TestBase {
 
 
     }
+    public void iwaitSeconds(String seconds){
+            String[] arrSecond = seconds.split("-");
+            if(arrSecond.length>2){
+                throw new RuntimeException("please input two number");
+            }if(!isNumber(arrSecond[0]) && !isNumber(arrSecond[1])){
+                throw new RuntimeException("seconds must be a number");
+        }
+            if(Integer.parseInt(arrSecond[0])>Integer.parseInt(arrSecond[1])){
+                throw new RuntimeException("Wait seconds range: wait seconds from should be less than wait seconds to");
+            }
+            else{
+                    int number = getRandomNumber(Integer.parseInt(arrSecond[0]), Integer.parseInt(arrSecond[1]));
+                    Selenide
+
+            }
+
+    }
 
     public void Type(String data, String element, Page page){
         Locators locators = getValueElement(page, element);
@@ -982,7 +1000,18 @@ public class TestBase {
 
 
     }
-
+    public boolean isNumber(String data){
+        try {
+            Integer.parseInt(data);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public static int getRandomNumber(int min, int max) {
+        return (new SecureRandom()).nextInt(max - min + 1) + min;
+    }
     public void closeBrowser(){
         if(driver!=null){
             driver.quit();
@@ -1007,7 +1036,6 @@ public class TestBase {
             }
 
         }
-
     }
 
 }

@@ -179,6 +179,7 @@ public class Steps {
 
                 testBase.getDataFromFile(data, file,element, this.page);
     }
+
     @Given("I drag and drop element {word} to element {word}")
     public void i_drag_and_drop_element_amount_to_element_amount_target(String element, String target) {
         testBase.actionDragAndDrop(element, target, this.page);
@@ -186,6 +187,11 @@ public class Steps {
     @Given("I drag and drop element {word} to element {word} by javascript")
     public void i_drag_and_drop_element_amount_to_element_amount_target_by_javascript(String element, String target) {
         testBase.actionDragAndDropByJS(element, target, this.page);
+    }
+
+    @Given("I wait {word} seconds")
+    public void i_wait_seconds(String seconds) {
+
     }
 
     @After

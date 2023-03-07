@@ -183,9 +183,8 @@ public class ProcessFile {
             e.printStackTrace();
             throw new RuntimeException(number +" not a number, please input a number");
         }
-
-
     }
+
     public String[] getArrayDataToScript(String data, Map<String, String> map){
         String[] arrDataTemp =  data.split(",");
         String[] arrData= new String[arrDataTemp.length];

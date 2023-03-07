@@ -16,6 +16,7 @@ Feature: Search function
     And I perform buy-one-mobile action with override values
 #      | search-input | KEY.product |
       | search-input | USER.email |
+
 #    And I click keyboard HOVER button on element dropdown-search
 #    And I click element dropdown-search
 #    And I click keyboard HOVER-AND-CLICK button on element dropdown-search
