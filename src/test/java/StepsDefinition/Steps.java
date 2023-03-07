@@ -179,6 +179,7 @@ public class Steps {
 
                 testBase.getDataFromFile(data, file,element, this.page);
     }
+
     @Given("I drag and drop element {word} to element {word}")
     public void i_drag_and_drop_element_amount_to_element_amount_target(String element, String target) {
         testBase.actionDragAndDrop(element, target, this.page);
@@ -188,6 +189,12 @@ public class Steps {
         testBase.actionDragAndDropByJS(element, target, this.page);
     }
 
+    @Given("I wait {word} seconds")
+    public void i_wait_seconds(String seconds) {
+        testBase.iwaitSeconds(seconds);
+
+    }
+
     @After
     public void tearDown(Scenario scenario) {
         this.scenario = scenario;
@@ -195,7 +202,7 @@ public class Steps {
             final  byte[]  screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot, "image/png",scenario.getName());
         }
-//        testBase.closeBrowser();
+        testBase.closeBrowser();
     }
 
 }
