@@ -176,6 +176,34 @@ public class TestBase {
                         }
                     });
                     break;
+                case "EXIST":
+                    wait.until(new ExpectedCondition<Boolean>() {
+                        public Boolean apply(WebDriver driver) {
+                            return driver.findElements(by).size()>0;
+                        }
+                    });
+                    break;
+                case "NOT_EXIST":
+                    wait.until(new ExpectedCondition<Boolean>() {
+                        public Boolean apply(WebDriver driver) {
+                            return !(driver.findElements(by).size()>0);
+                        }
+                    });
+                    break;
+                case "SELECTED":
+                    wait.until(new ExpectedCondition<Boolean>() {
+                        public Boolean apply(WebDriver driver) {
+                            return driver.findElement(by).isSelected();
+                        }
+                    });
+                    break;
+                case "NOT_SELECTED":
+                    wait.until(new ExpectedCondition<Boolean>() {
+                        public Boolean apply(WebDriver driver) {
+                            return !(driver.findElement(by).isSelected());
+                        }
+                    });
+                    break;
             }
         } catch (Exception e) {
             e.printStackTrace();
