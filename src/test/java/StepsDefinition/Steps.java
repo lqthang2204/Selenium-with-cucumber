@@ -194,6 +194,10 @@ public class Steps {
         testBase.iwaitSeconds(seconds);
 
     }
+    @Given("I verify attribute element {} has css property {} with value {string}")
+    public void i_verify_attribute_element_campaign_source_value_two_has_css_property_with_value(String element, String property, String value) {
+            testBase.checkCssAttribute(this.page, element, property, value, this.mapSaveText);
+    }
 
     @After
     public void tearDown(Scenario scenario) {
