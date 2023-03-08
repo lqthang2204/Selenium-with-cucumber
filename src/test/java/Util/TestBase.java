@@ -2,6 +2,7 @@ package Util;
 
 import StepsDefinition.Steps;
 import bean.*;
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.impl.JavaScript;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -1000,6 +1001,31 @@ public class TestBase {
                 Selenide.sleep((long)Integer.parseInt(arrSecond[0])*1000L);
             }
 
+
+    }
+    public boolean checkCssAttribute(Page page, String element, String property, String value, Map<String, String> map){
+       By temp = null;
+        boolean flag = false;
+        try {
+            Locators Locator = getValueElement(page, element);
+             By by = getBy(driver, Locator.getType(), Locator.getValue());
+                if (map.containsKey(value)) {
+                    value = map.get(value);
+                }
+            wait.until(new ExpectedCondition<Boolean>() {
+                public Boolean apply(WebDriver driver) {
+                    return driver.findElement(by).isDisplayed();
+                }
+            });
+                scrollToElement(driver, by);
+         flag =  driver.findElement(by).getAttribute(property).equals(value);
+         Assert.assertTrue(flag);
+         temp = by;
+        }catch (Exception e){
+            e.printStackTrace();
+            Assert.assertEquals( driver.findElement(temp).getAttribute(property), value);
+        }
+        return  flag;
 
     }
 
