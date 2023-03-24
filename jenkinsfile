@@ -9,20 +9,19 @@ pipeline {
     stages {
         stage('get Code to GitHub') {
             steps {
-                // Get some code from a GitHub repository
                 git 'https://github.com/lqthang2204/FrameworkAuto.git'
             }
 
         }
          stage ('Running FrameworkAuto'){
-         steps{
-           bat "mvn clean verify  -Dcucumber.filter.tags=%tag% -Dtimeout=%timeout% -DpageLoadTimeout=%page_load_time%"
+             steps{
+               bat "mvn clean verify  -Dcucumber.filter.tags=%tag% -Dtimeout=%timeout% -DpageLoadTimeout=%page_load_time%"
+             }
          }
- }
         stage ('Generated report HTML'){
-        steps{
-         cucumber buildStatus: 'UNSTABLE', customCssFiles: '', customJsFiles: '', fileIncludePattern: '**/cucumber.json'
-        }
+            steps{
+             cucumber buildStatus: 'UNSTABLE', customCssFiles: '', customJsFiles: '', fileIncludePattern: '**/cucumber.json'
+            }
         }
     }
 
