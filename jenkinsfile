@@ -14,11 +14,6 @@ pipeline {
             }
 
         }
-                     stage('install nodejs') {
-                                            steps {
-                                               bat 'npm install -g newman'
-                                            }
-         }
          stage ('Running FrameworkAuto'){
          steps{
            bat "mvn clean verify  -Dcucumber.filter.tags=%tag% -Dtimeout=%timeout% -DpageLoadTimeout=%page_load_time%"
