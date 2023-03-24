@@ -46,6 +46,7 @@ public class Steps {
         userDTO = new UserDTO();
         mapSaveText = new HashMap<>();
         mapFileYaml = new HashMap<>();
+        System.setProperty("webdriver.http.factory", "jdk-http-client");
         execute.findFile(new File(System.getProperty("user.dir") + "/src/test/resources/Pages"), this.mapFileYaml);
         this.scenario = scenario;
         listUserDTO = new LinkedList<>();
