@@ -1,5 +1,6 @@
 package Util;
 
+import ManageDriver.Hook;
 import StepsDefinition.Steps;
 import bean.*;
 import com.codeborne.selenide.Condition;
@@ -52,29 +53,7 @@ public class TestBase {
 
 
     public WebDriver getDriver() {
-        switch (Configuration.WEB_BROWSER) {
-            case "CHROME":
-//                    WebDriverManager.chromedriver().clearDriverCache();
-//                    WebDriverManager.chromedriver().setup();
-                    this.driver = new ChromeDriver();
-                    break;
-            case "FIREFOX":
-//                WebDriverManager.firefoxdriver().setup();
-                driver = new FirefoxDriver();
-                break;
-//            case "OPERA":
-////                WebDriverManager.operadriver().setup();
-//                driver = new
-//                break;
-            case "EDGE":
-//                WebDriverManager.edgedriver().setup();
-                driver = new EdgeDriver();
-                break;
-            default:
-                    System.out.println("Not support to run browser");
-                Assert.assertTrue(false);
-                    break;
-        }
+       driver = Hook.getInstance(Configuration.WEB_BROWSER);
         wait = getWait(driver);
         return driver;
     }
@@ -1072,11 +1051,7 @@ public class TestBase {
         return (new SecureRandom()).nextInt(max - min + 1) + min;
     }
     public void closeBrowser(){
-        if(driver!=null){
-            driver.quit();
-            driver=null;
-        }
-
+      Hook.quit();
     }
     public void beforeAction(WebElement element){
         try {
