@@ -51,6 +51,7 @@ public class Steps {
         this.scenario = scenario;
         listUserDTO = new LinkedList<>();
 //        testBase.readYamlFile("CommonPage", this.mapFileYaml);
+        this.driver = testBase.getDriver();
 
 
     }
@@ -70,7 +71,7 @@ public class Steps {
 
     @Given("I navigate to {word}")
     public void openBrowser(String url) {
-           this.driver = TestBase.OpenBrowser(testBase, url);
+           TestBase.OpenBrowser(testBase, url);
     }
 
     @Given("I change the page spec to {word}")

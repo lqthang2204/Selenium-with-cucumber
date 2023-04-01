@@ -7,6 +7,8 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 
+import java.time.Duration;
+
 public class Hook {
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
@@ -29,6 +31,10 @@ public class Hook {
                 Assert.assertTrue(false);
                 break;
         }
+        if (Configuration.DEFAULT_MAXIMUM) {
+            driver.get().manage().window().maximize();
+        }
+        driver.get().manage().timeouts().pageLoadTimeout(Duration.ofMillis(Configuration.PAGE_LOAD_TIME));
         return driver.get();
     }
     public static void quit(){
