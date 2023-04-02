@@ -51,27 +51,24 @@ public class TestBase {
     }
 
 
-    public WebDriver getDriver() {
+    public void getDriver() {
         this.driver = Hook.getInstance(Configuration.WEB_BROWSER);
-        wait = getWait(driver);
-        return driver;
+        wait = getWait();
     }
 
-    public static WebDriver OpenBrowser(TestBase testBase, String URl) {
+    public WebDriver OpenBrowser(String URl) {
         try {
             if (URl.equals("refresh-page")) {
-                driver.navigate().refresh();
+                Hook.getWebdriver().navigate().refresh();
             }
             if (!URl.equals("refresh-page")) {
-                driver.get(URl.replace("\"", ""));
+                Hook.getWebdriver().get(URl.replace("\"", ""));
             }
-
-
         } catch (Exception e) {
             e.printStackTrace();
             Assert.assertTrue(false);
         }
-        return driver;
+        return Hook.getWebdriver();
     }
 
     public void mouseAction(Page page, String action, String element, Map<String, String> map) {
@@ -468,7 +465,7 @@ public class TestBase {
                 By by = getBy(driver, locators.getType(), locators.getValue());
 //                    scrollToElement(this.driver, by);
                 if (list.get(i).getCondition() != null) {
-                    waitAction = getWaitAction(driver, list.get(i).getTimeout());
+                    waitAction = getWaitAction(list.get(i).getTimeout());
                     if (waitAction != null) {
                         temp = true;
                     } else {
@@ -592,12 +589,12 @@ public class TestBase {
     }
 
 
-    public WebDriverWait getWait(WebDriver driver) {
+    public WebDriverWait getWait() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(Configuration.TIME_OUT));
         return wait;
     }
 
-    public WebDriverWait getWaitAction(WebDriver driver, long duration) {
+    public WebDriverWait getWaitAction(long duration) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(duration));
         return wait;
     }
@@ -1014,7 +1011,7 @@ public class TestBase {
 
     public void Type(String data, String element, Page page) {
         Locators locators = getValueElement(page, element);
-        WebDriverWait wait = getWait(driver);
+        WebDriverWait wait = getWait();
         By by = getBy(driver, locators.getType(), locators.getValue());
 //        wait.until(ExpectedConditions.elementToBeClickable(by));
         driver.findElement(by).click();

@@ -38,17 +38,21 @@ public class Hook {
         if (Configuration.DEFAULT_MAXIMUM) {
             driver.get().manage().window().maximize();
         }
-        driver.get().manage().timeouts().pageLoadTimeout(Duration.ofMillis(Configuration.PAGE_LOAD_TIME));
-        return driver.get();
+        System.out.println("name thread == "+ Thread.currentThread().getName());
+        System.out.println("SessionID  == "+ Thread.currentThread().getId());
+        getWebdriver().manage().timeouts().pageLoadTimeout(Duration.ofMillis(Configuration.PAGE_LOAD_TIME));
+        return getWebdriver();
     }
 
-    public static WebDriver getDriver() {
+    public static WebDriver getWebdriver() {
         return driver.get();
 
     }
 
     public static void quit() {
         if (driver.get() != null) {
+            System.out.println("name thread close == "+ Thread.currentThread().getName());
+            System.out.println("SessionID close  == "+ Thread.currentThread().getId());
             driver.get().quit();
             driver.remove();
         }
