@@ -53,6 +53,7 @@ public class Steps {
         this.scenario = scenario;
         listUserDTO = new LinkedList<>();
 //        testBase.readYamlFile("CommonPage", this.mapFileYaml);
+
         this.driver = testBase.getDriver();
 
 
@@ -77,7 +78,6 @@ public class Steps {
     @Given("I change the page spec to {word}")
     public void updateYaml(String yaml) {
         this.page = testBase.readYamlFile(yaml, this.mapFileYaml);
-
         this.titlePage = yaml;
     }
 
@@ -218,7 +218,7 @@ public class Steps {
             final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot, "image/png", scenario.getName());
         }
-//        testBase.closeBrowser();
+        testBase.closeBrowser();
     }
 
 }

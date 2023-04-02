@@ -52,20 +52,13 @@ public class TestBase {
 
 
     public WebDriver getDriver() {
-        driver = Hook.getInstance(Configuration.WEB_BROWSER);
+        this.driver = Hook.getInstance(Configuration.WEB_BROWSER);
         wait = getWait(driver);
         return driver;
     }
 
     public static WebDriver OpenBrowser(TestBase testBase, String URl) {
         try {
-            if (driver == null) {
-                driver = testBase.getDriver();
-                System.out.println("Duration.ofMillis(Configuration.PAGE_LOAD_TIME)==" + Duration.ofMillis(Configuration.PAGE_LOAD_TIME));
-                if (Configuration.DEFAULT_MAXIMUM) {
-                    driver.manage().window().maximize();
-                }
-            }
             if (URl.equals("refresh-page")) {
                 driver.navigate().refresh();
             }
