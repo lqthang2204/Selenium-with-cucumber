@@ -12,7 +12,8 @@ on:
   push:
     branches: [ "master" ]
   pull_request:
-    branches: [ "master" ]
+    #branches: [ "master" ]
+    types: [review_requested]
 
 jobs:
   build:
