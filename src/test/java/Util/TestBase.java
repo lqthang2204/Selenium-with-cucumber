@@ -14,6 +14,7 @@ import io.cucumber.java.Scenario;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -22,7 +23,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.io.*;
 import java.nio.file.Paths;
@@ -35,11 +35,11 @@ import java.util.stream.Stream;
 //import static com.codeborne.selenide.Selenide.$;
 
 public class TestBase {
-    public static WebDriver driver;
+    public WebDriver driver;
     private JsonNode arrayJsonNode;
     FakerData fake;
     public WebDriverWait wait;
-
+    public Hook hook;
     public Actions actions;
     public Map<String, Page> map = new HashMap<>();
     ExecuteYaml yamlExecute = new ExecuteYaml();
@@ -48,40 +48,33 @@ public class TestBase {
 
     public TestBase() {
         Configuration.ReadConfig();
+       hook = new Hook();
     }
 
 
-    public WebDriver getDriver() {
-        driver = Hook.getInstance(Configuration.WEB_BROWSER);
-        wait = getWait(driver);
-        return driver;
+    public void getDriver() {
+       hook.getInstance(Configuration.WEB_BROWSER);
+        driver = hook.getWebdriver();
+        wait = getWait();
     }
 
-    public static WebDriver OpenBrowser(TestBase testBase, String URl) {
+    public WebDriver OpenBrowser(String URl) {
         try {
-            if (driver == null) {
-                driver = testBase.getDriver();
-                System.out.println("Duration.ofMillis(Configuration.PAGE_LOAD_TIME)==" + Duration.ofMillis(Configuration.PAGE_LOAD_TIME));
-                if (Configuration.DEFAULT_MAXIMUM) {
-                    driver.manage().window().maximize();
-                }
-            }
             if (URl.equals("refresh-page")) {
-                driver.navigate().refresh();
+                hook.getWebdriver().navigate().refresh();
             }
             if (!URl.equals("refresh-page")) {
-                driver.get(URl.replace("\"", ""));
+                hook.getWebdriver().get(URl.replace("\"", ""));
             }
-
-
         } catch (Exception e) {
             e.printStackTrace();
             Assert.assertTrue(false);
         }
-        return driver;
+        return hook.getWebdriver();
     }
 
     public void mouseAction(Page page, String action, String element, Map<String, String> map) {
+        System.out.println("thread === "+ Thread.currentThread().getId());
         Locators locators = getValueElement(page, element);
         String valueElement = getValueElementToWithText(locators, element, map);
 //        WebDriverWait wait = getWait(driver);
@@ -128,6 +121,7 @@ public class TestBase {
 
 
     public void showUI(Page page, String element, String status, Map<String, String> map) {
+        System.out.println("thread show=== "+ Thread.currentThread().getId());
         try {
             Locators locators = getValueElement(page, element);
             String valueElement = getValueElementToWithText(locators, element, map);
@@ -475,7 +469,7 @@ public class TestBase {
                 By by = getBy(driver, locators.getType(), locators.getValue());
 //                    scrollToElement(this.driver, by);
                 if (list.get(i).getCondition() != null) {
-                    waitAction = getWaitAction(driver, list.get(i).getTimeout());
+                    waitAction = getWaitAction(list.get(i).getTimeout());
                     if (waitAction != null) {
                         temp = true;
                     } else {
@@ -599,12 +593,12 @@ public class TestBase {
     }
 
 
-    public WebDriverWait getWait(WebDriver driver) {
+    public WebDriverWait getWait() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(Configuration.TIME_OUT));
         return wait;
     }
 
-    public WebDriverWait getWaitAction(WebDriver driver, long duration) {
+    public WebDriverWait getWaitAction(long duration) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(duration));
         return wait;
     }
@@ -1021,7 +1015,7 @@ public class TestBase {
 
     public void Type(String data, String element, Page page) {
         Locators locators = getValueElement(page, element);
-        WebDriverWait wait = getWait(driver);
+        WebDriverWait wait = getWait();
         By by = getBy(driver, locators.getType(), locators.getValue());
 //        wait.until(ExpectedConditions.elementToBeClickable(by));
         driver.findElement(by).click();
@@ -1042,7 +1036,8 @@ public class TestBase {
                 fileProcess.WriteDataExcel(data, fileName, map);
                 break;
             default:
-                throw new NotFoundException("Not support file type " + fileType);
+               Assert.assertTrue("Not support file type " + fileType,false);
+            break;
         }
 
 
@@ -1063,7 +1058,7 @@ public class TestBase {
     }
 
     public void closeBrowser() {
-        Hook.quit();
+        hook.quit();
     }
 
     public void beforeAction(WebElement element) {
