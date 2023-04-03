@@ -1036,7 +1036,8 @@ public class TestBase {
                 fileProcess.WriteDataExcel(data, fileName, map);
                 break;
             default:
-                throw new NotFoundException("Not support file type " + fileType);
+               Assert.assertTrue("Not support file type " + fileType,false);
+            break;
         }
 
 
