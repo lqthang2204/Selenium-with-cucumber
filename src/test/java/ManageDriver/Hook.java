@@ -10,13 +10,14 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import java.time.Duration;
 
 public class Hook {
-    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    public  final ThreadLocal<WebDriver> driver = ThreadLocal.withInitial(() -> {
+        return null;
+    });
 
-    Hook() {
-
+    public Hook() {
     }
 
-    public static WebDriver getInstance(String browser) {
+    public  WebDriver getInstance(String browser) {
         if (driver.get() == null) {
             switch (browser) {
                 case "CHROME":
@@ -40,21 +41,20 @@ public class Hook {
         }
         System.out.println("name thread == "+ Thread.currentThread().getName());
         System.out.println("SessionID  == "+ Thread.currentThread().getId());
-        getWebdriver().manage().timeouts().pageLoadTimeout(Duration.ofMillis(Configuration.PAGE_LOAD_TIME));
-        return getWebdriver();
+        driver.get().manage().timeouts().pageLoadTimeout(Duration.ofMillis(Configuration.PAGE_LOAD_TIME));
+        return driver.get();
     }
 
-    public static WebDriver getWebdriver() {
+    public WebDriver getWebdriver() {
         return driver.get();
 
     }
 
-    public static void quit() {
-        if (driver.get() != null) {
+    public void quit() {
             System.out.println("name thread close == "+ Thread.currentThread().getName());
             System.out.println("SessionID close  == "+ Thread.currentThread().getId());
+        driver.get().quit();
             driver.get().quit();
             driver.remove();
-        }
     }
 }

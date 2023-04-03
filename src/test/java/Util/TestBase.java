@@ -35,11 +35,11 @@ import java.util.stream.Stream;
 //import static com.codeborne.selenide.Selenide.$;
 
 public class TestBase {
-    public static WebDriver driver;
+    public WebDriver driver;
     private JsonNode arrayJsonNode;
     FakerData fake;
     public WebDriverWait wait;
-
+    public Hook hook;
     public Actions actions;
     public Map<String, Page> map = new HashMap<>();
     ExecuteYaml yamlExecute = new ExecuteYaml();
@@ -48,30 +48,33 @@ public class TestBase {
 
     public TestBase() {
         Configuration.ReadConfig();
+       hook = new Hook();
     }
 
 
     public void getDriver() {
-        this.driver = Hook.getInstance(Configuration.WEB_BROWSER);
+       hook.getInstance(Configuration.WEB_BROWSER);
+        driver = hook.getWebdriver();
         wait = getWait();
     }
 
     public WebDriver OpenBrowser(String URl) {
         try {
             if (URl.equals("refresh-page")) {
-                Hook.getWebdriver().navigate().refresh();
+                hook.getWebdriver().navigate().refresh();
             }
             if (!URl.equals("refresh-page")) {
-                Hook.getWebdriver().get(URl.replace("\"", ""));
+                hook.getWebdriver().get(URl.replace("\"", ""));
             }
         } catch (Exception e) {
             e.printStackTrace();
             Assert.assertTrue(false);
         }
-        return Hook.getWebdriver();
+        return hook.getWebdriver();
     }
 
     public void mouseAction(Page page, String action, String element, Map<String, String> map) {
+        System.out.println("thread === "+ Thread.currentThread().getId());
         Locators locators = getValueElement(page, element);
         String valueElement = getValueElementToWithText(locators, element, map);
 //        WebDriverWait wait = getWait(driver);
@@ -118,6 +121,7 @@ public class TestBase {
 
 
     public void showUI(Page page, String element, String status, Map<String, String> map) {
+        System.out.println("thread show=== "+ Thread.currentThread().getId());
         try {
             Locators locators = getValueElement(page, element);
             String valueElement = getValueElementToWithText(locators, element, map);
@@ -1053,7 +1057,7 @@ public class TestBase {
     }
 
     public void closeBrowser() {
-        Hook.quit();
+        hook.quit();
     }
 
     public void beforeAction(WebElement element) {

@@ -1,5 +1,6 @@
 package StepsDefinition;
 
+import ManageDriver.Hook;
 import Util.Configuration;
 import Util.ExecuteYaml;
 import Util.TestBase;
@@ -23,10 +24,8 @@ import java.io.IOException;
 import java.util.*;
 
 public class Steps {
-    public static WebDriver driver;
     public TestBase testBase;
     ExecuteYaml execute;
-    //    Map<String, Page> map;
     Page page;
     Map<String, String> mapSaveText;
     public static String titlePage;
@@ -34,16 +33,16 @@ public class Steps {
     Scenario scenario;
     List<UserDTO> listUserDTO;
     UserDTO userDTO;
+    public Hook hook;
 
     public Steps() {
     }
 
     @Before
     public void setUp(Scenario scenario) {
-//        Configuration.ReadConfig();
+        hook = new Hook();
         testBase = new TestBase();
         execute = new ExecuteYaml();
-//        map = new HashMap<>();
         page = new Page();
         userDTO = new UserDTO();
         mapSaveText = new HashMap<>();
@@ -53,10 +52,12 @@ public class Steps {
         this.scenario = scenario;
         listUserDTO = new LinkedList<>();
 //        testBase.readYamlFile("CommonPage", this.mapFileYaml);
+
     }
 
     @Before
     public void setUp2(Scenario scenario) {
+
         System.out.println("Scenarion == " + scenario);
         System.out.println("" + scenario.getSourceTagNames());
         Collection<String> tags = scenario.getSourceTagNames();
@@ -212,7 +213,7 @@ public class Steps {
     public void tearDown(Scenario scenario) {
         this.scenario = scenario;
         if (scenario.isFailed()) {
-            final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+            final byte[] screenshot = ((TakesScreenshot) hook.getWebdriver()).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot, "image/png", scenario.getName());
         }
         testBase.closeBrowser();

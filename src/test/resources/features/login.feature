@@ -1,9 +1,9 @@
-@feature-mc-21946 @regression
+@feature-login
 Feature: Login function
 
   @mc-login
   Scenario: Negative to web URL
-    Given I navigate to "https://zingnews.vn/"
+#    Given I navigate to "https://zingnews.vn/"
     And I navigate to "https://www.google.com.vn/"
     And I change the page spec to test
     And I become a random user
@@ -46,7 +46,7 @@ Feature: Login function
 
   @mc-test123456
   Scenario: Negative to web URL
-    Given I navigate to "https://zingnews.vn/"
+#    Given I navigate to "https://zingnews.vn/"
     And I navigate to "https://www.google.com.vn/"
     And I change the page spec to test
     And I type "Đăng nhập" into element field-search
