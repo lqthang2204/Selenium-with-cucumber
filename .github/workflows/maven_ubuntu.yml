@@ -8,7 +8,7 @@
 #https://docs:
 #  github:
 #    com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven:
-name: Run check Code
+name: Run check Code Ubuntu
 
 on:
   push:
