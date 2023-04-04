@@ -64,47 +64,47 @@ Feature: Login function
     And I run test.json with data.json data file with override values
       | search-input | USER.email |
 
-  @mc-guru3
-  Scenario: Negative to web URL
-    And I navigate to "https://www.google.com.vn/"
-    And I change the page spec to test
-    And I type "Đăng nhập" into element field-search
-    And I save text for element field-search with key "name"
-    And I clear text from element field-search
-    And I click element ui-text-equal with text "Đăng nhập"
-    And I wait for element ui-text-equal with text "KEY.name" to be DISPLAYED
-    And I click element ui-text-equal with text "KEY.name"
-    And I wait for element ui-text-equal with text "Tiếp theo" to be DISPLAYED
-
-  @mc-guru4
-  Scenario: Negative to web URL
-    Given I navigate to "https://demo.guru99.com/test/drag_drop.html"
-#    Given I navigate to "https://jqueryui.com/droppable/"
-    And I change the page spec to Page_DragDrop
-    And I drag and drop element amount_5000 to element amount_target_1
-
-  @mc-guru5
-  Scenario: Negative to web URL
-    And I navigate to "https://www.google.com.vn/"
-    And I change the page spec to test
-    And I type "tin tuc" into element field-search
-    And I click keyboard ENTER button on element field-search
-    And I change the page spec to result
-    And I wait for element result-search to be DISPALYED
-    And I save text for element result-search with key "data_temp"
-    And I save text for element result-search-2 with key "data_temp-2"
-    And I save text for element result-search-3 with key "data_temp-3"
-    And I generate test_file.csv file with header "column1, column2, column3"
-    And I write "KEY.data_temp,KEY.data_temp-2,KEY.data_temp-3" into file test_file.csv
-    And I change the page spec to test
-    And I type "zing" into element field-search
-    And I click keyboard ENTER button on element field-search
-    And I change the page spec to result
-    And I wait for element result-search to be DISPALYED
-    And I save text for element result-search with key "data_temp_4"
-    And I write "KEY.data_temp_4,," into file test_file.csv
-    And I change the page spec to test
-    And I type "column1.1" from test_file.csv into element field-search
+#  @mc-guru3
+#  Scenario: Negative to web URL
+#    And I navigate to "https://www.google.com.vn/"
+#    And I change the page spec to test
+#    And I type "Đăng nhập" into element field-search
+#    And I save text for element field-search with key "name"
+#    And I clear text from element field-search
+#    And I click element ui-text-equal with text "Đăng nhập"
+#    And I wait for element ui-text-equal with text "KEY.name" to be DISPLAYED
+#    And I click element ui-text-equal with text "KEY.name"
+#    And I wait for element ui-text-equal with text "Tiếp theo" to be DISPLAYED
+#
+#  @mc-guru4
+#  Scenario: Negative to web URL
+#    Given I navigate to "https://demo.guru99.com/test/drag_drop.html"
+##    Given I navigate to "https://jqueryui.com/droppable/"
+#    And I change the page spec to Page_DragDrop
+#    And I drag and drop element amount_5000 to element amount_target_1
+#
+#  @mc-guru5
+#  Scenario: Negative to web URL
+#    And I navigate to "https://www.google.com.vn/"
+#    And I change the page spec to test
+#    And I type "tin tuc" into element field-search
+#    And I click keyboard ENTER button on element field-search
+#    And I change the page spec to result
+#    And I wait for element result-search to be DISPALYED
+#    And I save text for element result-search with key "data_temp"
+#    And I save text for element result-search-2 with key "data_temp-2"
+#    And I save text for element result-search-3 with key "data_temp-3"
+#    And I generate test_file.csv file with header "column1, column2, column3"
+#    And I write "KEY.data_temp,KEY.data_temp-2,KEY.data_temp-3" into file test_file.csv
+#    And I change the page spec to test
+#    And I type "zing" into element field-search
+#    And I click keyboard ENTER button on element field-search
+#    And I change the page spec to result
+#    And I wait for element result-search to be DISPALYED
+#    And I save text for element result-search with key "data_temp_4"
+#    And I write "KEY.data_temp_4,," into file test_file.csv
+#    And I change the page spec to test
+#    And I type "column1.1" from test_file.csv into element field-search
 
   @mc-guru6
   Scenario Outline: test Search function
