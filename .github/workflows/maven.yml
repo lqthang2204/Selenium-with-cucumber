@@ -4,6 +4,7 @@
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
 # separate terms of service, privacy policy, and support
+#mvn clean verify -Dtimeout=120000 -DpageLoadTimeout=120000 -DstartMaximized=true -Dcucumber.filter.tags=@mc-login#
 # documentation.
 
 name: Java CI with Maven
@@ -28,7 +29,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn clean verify -Dtimeout=120000 -DpageLoadTimeout=120000 -DstartMaximized=true -Dcucumber.filter.tags=@mc-login
+      run: mvn clean verify
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
