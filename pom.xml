@@ -176,9 +176,9 @@
                             <projectName>FrameworkAuto</projectName>
                             <outputDirectory>${project.build.directory}/cucumber-report-html</outputDirectory>
                             <inputDirectory>${project.build.directory}/cucumber.json</inputDirectory>
-<!--                            <jsonFiles>-->
-<!--                                <param>**/cucumber.json</param>-->
-<!--                            </jsonFiles>-->
+                            <jsonFiles>
+                                <param>**/cucumber.json</param>
+                            </jsonFiles>
                             <mergeFeaturesById>false</mergeFeaturesById>
 <!--                            <mergeFeaturesWithRetest>false</mergeFeaturesWithRetest>-->
                             <checkBuildResult>true</checkBuildResult>
