@@ -35,7 +35,7 @@ jobs:
             bug
             enhacement
       - name: Build with Maven
-        run: mvn clean verify -Dtimeout=120000 -DpageLoadTimeout=120000 -DstartMaximized=true -Dcucumber.filter.tags=@Guru
+        run: mvn clean verify -Dtimeout=120000 -DpageLoadTimeout=120000 -DstartMaximized=true -Dcucumber.filter.tags="@Guru"
 
       # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
       - name: Update dependency graph
