@@ -211,12 +211,19 @@ public class Steps {
 
     @After
     public void tearDown(Scenario scenario) {
-        this.scenario = scenario;
-        if (scenario.isFailed()) {
-            final byte[] screenshot = ((TakesScreenshot) hook.getWebdriver()).getScreenshotAs(OutputType.BYTES);
-            scenario.attach(screenshot, "image/png", scenario.getName());
+        try {
+            this.scenario = scenario;
+            if (scenario.isFailed()) {
+                final byte[] screenshot = ((TakesScreenshot) hook.getWebdriver()).getScreenshotAs(OutputType.BYTES);
+                scenario.attach(screenshot, "image/png", scenario.getName());
+            }
+        }catch (Exception e)
+        {
+            e.printStackTrace();
         }
-        testBase.closeBrowser();
+        finally {
+            testBase.closeBrowser();
+        }
     }
 
 }

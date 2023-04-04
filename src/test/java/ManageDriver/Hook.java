@@ -53,7 +53,7 @@ public class Hook {
     public void quit() {
             System.out.println("name thread close == "+ Thread.currentThread().getName());
             System.out.println("SessionID close  == "+ Thread.currentThread().getId());
-        driver.get().quit();
+            driver.get().quit();
             driver.get().quit();
             driver.remove();
     }
