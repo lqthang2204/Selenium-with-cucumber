@@ -7,7 +7,7 @@ Feature: Login function
     And I change the page spec to test
     And I become a random user
     And I type "USER.email" into element field-search
-    And I click keyboard NUMPAD6 button on element field-search
+    And I click keyboard ENTER button on element field-search
     And I change the page spec to result
     And I wait for element result-search to be DISPALYED
     And I save text for element result-search with key "data_temp"
