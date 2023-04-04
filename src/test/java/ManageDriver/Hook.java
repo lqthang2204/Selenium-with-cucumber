@@ -4,6 +4,7 @@ import Util.Configuration;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -21,7 +22,9 @@ public class Hook {
         if (driver.get() == null) {
             switch (browser) {
                 case "CHROME":
-                    driver.set(new ChromeDriver());
+                    ChromeOptions ChromeOptions = new ChromeOptions();
+                    ChromeOptions.addArguments("--headless", "window-size=1024,768", "--no-sandbox");
+                    driver.set(new ChromeDriver(ChromeOptions));
                     break;
                 case "FIREFOX":
                     driver.set(new FirefoxDriver());
