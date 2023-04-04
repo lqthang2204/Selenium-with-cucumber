@@ -175,7 +175,7 @@
                         <configuration>
                             <projectName>FrameworkAuto</projectName>
                             <outputDirectory>${project.build.directory}/cucumber-report-html</outputDirectory>
-                            <inputDirectory>${project.build.directory}/cucumber.json</inputDirectory>
+                            <inputDirectory>${project.build.directory}/</inputDirectory>
                             <jsonFiles>
                                 <param>**/cucumber.json</param>
                             </jsonFiles>
