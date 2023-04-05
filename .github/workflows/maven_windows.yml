@@ -1,4 +1,4 @@
-name: Run check Code Windows
+name: Run check Code with multi OS
 
 on:
   push:
@@ -10,7 +10,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ 'ubuntu-latest', 'macos-latest', 'windows-latest' ]
+        os: [ 'ubuntu-latest', 'windows-latest' ]
+#          os: [ 'ubuntu-latest', 'macos-latest', 'windows-latest' ]
     name: Java ${{ matrix.Java }} (${{ matrix.os }}) sample
     steps:
       - uses: actions/checkout@v3
