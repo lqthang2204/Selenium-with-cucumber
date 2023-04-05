@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.time.Duration;
 
@@ -23,11 +24,17 @@ public class Hook {
             switch (browser) {
                 case "CHROME":
                     ChromeOptions ChromeOptions = new ChromeOptions();
-                    ChromeOptions.addArguments("--headless", "window-size=1024,768", "--no-sandbox");
+                    if(Configuration.IS_HEADLESS){
+                        ChromeOptions.addArguments("--headless", "window-size=1024,768", "--no-sandbox");
+                    }
                     driver.set(new ChromeDriver(ChromeOptions));
                     break;
                 case "FIREFOX":
-                    driver.set(new FirefoxDriver());
+                    FirefoxOptions firefoxOptions = new FirefoxOptions();
+                    if(Configuration.IS_HEADLESS){
+                        firefoxOptions.addArguments("--headless", "window-size=1024,768", "--no-sandbox");
+                    }
+                    driver.set(new FirefoxDriver(firefoxOptions));
                     break;
                 case "EDGE":
                     driver.set(new EdgeDriver());
