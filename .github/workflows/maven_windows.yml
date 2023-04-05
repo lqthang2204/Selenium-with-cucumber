@@ -1,3 +1,10 @@
+name: Run check Code Windows
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 jobs:
   build:
     runs-on: ${{ matrix.os }}
