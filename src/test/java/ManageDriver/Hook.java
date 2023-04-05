@@ -7,27 +7,34 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.time.Duration;
 
 public class Hook {
-    public  final ThreadLocal<WebDriver> driver = ThreadLocal.withInitial(() -> {
+    public final ThreadLocal<WebDriver> driver = ThreadLocal.withInitial(() -> {
         return null;
     });
 
     public Hook() {
     }
 
-    public  WebDriver getInstance(String browser) {
+    public WebDriver getInstance(String browser) {
         if (driver.get() == null) {
             switch (browser) {
                 case "CHROME":
                     ChromeOptions ChromeOptions = new ChromeOptions();
-                    ChromeOptions.addArguments("--headless", "window-size=1024,768", "--no-sandbox");
+                    if (Configuration.IS_HEADLESS) {
+                        ChromeOptions.addArguments("--headless", "window-size=1024,768", "--no-sandbox");
+                    }
                     driver.set(new ChromeDriver(ChromeOptions));
                     break;
                 case "FIREFOX":
-                    driver.set(new FirefoxDriver());
+                    FirefoxOptions firefoxOptions = new FirefoxOptions();
+                    if (Configuration.IS_HEADLESS) {
+                        firefoxOptions.addArguments("--headless", "window-size=1024,768", "--no-sandbox");
+                    }
+                    driver.set(new FirefoxDriver(firefoxOptions));
                     break;
                 case "EDGE":
                     driver.set(new EdgeDriver());
@@ -42,8 +49,8 @@ public class Hook {
         if (Configuration.DEFAULT_MAXIMUM) {
             driver.get().manage().window().maximize();
         }
-        System.out.println("name thread == "+ Thread.currentThread().getName());
-        System.out.println("SessionID  == "+ Thread.currentThread().getId());
+        System.out.println("name thread == " + Thread.currentThread().getName());
+        System.out.println("SessionID  == " + Thread.currentThread().getId());
         driver.get().manage().timeouts().pageLoadTimeout(Duration.ofMillis(Configuration.PAGE_LOAD_TIME));
         return driver.get();
     }
@@ -54,10 +61,10 @@ public class Hook {
     }
 
     public void quit() {
-            System.out.println("name thread close == "+ Thread.currentThread().getName());
-            System.out.println("SessionID close  == "+ Thread.currentThread().getId());
-            driver.get().quit();
-            driver.get().quit();
-            driver.remove();
+        System.out.println("name thread close == " + Thread.currentThread().getName());
+        System.out.println("SessionID close  == " + Thread.currentThread().getId());
+        driver.get().quit();
+        driver.get().quit();
+        driver.remove();
     }
 }
