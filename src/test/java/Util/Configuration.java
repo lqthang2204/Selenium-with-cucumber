@@ -11,6 +11,7 @@ public class Configuration {
     public static long PAGE_LOAD_TIME= 0;
     public static boolean DEFAULT_MAXIMUM =true;
     public static String PATH_POSTMAN;
+    public static boolean IS_HEADLESS;
     public static String[] PREFIX= new String[]{"unique.", "user.","key."};
 
 //    private static final SelenideConfig defaults = new SelenideConfig();
@@ -20,6 +21,7 @@ public class Configuration {
         Configuration.TIME_OUT = Long.parseLong(System.getProperty("timeout")==null ? "30000" : System.getProperty("timeout"));
         Configuration.PAGE_LOAD_TIME = Integer.parseInt(System.getProperty("pageLoadTimeout")==null ? "30000" : System.getProperty("pageLoadTimeout"));
         Configuration.DEFAULT_MAXIMUM = Boolean.parseBoolean(System.getProperty("startMaximized")==null ? "true" : System.getProperty("startMaximized"));
+        Configuration.IS_HEADLESS = Boolean.parseBoolean(System.getProperty("headless")==null ? "false" : System.getProperty("headless"));
         Configuration.PATH_POSTMAN = getFilePath(System.getProperty("user.dir")+"/src/test/resources/postman-test");
 //        TIME_OUT = defaults.timeout();
     }
