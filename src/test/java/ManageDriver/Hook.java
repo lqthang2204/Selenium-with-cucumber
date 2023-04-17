@@ -1,6 +1,7 @@
 package ManageDriver;
 
 import Util.Configuration;
+import com.epam.healenium.SelfHealingDriver;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -27,7 +28,9 @@ public class Hook {
                     if(Configuration.IS_HEADLESS){
                         ChromeOptions.addArguments("--headless", "window-size=1024,768", "--no-sandbox");
                     }
-                    driver.set(new ChromeDriver(ChromeOptions));
+                    WebDriver delgate = new ChromeDriver(ChromeOptions);
+                   SelfHealingDriver selfHealingDriver = SelfHealingDriver.create(delgate);
+                    driver.set(selfHealingDriver);
                     break;
                 case "FIREFOX":
                     FirefoxOptions firefoxOptions = new FirefoxOptions();
