@@ -62,7 +62,7 @@ Feature: Login function
       | test2 | KEY.name |
     And I run test.json with data.json data file
     And I run test.json with data.json data file with override values
-      | search-input | USER.email |
+      | search-input | USER.1.email |
 
 #  @mc-guru3
 #  Scenario: Negative to web URL
