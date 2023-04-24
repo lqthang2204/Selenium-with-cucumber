@@ -50,7 +50,6 @@ public class Steps {
         System.setProperty("webdriver.http.factory", "jdk-http-client");
         execute.findFile(new File(System.getProperty("user.dir") + "/src/test/resources/Pages"), this.mapFileYaml);
         this.scenario = scenario;
-        listUserDTO = new LinkedList<>();
 //        testBase.readYamlFile("CommonPage", this.mapFileYaml);
 
     }
@@ -93,19 +92,19 @@ public class Steps {
 
     @When("I type {string} into element {word}")
     public void actionType(String content, String element) {
-        testBase.ActionType(this.page, element, content, this.mapSaveText, this.userDTO);
+        testBase.ActionType(this.page, element, content, this.mapSaveText, this.listUserDTO);
 
     }
 
     @And("I run {word} with {word} data file")
     public void i_run_postman_collection_with_data_json(String collectionFile, String dataFile) {
-        testBase.runCollection(collectionFile, dataFile, (Map) null, this.scenario, this.userDTO, this.mapSaveText);
+        testBase.runCollection(collectionFile, dataFile, (Map) null, this.scenario, this.listUserDTO, this.mapSaveText);
 
     }
 
     @And("I run {word} with {word} data file with override values")
     public void i_run_with_data_file_with_override_values(String collectionFile, String dataFile, DataTable dataTable) {
-        testBase.runCollection(collectionFile, dataFile, dataTable.asMap(String.class, String.class), this.scenario, userDTO, this.mapSaveText);
+        testBase.runCollection(collectionFile, dataFile, dataTable.asMap(String.class, String.class), this.scenario, listUserDTO, this.mapSaveText);
     }
 
     @And("I wait for element {} to be {}")
@@ -115,17 +114,17 @@ public class Steps {
 
     @Given("I become a random user")
     public void i_become_a_random_user() {
-        this.userDTO = testBase.CreateUser();
+       this.listUserDTO = testBase.CreateUser(listUserDTO);
     }
 
     @And("I verify the text for element {word} is {string}")
     public void verifyText(String element, String text) {
-        testBase.verifyText(this.page, element, text, true, this.mapSaveText, userDTO);
+        testBase.verifyText(this.page, element, text, true, this.mapSaveText, listUserDTO);
     }
 
     @And("I verify the exact text for element {word} is {string}")
     public void verifyExactText(String element, String text) {
-        testBase.verifyText(this.page, element, text, false, this.mapSaveText, userDTO);
+        testBase.verifyText(this.page, element, text, false, this.mapSaveText, listUserDTO);
     }
 
     @Given("I save text for element {word} with key {string}")
@@ -152,13 +151,13 @@ public class Steps {
 
     @Given("I perform {word} action")
     public void i_perform_to_action(String action) {
-        testBase.executeAction(this.page, action, null, this.mapSaveText, this.userDTO);
+        testBase.executeAction(this.page, action, null, this.mapSaveText, this.listUserDTO);
 
     }
 
     @Given("I perform {word} action with override values")
     public void actionOverride(String action, DataTable dataTable) {
-        testBase.executeAction(this.page, action, dataTable, this.mapSaveText, this.userDTO);
+        testBase.executeAction(this.page, action, dataTable, this.mapSaveText, this.listUserDTO);
     }
 
     @Given("I close browser with title is {string}")

@@ -184,7 +184,7 @@ public class TestBase {
 
     }
 
-    public void verifyText(Page page, String element, String content, boolean status, Map<String, String> map, UserDTO userDTO) {
+    public void verifyText(Page page, String element, String content, boolean status, Map<String, String> map,List<UserDTO> listUserDto) {
         Locators locators = getValueElement(page, element);
         By by = getBy(driver, locators.getType(), locators.getValue());
         scrollAction(element, page);
@@ -195,7 +195,7 @@ public class TestBase {
             }
             if (content.toLowerCase().contains("user.")) {
                 content = content.substring(5);
-                content = getProfileUser(content, userDTO);
+                content = getProfileUser(content, listUserDto);
             }
             if (status) {
                 String result = content;
@@ -222,7 +222,7 @@ public class TestBase {
 
     }
 
-    public void ActionType(Page page, String element, String content, Map<String, String> map, UserDTO userDTO) {
+    public void ActionType(Page page, String element, String content, Map<String, String> map, List<UserDTO> listUserDto) {
         try {
             String text = content;
             Locators locators = getValueElement(page, element);
@@ -233,9 +233,9 @@ public class TestBase {
                 text = map.get(content);
             } else if (content.contains("USER.")) {
                 String suffix = content.substring(5);
-                text = getProfileUser(suffix, userDTO);
+                text = getProfileUser(suffix, listUserDto);
             } else if (content.contains("UNIQUE.")) {
-                text = getReplaceValue(content, userDTO, map);
+                text = getReplaceValue(content, listUserDto, map);
             }
 //          else if(content.contains("keyboard.")){
 //                text = text.replace("keyboard.","");
@@ -254,12 +254,12 @@ public class TestBase {
 
     }
 
-    public void runCollection(String collectionJson, String dataFile, Map<String, String> datatable, Scenario scenario, UserDTO userDTO, Map<String, String> mapSavetext) {
+    public void runCollection(String collectionJson, String dataFile, Map<String, String> datatable, Scenario scenario, List<UserDTO> listUserDto, Map<String, String> mapSavetext) {
         collectionJson = Configuration.PATH_POSTMAN + "/collection/" + collectionJson;
         dataFile = Configuration.PATH_POSTMAN + "/data-files/" + dataFile;
         try {
             this.arrayJsonNode = (new ObjectMapper()).readTree(new File(dataFile));
-            JsonNode jsonNode = UpdateNodeJson(datatable, userDTO, mapSavetext);
+            JsonNode jsonNode = UpdateNodeJson(datatable, listUserDto, mapSavetext);
             System.out.println("json node== " + jsonNode);
             ObjectMapper mapper = new ObjectMapper();
             dataFile = Configuration.PATH_POSTMAN + "/data-files/" + scenario.getName() + "_" + System.currentTimeMillis() + ".json";
@@ -281,7 +281,7 @@ public class TestBase {
 
     }
 
-    public JsonNode UpdateNodeJson(Map<String, String> dataTable, UserDTO userDTO, Map<String, String> mapSaveText) {
+    public JsonNode UpdateNodeJson(Map<String, String> dataTable, List<UserDTO> listUserDto, Map<String, String> mapSaveText) {
 //        if(dataTable!=null){
 
         Iterator<JsonNode> var1 = this.arrayJsonNode.iterator();
@@ -297,11 +297,11 @@ public class TestBase {
                 for (int i = 0; i < list.size(); i++) {
                     String field_key = list.get(i);
                     if (value.contains(field_key)) {
-                        ((ObjectNode) jsonNode).put(key, getReplaceValue(value, userDTO, mapSaveText));
+                        ((ObjectNode) jsonNode).put(key, getReplaceValue(value, listUserDto, mapSaveText));
                     }
                     if (Objects.nonNull(dataTable) && dataTable.containsKey(key)) {
                         String data = dataTable.get(key).toString();
-                        data = getReplaceValue(data, userDTO, mapSaveText);
+                        data = getReplaceValue(data, listUserDto, mapSaveText);
                         ((ObjectNode) jsonNode).put(key, data);
                     }
                 }
@@ -442,7 +442,7 @@ public class TestBase {
 
     }
 
-    public void executeAction(Page page, String action, DataTable dataTable, Map<String, String> map, UserDTO userDTO) {
+    public void executeAction(Page page, String action, DataTable dataTable, Map<String, String> map, List<UserDTO> listUserDto) {
         ActionsTest actions = getActions(page, action);
         WebDriverWait waitAction;
         boolean flag = false;
@@ -463,7 +463,7 @@ public class TestBase {
                 }
                 if (value.contains("USER.")) {
                     String suffix = value.substring(5);
-                    value = getProfileUser(suffix, userDTO);
+                    value = getProfileUser(suffix, listUserDto);
                 }
                 Locators locators = getValueElement(page, list.get(i).getElement());
                 By by = getBy(driver, locators.getType(), locators.getValue());
@@ -689,11 +689,11 @@ public class TestBase {
         }
     }
 
-    public String getReplaceValue(String value, UserDTO userDTO, Map<String, String> mapSaveText) {
+    public String getReplaceValue(String value, List<UserDTO> listUserDto, Map<String, String> mapSaveText) {
         String replaceValue = null;
         if (value.toLowerCase().contains("user.")) {
             String suffix = value.substring(5);
-            replaceValue = getProfileUser(suffix, userDTO);
+            replaceValue = getProfileUser(suffix, listUserDto);
         } else if (value.toLowerCase().contains("unique.")) {
             String suffix = value.substring(7);
             if (suffix.contains("number.")) {
@@ -712,9 +712,10 @@ public class TestBase {
 
     }
 
-    public UserDTO CreateUser() {
+    public List<UserDTO> CreateUser(List<UserDTO> list) {
         fake = new FakerData();
-        return fake.CreateUser();
+         list = fake.CreateUser(list);
+         return list;
 
     }
 
@@ -771,8 +772,20 @@ public class TestBase {
 //        return value;
 //
 //    }
-    public String getProfileUser(String suffix, UserDTO userDTO) {
+    public String getProfileUser(String suffix, List<UserDTO> listUserDto) {
         String value = "";
+        UserDTO userDTO = null;
+        if(suffix.contains(".")){
+            String[] arr = suffix.split("\\.");
+            if(isNumber(arr[0])){
+                userDTO =  listUserDto.get(Integer.parseInt(arr[0])-1);
+                suffix = arr[1];
+            }else{
+                throw new NotFoundException("not support keyword "+ suffix);
+            }
+        }else{
+            userDTO = listUserDto.get(0);
+        }
         switch (suffix) {
             case "firstName":
                 value = userDTO.getFirstname();
