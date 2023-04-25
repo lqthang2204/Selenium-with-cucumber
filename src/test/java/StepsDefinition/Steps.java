@@ -33,6 +33,7 @@ public class Steps {
     Scenario scenario;
     List<UserDTO> listUserDTO;
     UserDTO userDTO;
+    public WebDriver driver;
     public Hook hook;
 
     public Steps() {
@@ -69,7 +70,7 @@ public class Steps {
     @Given("I navigate to {word}")
     public void openBrowser(String url) {
         testBase.getDriver();
-        testBase.OpenBrowser(url);
+        driver = testBase.OpenBrowser(url);
     }
 
     @Given("I change the page spec to {word}")
@@ -213,7 +214,7 @@ public class Steps {
         try {
             this.scenario = scenario;
             if (scenario.isFailed()) {
-                final byte[] screenshot = ((TakesScreenshot) hook.getWebdriver()).getScreenshotAs(OutputType.BYTES);
+                final byte[] screenshot = ((TakesScreenshot) this.driver).getScreenshotAs(OutputType.BYTES);
                 scenario.attach(screenshot, "image/png", scenario.getName());
             }
         }catch (Exception e)

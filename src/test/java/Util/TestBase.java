@@ -74,7 +74,6 @@ public class TestBase {
     }
 
     public void mouseAction(Page page, String action, String element, Map<String, String> map) {
-        System.out.println("thread === "+ Thread.currentThread().getId());
         Locators locators = getValueElement(page, element);
         String valueElement = getValueElementToWithText(locators, element, map);
 //        WebDriverWait wait = getWait(driver);
