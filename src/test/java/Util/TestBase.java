@@ -1025,6 +1025,19 @@ public class TestBase {
 
     }
 
+    public void SwitchFrame(Page page,String element) {
+        try {
+            Locators Locator = getValueElement(page, element);
+            By by = getBy(driver, Locator.getType(), Locator.getValue());
+            driver.switchTo().frame(driver.findElement(by));
+        } catch (Exception e) {
+            Assert.assertFalse("Not Switch to jFrame with element " + element, false);
+            e.printStackTrace();
+        }
+    }
+    public void SwitchDefaulFrame(){
+        driver.switchTo().defaultContent();
+    }
     public void Type(String data, String element, Page page) {
         Locators locators = getValueElement(page, element);
         WebDriverWait wait = getWait();
