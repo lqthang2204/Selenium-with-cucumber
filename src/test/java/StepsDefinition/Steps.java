@@ -71,6 +71,7 @@ public class Steps {
     public void openBrowser(String url) {
         testBase.getDriver();
         driver = testBase.OpenBrowser(url);
+
     }
 
     @Given("I change the page spec to {word}")
@@ -208,7 +209,15 @@ public class Steps {
     public void i_verify_attribute_element_campaign_source_value_two_has_css_property_with_value(String element, String property, String value) {
         testBase.checkCssAttribute(this.page, element, property, value, this.mapSaveText);
     }
+    @Given("I switch to iFrame for element {}")
+    public void i_switch_to_i_frame_with_index(String element) {
+       testBase.SwitchFrame(this.page, element);
+    }
 
+    @Given("I switch to default iFrame")
+    public void i_switch_to_default_i_frame() {
+       testBase.SwitchDefaulFrame();
+    }
     @After
     public void tearDown(Scenario scenario) {
         try {

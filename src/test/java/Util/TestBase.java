@@ -980,7 +980,7 @@ public class TestBase {
     public void iwaitSeconds(String seconds) {
         String[] arrSecond = seconds.split("-");
         if (arrSecond.length > 2) {
-            throw new RuntimeException("please input two number");
+            throw new RuntimeException("please input less two number");
         }
         if (!isNumber(arrSecond[0]) && !isNumber(arrSecond[1])) {
             throw new RuntimeException("seconds must be a number");
@@ -1025,6 +1025,19 @@ public class TestBase {
 
     }
 
+    public void SwitchFrame(Page page,String element) {
+        try {
+            Locators Locator = getValueElement(page, element);
+            By by = getBy(driver, Locator.getType(), Locator.getValue());
+            driver.switchTo().frame(driver.findElement(by));
+        } catch (Exception e) {
+            Assert.assertFalse("Not Switch to jFrame with element " + element, false);
+            e.printStackTrace();
+        }
+    }
+    public void SwitchDefaulFrame(){
+        driver.switchTo().defaultContent();
+    }
     public void Type(String data, String element, Page page) {
         Locators locators = getValueElement(page, element);
         WebDriverWait wait = getWait();

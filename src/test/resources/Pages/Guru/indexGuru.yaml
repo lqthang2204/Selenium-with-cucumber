@@ -1,0 +1,19 @@
+elements:
+  - id: iframe-jmeter
+    description: this is frame
+    locators:
+      - device: WEB
+        type: ID
+        value: a077aa5e
+  - id: image-in-iframe
+    description: this is iamge jmeter
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //img[@src="Jmeter720.png"]
+  - id: selenium-icon
+    description: this is icon selenium
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //a[text()="Selenium"]
