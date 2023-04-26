@@ -10,6 +10,11 @@ Feature: Search function
     And I switch to default iFrame
     And I wait for element selenium-icon to be ENABLED
     And I click element selenium-icon
+    And I wait 10 seconds
+    And I switch to browser window with index "2"
+    And I change the page spec to seleniumPage
+    And I wait for element title-page to be DISPLAYED
+    And I verify the text for element title-page is "Selenium Live Project: FREE Real Time Project for Practice"
 
 #    And I navigate to "https://www.google.com/"
 #    And I close browser with title is "test"

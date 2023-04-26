@@ -980,7 +980,7 @@ public class TestBase {
     public void iwaitSeconds(String seconds) {
         String[] arrSecond = seconds.split("-");
         if (arrSecond.length > 2) {
-            throw new RuntimeException("please input two number");
+            throw new RuntimeException("please input less two number");
         }
         if (!isNumber(arrSecond[0]) && !isNumber(arrSecond[1])) {
             throw new RuntimeException("seconds must be a number");
