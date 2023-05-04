@@ -18,7 +18,7 @@ elements:
     locators:
       - device: WEB
         type: NAME
-        value: q
+        value: qdsds
   - id: button-search
     description: Button reset security
     locators:

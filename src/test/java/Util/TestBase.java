@@ -227,7 +227,7 @@ public class TestBase {
             Locators locators = getValueElement(page, element);
 //            WebDriverWait wait = getWait(driver);
             By by = getBy(driver, locators.getType(), locators.getValue());
-            wait.until(ExpectedConditions.elementToBeClickable(by));
+//            wait.until(ExpectedConditions.elementToBeClickable(by));
             if (map.containsKey(content)) {
                 text = map.get(content);
             } else if (content.contains("USER.")) {
