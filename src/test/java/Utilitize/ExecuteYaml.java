@@ -1,9 +1,10 @@
-package Util;
+package Utilitize;
 
 import bean.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
+import com.github.javafaker.Faker;
 import org.junit.Assert;
 
 import java.io.File;
@@ -204,6 +205,45 @@ public class ExecuteYaml {
         }
 
     }
+    public List<UserDTO> getUserFormFile(String nameFile, List<UserDTO> list){
+        if(list == null){
+            list = new LinkedList<>();
+        }
+        UserDTO user = new UserDTO();
+        File f  = new File(System.getProperty("user.dir") + "/src/test/resources/user/"+nameFile+".yaml");
+        String json = ConvertFileYaml(f);
+        JSONObject object = new JSONObject(json);
+        user.setFirstName(getStringFormKey("firstName",object));
+        user.setMiddleName(getStringFormKey("middleName",object));
+        user.setLastName(getStringFormKey("lastName",object));
+        user.setFullName(Util.removeBlank(user.getFirstName()+" "+user.getMiddleName()+" "+user.getLastName()));
+        user.setDob(Long.parseLong(getStringFormKey("dob",object)));
+        user.setPrefix(getStringFormKey("prefix",object));
+        user.setSuffix(getStringFormKey("suffix",object));
+        user.setEmail(Util.getRandomEmail(getStringFormKey("email",object)));
+        user.setEthnicities(getStringFormKey("Ethnicities",object));
+        user.setGender(getStringFormKey("Genders",object));
+        user.setPassword(Util.DecryptTextWithoutKey(getStringFormKey("password",object)));
+        JSONObject objectAddress = new JSONObject(getStringFormKey("userAddresses",object));
+        UserAddress address = new UserAddress();
+        address.setCity(getStringFormKey("city",objectAddress));
+        address.setState(getStringFormKey("state",objectAddress));
+        address.setStreetOne(getStringFormKey("streetOne",objectAddress));
+        address.setZip(getStringFormKey("zip",objectAddress));
+        address.setPhoneNumber(getStringFormKey("phoneNumber",objectAddress));
+        user.setUserAddresses(address);
+        list.add(user);
+        return list;
+    }
+    public String getStringFormKey(String key,JSONObject object){
+        if(object.has(key)){
+            String result =  object.get(key).toString() == "null"  ? "" : object.get(key).toString();
+            return result;
+        }else{
+            return "";
+        }
+    }
+
 
 
 

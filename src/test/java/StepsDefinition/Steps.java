@@ -1,9 +1,8 @@
 package StepsDefinition;
 
 import ManageDriver.Hook;
-import Util.Configuration;
-import Util.ExecuteYaml;
-import Util.TestBase;
+import Utilitize.ExecuteYaml;
+import Utilitize.TestBase;
 import bean.Page;
 import bean.UserDTO;
 import io.cucumber.datatable.DataTable;
@@ -18,9 +17,9 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
-import javax.xml.crypto.Data;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.*;
 
 public class Steps {
@@ -115,7 +114,7 @@ public class Steps {
     }
 
     @Given("I become a random user")
-    public void i_become_a_random_user() {
+    public void i_become_a_random_user() throws ParseException {
        this.listUserDTO = testBase.CreateUser(listUserDTO);
     }
 
@@ -214,6 +213,10 @@ public class Steps {
        testBase.SwitchFrame(this.page, element);
     }
 
+    @Given("I am {word} created by the file")
+    public void i_am_user1_created_by_the_file(String nameFile) {
+        this.listUserDTO = testBase.getUserFormFile(this.listUserDTO, nameFile);
+    }
     @Given("I switch to default iFrame")
     public void i_switch_to_default_i_frame() {
        testBase.SwitchDefaulFrame();

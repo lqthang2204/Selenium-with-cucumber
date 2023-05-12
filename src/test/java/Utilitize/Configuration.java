@@ -1,9 +1,8 @@
-package Util;
+package Utilitize;
 
 //import com.codeborne.selenide.SelenideConfig;
 
 import java.io.File;
-import java.sql.Time;
 
 public class Configuration {
     public static String WEB_BROWSER = "";

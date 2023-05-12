@@ -1,9 +1,8 @@
-package Util;
+package Utilitize;
 
 import ManageDriver.Hook;
 import StepsDefinition.Steps;
 import bean.*;
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.impl.JavaScript;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -11,14 +10,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.Scenario;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.junit.Assert;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -27,10 +21,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.*;
 import java.nio.file.Paths;
 import java.security.SecureRandom;
+import java.text.ParseException;
 import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.*;
-import java.util.stream.Stream;
 
 //import static com.codeborne.selenide.Selenide.$;
 
@@ -280,7 +273,7 @@ public class TestBase {
 
     }
 
-    public JsonNode UpdateNodeJson(Map<String, String> dataTable, List<UserDTO> listUserDto, Map<String, String> mapSaveText) {
+    public JsonNode UpdateNodeJson(Map<String, String> dataTable, List<UserDTO> listUserDto, Map<String, String> mapSaveText) throws ParseException {
 //        if(dataTable!=null){
 
         Iterator<JsonNode> var1 = this.arrayJsonNode.iterator();
@@ -688,7 +681,7 @@ public class TestBase {
         }
     }
 
-    public String getReplaceValue(String value, List<UserDTO> listUserDto, Map<String, String> mapSaveText) {
+    public String getReplaceValue(String value, List<UserDTO> listUserDto, Map<String, String> mapSaveText) throws ParseException {
         String replaceValue = null;
         if (value.toLowerCase().contains("user.")) {
             String suffix = value.substring(5);
@@ -711,7 +704,7 @@ public class TestBase {
 
     }
 
-    public List<UserDTO> CreateUser(List<UserDTO> list) {
+    public List<UserDTO> CreateUser(List<UserDTO> list) throws ParseException {
         fake = new FakerData();
          list = fake.CreateUser(list);
          return list;
@@ -771,7 +764,7 @@ public class TestBase {
 //        return value;
 //
 //    }
-    public String getProfileUser(String suffix, List<UserDTO> listUserDto) {
+    public String getProfileUser(String suffix, List<UserDTO> listUserDto) throws ParseException {
         String value = "";
         UserDTO userDTO = null;
         if(suffix.contains(".")){
@@ -787,25 +780,38 @@ public class TestBase {
         }
         switch (suffix) {
             case "firstName":
-                value = userDTO.getFirstname();
+                value = userDTO.getFirstName();
                 break;
             case "lastName":
-                value = userDTO.getLastname();
+                value = userDTO.getLastName();
+                break;
+            case "middleName":
+                value = userDTO.getMiddleName();
                 break;
             case "dob":
-                value = userDTO.getDob();
+                value =   Util.convertMilisecondsToDob(userDTO.getDob());
                 break;
             case "email":
                 value = userDTO.getEmail();
                 break;
             case "phoneNumber":
-                value = userDTO.getPhoneNumber();
+                value = userDTO.getUserAddresses().getPhoneNumber();
                 break;
-            case "address":
-                value = userDTO.getAddress();
+            case "city" :
+                value =   userDTO.getUserAddresses().getCity();
+                break;
+            case "state" :
+                value =   userDTO.getUserAddresses().getState();
+                break;
+            case "street" :
+                value =   userDTO.getUserAddresses().getStreetOne();
+                break;
+            case "zip" :
+                value =   userDTO.getUserAddresses().getZip();
                 break;
             default:
-                System.out.println("Not Found User");
+                System.out.println("not support key value");
+                throw new RuntimeException();
         }
         return value;
     }
@@ -851,19 +857,6 @@ public class TestBase {
         return value;
     }
 
-    public static void main(String[] args) {
-//        final String number = "0123456789";
-//        final int N = number.length();
-//        Random r = new Random();
-//        String value = "";
-//        for (int i = 0; i < 10; i++) {
-//            value = value+number.charAt(r.nextInt(N));
-//        }
-//        System.out.println("value =="+ value);
-
-//        System.out.println("number == "+getRandomNumber(5,""));
-
-    }
 
     public void ExecutePostmanCollectionWithLink(String link) throws IOException, InterruptedException {
         String[] arrCommand = new String[]{"newman", "run", null};
@@ -1067,6 +1060,10 @@ public class TestBase {
 
 
     }
+    public List<UserDTO> getUserFormFile(List<UserDTO> list, String nameFile){
+        list = yamlExecute.getUserFormFile(nameFile, list);
+        return  list;
+    }
 
     public boolean isNumber(String data) {
         try {
@@ -1102,6 +1099,10 @@ public class TestBase {
             }
 
         }
+    }
+
+    public static void main(String[] args) {
+        String exmp = "random[a-z0-9._-]{0,15}@";
     }
 
 }
