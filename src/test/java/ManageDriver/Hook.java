@@ -1,6 +1,6 @@
 package ManageDriver;
 
-import Util.Configuration;
+import Utilitize.Configuration;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

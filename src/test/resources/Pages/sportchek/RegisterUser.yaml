@@ -1,0 +1,7 @@
+elements:
+  - id: search-input
+    description: Search input
+    locators:
+      - device: WEB
+        type: CSS
+        value: input[placeholder='Search Name']
