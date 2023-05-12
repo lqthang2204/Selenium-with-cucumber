@@ -1,7 +1,7 @@
 elements:
-  - id: search-input
-    description: Search input
+  - id: login-button
+    description: Login button
     locators:
       - device: WEB
-        type: CSS
-        value: input[placeholder='Search Name']
+        type: XPATH
+        value: //button[contains(text(),'Sign In')]

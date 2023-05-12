@@ -809,6 +809,9 @@ public class TestBase {
             case "zip" :
                 value =   userDTO.getUserAddresses().getZip();
                 break;
+            case "password" :
+                value =   userDTO.getPassword();
+                break;
             default:
                 System.out.println("not support key value");
                 throw new RuntimeException();

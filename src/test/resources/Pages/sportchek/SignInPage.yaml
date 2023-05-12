@@ -1,0 +1,13 @@
+elements:
+  - id: user-input
+    description: user input
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@placeholder='Email *']
+  - id: password-input
+    description: password input
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@placeholder='Password *']
