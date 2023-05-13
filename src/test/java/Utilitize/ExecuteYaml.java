@@ -210,7 +210,7 @@ public class ExecuteYaml {
             list = new LinkedList<>();
         }
         UserDTO user = new UserDTO();
-        File f  = new File(System.getProperty("user.dir") + "/src/test/resources/user/"+nameFile+".yaml");
+        File f  = new File(System.getProperty("user.dir") + "/src/test/resources/User/"+nameFile+".yaml");
         String json = ConvertFileYaml(f);
         System.out.println("json obect = "+ json);
         JSONObject object = new JSONObject(json);
