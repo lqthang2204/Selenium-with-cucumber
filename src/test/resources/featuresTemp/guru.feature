@@ -136,7 +136,7 @@ Feature: Login function
     And I wait for element title-page to be DISPLAYED
     And I verify the text for element title-page is "Selenium Live Project: FREE Real Time Project for Practice"
 
-  @register-user
+  @mc-guru7
   Scenario: test register user
     Given I navigate to "https://www.sportchek.ca/"
     And I am user1 created by the file

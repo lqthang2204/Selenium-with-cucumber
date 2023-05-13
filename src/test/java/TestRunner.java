@@ -4,12 +4,12 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features ="src/test/resources/featuresTemp", glue = {"StepsDefinition"},
-        plugin = {"json:target/cucumber.json", "pretty"},
+        plugin = {"json:target/cucumber.json", "pretty", "rerun:target/failedrerun.txt"},
         monochrome = true
 
 )
 
 
-public class TestRunner  {
+public class TestRunner   {
 
 }
