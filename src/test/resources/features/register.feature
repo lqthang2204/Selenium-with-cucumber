@@ -29,7 +29,6 @@ Feature: Login function
     And I wait for element welcome-user to be DISPLAYED
     And I verify the text for element welcome-user is "USER.1.email"
     And I switch to browser window with index "1"
-    And I wait 1000 seconds
 
 
 
