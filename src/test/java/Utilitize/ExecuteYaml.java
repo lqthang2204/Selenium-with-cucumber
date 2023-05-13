@@ -210,8 +210,9 @@ public class ExecuteYaml {
             list = new LinkedList<>();
         }
         UserDTO user = new UserDTO();
-        File f  = new File(System.getProperty("user.dir") + "/src/test/resources/user/"+nameFile+".yaml");
+        File f  = new File(System.getProperty("user.dir") + "/src/test/resources/User/"+nameFile+".yaml");
         String json = ConvertFileYaml(f);
+        System.out.println("json obect = "+ json);
         JSONObject object = new JSONObject(json);
         user.setFirstName(getStringFormKey("firstName",object));
         user.setMiddleName(getStringFormKey("middleName",object));
@@ -232,6 +233,7 @@ public class ExecuteYaml {
         address.setZip(getStringFormKey("zip",objectAddress));
         address.setPhoneNumber(getStringFormKey("phoneNumber",objectAddress));
         user.setUserAddresses(address);
+        System.out.println("email random is "+ user.getEmail());
         list.add(user);
         return list;
     }

@@ -1,6 +1,9 @@
 package Utilitize;
 
 import ManageDriver.Hook;
+import Nada.MessageEmail;
+import Retrofit.ControllerAPI;
+import Retrofit.ServiceAPI;
 import StepsDefinition.Steps;
 import bean.*;
 import com.codeborne.selenide.Selenide;
@@ -10,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.Scenario;
+import org.apache.commons.exec.ExecuteException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.junit.Assert;
 import org.openqa.selenium.*;
@@ -17,6 +21,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import retrofit2.Response;
 
 import java.io.*;
 import java.nio.file.Paths;
@@ -99,11 +104,15 @@ public class TestBase {
 
     }
 
-    public void switchTab(int index) {
+    public void switchTab(String index) {
         try {
             ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-            System.out.println("tab====" + tabs.size());
-            driver.switchTo().window(tabs.get(index - 1));
+            if(Util.isNumber(index)){
+                driver.switchTo().window(tabs.get(Integer.parseInt(index) - 1));
+            }else{
+                System.out.println(" please set index to switch browser");
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             Assert.assertTrue(false);
@@ -1066,6 +1075,23 @@ public class TestBase {
     public List<UserDTO> getUserFormFile(List<UserDTO> list, String nameFile){
         list = yamlExecute.getUserFormFile(nameFile, list);
         return  list;
+    }
+    public void NavigateAnotherPage(String email, Map<String, String> map, List<UserDTO> list) throws ParseException, IOException, InterruptedException {
+        if(map.containsKey(email)){
+            email = map.get(email);
+        }else if (email.toLowerCase().contains("user.")) {
+            email = email.substring(5);
+            email   = getProfileUser(email, list);
+        }
+        ServiceAPI serviceAPI = ControllerAPI.getServiceFromURL("https://getnada.com");
+        Response<MessageEmail> response = ControllerAPI.getMessageID(serviceAPI, email.toLowerCase().trim());
+        if(driver!=null){
+            driver.switchTo().newWindow(WindowType.TAB);
+            driver.get("https://getnada.com/message/"+response.body().msgs[0].uid);
+        }else{
+            throw new NoSuchWindowException("Not Found driver to open link verify");
+        }
+
     }
 
     public boolean isNumber(String data) {

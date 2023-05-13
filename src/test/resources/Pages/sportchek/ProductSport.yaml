@@ -1,0 +1,7 @@
+elements:
+  - id: welcome-user
+    description: Welcome user
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //span[contains(@class,'enterprise-account__username')]

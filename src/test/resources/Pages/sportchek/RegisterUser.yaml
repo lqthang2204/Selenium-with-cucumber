@@ -5,3 +5,57 @@ elements:
       - device: WEB
         type: XPATH
         value: //button[contains(text(),'Sign In')]
+  - id: register-button
+    description: Login button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //button[contains(text(),'Register')]
+  - id: user-input
+    description: user input
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@placeholder='Email *']
+  - id: password-input
+    description: password input
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@placeholder='Password *']
+  - id: confirm-password-input
+    description: password input
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //*[@placeholder='Confirm Password *']
+  - id: create-user-button
+    description: Create user button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //input[@value='CREATE TRIANGLE ID']
+  - id: check-box-confirm
+    description: Check box confirm
+    locators:
+      - device: WEB
+        type: XPATH
+        value: (//div[contains(@class,'composite-control-checkbox')])[4]
+  - id: confirm-no-button
+    description: button confirm
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //button[contains(text(),'No Thank You')]
+  - id: verify-email-button
+    description: Verify email button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //td/a[contains(@href, 'emailVerificationLink')]
+  - id: frame-sport-check
+    description: frame of sport check
+    locators:
+      - device: WEB
+        type: ID
+        value: the_message_iframe

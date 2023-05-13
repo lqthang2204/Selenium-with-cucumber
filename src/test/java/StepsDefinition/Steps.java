@@ -87,7 +87,7 @@ public class Steps {
 
     @And("I switch to browser window with index {string}")
     public void i_switch_to_browser_window_with_index(String index) {
-        testBase.switchTab(Integer.parseInt(index));
+        testBase.switchTab(index);
     }
 
 
@@ -220,6 +220,11 @@ public class Steps {
     @Given("I switch to default iFrame")
     public void i_switch_to_default_i_frame() {
        testBase.SwitchDefaulFrame();
+    }
+
+    @Given("I navigate to the page to verify email {string}")
+    public void i_navigate_to_the_page_to_verify_email(String email) throws ParseException, IOException, InterruptedException {
+        testBase.NavigateAnotherPage(email, this.mapSaveText, this.listUserDTO);
     }
     @After
     public void tearDown(Scenario scenario) {
