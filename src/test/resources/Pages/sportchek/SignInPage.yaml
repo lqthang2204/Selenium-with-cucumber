@@ -11,3 +11,9 @@ elements:
       - device: WEB
         type: XPATH
         value: //*[@placeholder='Password *']
+  - id: sign-in-button
+    description: Sign in button
+    locators:
+      - device: WEB
+        type: XPATH
+        value: //input[@value='SIGN IN']

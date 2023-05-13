@@ -232,6 +232,7 @@ public class ExecuteYaml {
         address.setZip(getStringFormKey("zip",objectAddress));
         address.setPhoneNumber(getStringFormKey("phoneNumber",objectAddress));
         user.setUserAddresses(address);
+        System.out.println("email random is "+ user.getEmail());
         list.add(user);
         return list;
     }
