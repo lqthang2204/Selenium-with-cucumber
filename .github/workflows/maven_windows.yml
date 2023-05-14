@@ -24,7 +24,7 @@ jobs:
             bug
             enhacement
       - name: Build with Maven
-        run: mvn clean verify -D"timeout=300000" -D"pageLoadTimeout=300000" -D"startMaximized=true" -D"headless=true" -D"cucumber.filter.tags=@Guru and not @register-user"
+        run: mvn clean verify -D"timeout=300000" -D"pageLoadTimeout=300000" -D"startMaximized=true" -D"headless=true" -D"cucumber.filter.tags=@Guru and not @mc-guru7"
 
       # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
       - name: Update dependency graph

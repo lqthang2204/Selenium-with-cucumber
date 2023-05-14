@@ -22,8 +22,8 @@ Feature: Login function
     And I wait for element login-button to be ENABLED
     And I click element login-button
     And I wait for element error-message to be DISPLAYED
-    And I verify the text for element error-message is "Invalid username/password. Please try again."
-#    And I verify the text for element error-message is "Usuario/contraseña inválida. Por favor inténtelo nuevamente."
+#    And I verify the text for element error-message is "Invalid username/password. Please try again."
+    And I verify the text for element error-message is "Usuario/contraseña inválida. Por favor inténtelo nuevamente."
     And I navigate to refresh-page
     And I type "Admin" into element user-field
     And I type "Admin123" into element pass-field
