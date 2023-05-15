@@ -152,8 +152,7 @@ Feature: Login function
     And I wait for element check-box-confirm to be DISPLAYED
     And I click element check-box-confirm
     And I click element create-user-button
-    And I wait for element confirm-no-button to be ENABLED
-    And I click element confirm-no-button
+    And I perform click-confirm-if-exist action
     And I wait 20 seconds
     And I navigate to the page to verify email "USER.1.email"
     And I switch to iFrame for element frame-sport-check

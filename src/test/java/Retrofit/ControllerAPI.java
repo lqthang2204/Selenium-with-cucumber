@@ -25,6 +25,12 @@ public class ControllerAPI {
         ServiceAPI service = retrofit.create(ServiceAPI.class);
         return service;
     }
+    public static ServiceAPI getServiceFromURLUnsafeHttpClient(String url) {
+        OkHttpClient okHttpClient = UnsafeOkHttpClient.getUnsafeOkHttpClient();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(url).addConverterFactory(GsonConverterFactory.create()).client(okHttpClient.newBuilder().build()).build();
+        ServiceAPI service = retrofit.create(ServiceAPI.class);
+        return service;
+    }
 
     public static void main(String[] args) throws IOException, InterruptedException {
             ControllerAPI control = new ControllerAPI();

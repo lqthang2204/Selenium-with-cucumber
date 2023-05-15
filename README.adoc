@@ -39,7 +39,7 @@ Follow https://github.com/lqthang2204/FrameworkAuto for cloning a repository.
 == Test execution
 
 === How do I run a automation test?
-. VM options : -Dtimeout=120000 -DpageLoadTimeout=120000 -DstartMaximized=true
+. VM options : -Dtimeout=120000 -DpageLoadTimeout=120000 -DstartMaximized=true and add more -Drun_unsafe_okhttp_client=true when network got issue Certificate
 . Environment Variables: WEB_BROWSER=FIREFOX
 
 How to run
