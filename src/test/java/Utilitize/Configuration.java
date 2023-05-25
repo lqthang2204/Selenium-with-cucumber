@@ -12,6 +12,7 @@ public class Configuration {
     public static String PATH_POSTMAN;
     public static boolean IS_HEADLESS;
     public static String[] PREFIX= new String[]{"unique.", "user.","key."};
+    public static boolean RUN_UNSAFE_OKHTTP_CLIENT = false;
 
 //    private static final SelenideConfig defaults = new SelenideConfig();
 
@@ -22,6 +23,7 @@ public class Configuration {
         Configuration.DEFAULT_MAXIMUM = Boolean.parseBoolean(System.getProperty("startMaximized")==null ? "true" : System.getProperty("startMaximized"));
         Configuration.IS_HEADLESS = Boolean.parseBoolean(System.getProperty("headless")==null ? "false" : System.getProperty("headless"));
         Configuration.PATH_POSTMAN = getFilePath(System.getProperty("user.dir")+"/src/test/resources/postman-test");
+        Configuration.RUN_UNSAFE_OKHTTP_CLIENT = Boolean.parseBoolean(System.getProperty("run_unsafe_okhttp_client")==null ? "false" : System.getProperty("run_unsafe_okhttp_client"));
 //        TIME_OUT = defaults.timeout();
     }
     public static void CheckParameter(String para){

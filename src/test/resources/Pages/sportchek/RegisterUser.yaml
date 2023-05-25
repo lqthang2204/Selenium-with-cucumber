@@ -41,7 +41,8 @@ elements:
       - device: WEB
         type: XPATH
         value: (//div[contains(@class,'composite-control-checkbox')])[4]
-  - id: confirm-no-button
+  - &confirm-no-button
+    id: confirm-no-button
     description: button confirm
     locators:
       - device: WEB
@@ -59,3 +60,11 @@ elements:
       - device: WEB
         type: ID
         value: the_message_iframe
+actions:
+  - id: click-confirm-if-exist
+    description: Click confirm existing email
+    actionElements:
+      - element: *confirm-no-button
+        timeout: 5000
+        condition: ENABLED
+        inputType: click

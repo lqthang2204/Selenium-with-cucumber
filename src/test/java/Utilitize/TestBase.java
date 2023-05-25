@@ -1083,7 +1083,12 @@ public class TestBase {
             email = email.substring(5);
             email   = getProfileUser(email, list);
         }
-        ServiceAPI serviceAPI = ControllerAPI.getServiceFromURL("https://getnada.com");
+        ServiceAPI serviceAPI= null;
+        if(Configuration.RUN_UNSAFE_OKHTTP_CLIENT){
+            serviceAPI = ControllerAPI.getServiceFromURLUnsafeHttpClient("https://getnada.com");
+        }else{
+            serviceAPI = ControllerAPI.getServiceFromURL("https://getnada.com");
+        }
         Response<MessageEmail> response = ControllerAPI.getMessageID(serviceAPI, email.toLowerCase().trim());
         if(driver!=null){
             driver.switchTo().newWindow(WindowType.TAB);
